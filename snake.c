@@ -54,7 +54,7 @@ typedef int ErrorCode;
 #define ERR_BOARD_FULL			((ErrorCode)-1)
 #define ERR_SNAKE_IS_TOO_HUNGRY ((ErrorCode)-2)
 
-// Anna's change: structs and fields
+// Anna's add: structs and fields
 typedef struct {
 	Matrix board;
 	Player currentPlayer;
@@ -92,8 +92,15 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
  The main program. The program implements a snake game
  -------------------------------------------------------------------------*/
 
+// Anna's add
 int open_snake(struct inode * n, struct file * f) {
+	int count;
+	int minor = MINOR(n->i_rdev);
+	down(&(games[minor].countLock));
+	if (games[minor].openCount == 2) {
+		up(&(games[minor].countLock));
 
+	}
 }
 
 bool Init(Matrix *matrix) {
@@ -131,7 +138,7 @@ bool Update(Matrix *matrix, Player player) {
 		printf("% d lost. the snake is too hungry", player);
 		return FALSE;
 	}
-	// only option is that e == ERR_OK
+// only option is that e == ERR_OK
 	if (IsMatrixFull(matrix)) {
 		printf("the board is full, tie");
 		return FALSE;
@@ -302,18 +309,18 @@ bool IsMatrixFull(Matrix *matrix) {
 }
 
 // Rebecca's add
-ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
-    int sem_wait((*PlayerS)(flip->private_data)->myGame->readWriteLock);
-    char *local_buff= kmalloc(count,GFP_KERNEL);
-    Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff);
-    copy_to_user(buff,local_buff, count)
-    kfree(local_buff);
+ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
+	int sem_wait((*PlayerS)(flip->private_data)->myGame->readWriteLock);
+	char *local_buff = kmalloc(count, GFP_KERNEL);
+	Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff);
+	copy_to_user(buff, local_buff, count)
+	kfree(local_buff);
 }
 
 //Rebecca's change
 void Print(Matrix *matrix, char *buff, size_t count) {
 	int i;
-    int current= 0;
+	int current = 0;
 	Point p;
 	for (i = 0; i < N + 1; ++i)
 		printf("---");
