@@ -98,7 +98,7 @@ bool Init(Matrix *matrix)
 		(*matrix)[N - 1][i] = BLACK * (i + 1);
 	}
 	/* initialize the food location */
-	srand(time(0));
+    /*Rebecca's change - srand*/
 	if (RandFoodLocation(matrix) != ERR_OK)
 		return FALSE;
 	printf("instructions: white player is represented by positive numbers, \nblack player is represented by negative numbers\n");
@@ -288,8 +288,11 @@ ErrorCode RandFoodLocation(Matrix *matrix)
 	Point p;
 	do
 	{
-		p.x = rand() % N;
-		p.y = rand() % N;
+        /*Rebecca's change*/
+        get_random_bytes(&p.x, sizeof(int));
+        p.x = p.x% N;
+        get_random_bytes(&p.y, sizeof(int));
+        p.y = p.y% N;
 	} while (!IsAvailable(matrix, p) || IsMatrixFull(matrix));
 
 	if (IsMatrixFull(matrix))
