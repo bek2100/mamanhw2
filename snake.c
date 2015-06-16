@@ -301,35 +301,53 @@ ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
     int sem_wait((*PlayerS)(flip->private_data)->myGame->readWriteLock);
     char *local_buff= kmalloc(count,GFP_KERNEL);
     Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff);
-    copy_to_user(buff,local_buff, count)
+    if(copy_to_user(buff,local_buff, count))
+        // TODO: change
+        return ERROR;
     kfree(local_buff);
 }
 
 //Rebecca's change
+//TODO: case count not long enough
 void Print(Matrix *matrix, char *buff, size_t count) {
 	int i;
     int current= 0;
 	Point p;
-	for (i = 0; i < N + 1; ++i)
-		printf("---");
-	printf("\n");
+    for (i = 0; i < N + 1; ++i){
+		buff[current++]='-';
+        buff[current++]='-';
+        buff[current++]='-';
+    }
+	buff[current++]='\n';
 	for (p.y = 0; p.y < N; ++p.y) {
-		printf("|");
+		buff[current++]='|';
 		for (p.x = 0; p.x < N; ++p.x) {
 			switch ((*matrix)[p.y][p.x]) {
 				case FOOD:
-					printf("  *");
+					buff[current++]=' ';
+                    buff[current++]=' ';
+                    buff[current++]='*';
 					break;
 				case EMPTY:
-					printf("  .");
+                    buff[current++]=' ';
+                    buff[current++]=' ';
+                    buff[current++]='.;
 					break;
 				default:
-					printf("% 3d", (*matrix)[p.y][p.x]);
-			}
+                    buff[current++]=' ';
+                    buff[current++]=(*matrix)[p.y][p.x]+'0';
+                    buff[current++]=' ';
+            }
 		}
-		printf(" |\n");
+        buff[current++]=' ';
+        buff[current++]='|';
+        buff[current++]='\n';
 	}
-	for (i = 0; i < N + 1; ++i)
-		printf("---");
-	printf("\n");
+    for (i = 0; i < N + 1; ++i){
+        buff[current++]='-';
+        buff[current++]='-';
+        buff[current++]='-';}
+	buff[current++]='\n';
+    while(current<=count)
+        buff[current++]='\0';}
 }
