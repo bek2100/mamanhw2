@@ -299,7 +299,7 @@ bool IsMatrixFull(Matrix *matrix) {
 // Rebecca's add
 ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
     char *local_buff= kmalloc(count,GFP_KERNEL);
-    Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff);
+    Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff, count, (*PlayerS)(flip->private_data)->myGame->readWriteLock);
     if(copy_to_user(buff,local_buff, count))
         // TODO: change
         return ERROR;
@@ -308,7 +308,7 @@ ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
 
 //Rebecca's change
 //TODO: case count not long enough
-void Print(Matrix *matrix, char *buff, size_t count) {
+void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 	int i;
     int current= 0;
 	Point p;
@@ -318,6 +318,7 @@ void Print(Matrix *matrix, char *buff, size_t count) {
         buff[current++]='-';
     }
 	buff[current++]='\n';
+    void down(sem);
 	for (p.y = 0; p.y < N; ++p.y) {
 		buff[current++]='|';
 		for (p.x = 0; p.x < N; ++p.x) {
@@ -334,9 +335,8 @@ void Print(Matrix *matrix, char *buff, size_t count) {
 					break;
 				default:
                     buff[current++]=' ';
-                    void down((*PlayerS)(flip->private_data)->myGame->readWriteLock);
+                    //TODO: check if correct
                     buff[current++]=(*matrix)[p.y][p.x]+'0';
-                    void up((*PlayerS)(flip->private_data)->myGame->readWriteLock);
                     buff[current++]=' ';
             }
 		}
@@ -344,6 +344,7 @@ void Print(Matrix *matrix, char *buff, size_t count) {
         buff[current++]='|';
         buff[current++]='\n';
 	}
+    void up(sem);
     for (i = 0; i < N + 1; ++i){
         buff[current++]='-';
         buff[current++]='-';
