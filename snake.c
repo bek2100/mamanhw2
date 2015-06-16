@@ -298,7 +298,6 @@ bool IsMatrixFull(Matrix *matrix) {
 
 // Rebecca's add
 ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
-    int sem_wait((*PlayerS)(flip->private_data)->myGame->readWriteLock);
     char *local_buff= kmalloc(count,GFP_KERNEL);
     Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff);
     if(copy_to_user(buff,local_buff, count))
@@ -335,7 +334,9 @@ void Print(Matrix *matrix, char *buff, size_t count) {
 					break;
 				default:
                     buff[current++]=' ';
+                    void down((*PlayerS)(flip->private_data)->myGame->readWriteLock);
                     buff[current++]=(*matrix)[p.y][p.x]+'0';
+                    void up((*PlayerS)(flip->private_data)->myGame->readWriteLock);
                     buff[current++]=' ';
             }
 		}
