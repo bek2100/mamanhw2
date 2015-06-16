@@ -7,7 +7,10 @@
 /*Rebecca's add*/
 #include <asm/uaccess.h>
 #include <linux/module.h>
-/*#include <linux/kernel.h> ? */
+#include <linux/kernel.h>
+#include <linux/fs.h>
+#include <asm/semaphore.h>
+#include <linux/sched.h>
 
 /*=========================================================================
  Constants and definitions:
@@ -278,7 +281,6 @@ ErrorCode RandFoodLocation(Matrix *matrix) {
 
 	if (IsMatrixFull(matrix))
 		return ERR_BOARD_FULL;
-
 	(*matrix)[p.y][p.x] = FOOD;
 	return ERR_OK;
 }
@@ -294,8 +296,19 @@ bool IsMatrixFull(Matrix *matrix) {
 	return TRUE;
 }
 
-void Print(Matrix *matrix) {
+// Rebecca's add
+ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
+    int sem_wait((*PlayerS)(flip->private_data)->myGame->readWriteLock);
+    char *local_buff= kmalloc(count,GFP_KERNEL);
+    Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff);
+    copy_to_user(buff,local_buff, count)
+    kfree(local_buff);
+}
+
+//Rebecca's change
+void Print(Matrix *matrix, char *buff, size_t count) {
 	int i;
+    int current= 0;
 	Point p;
 	for (i = 0; i < N + 1; ++i)
 		printf("---");
