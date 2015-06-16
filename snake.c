@@ -47,20 +47,21 @@ typedef int ErrorCode;
 #define ERR_BOARD_FULL			((ErrorCode)-1)
 #define ERR_SNAKE_IS_TOO_HUNGRY ((ErrorCode)-2)
 
-// Anna's change structs
-typedef struct {
-	int color;
-} PlayerS;
-
+// Anna's change: structs and fields
 typedef struct {
 	Matrix board;
-	int currentPlayer;
+	Player currentPlayer;
 	int openCount;
 	struct semaphore countLock;
 	struct semaphore openLock;
 	struct semaphore readWriteLock;
-	struct semaphore writingLock
+	struct semaphore writingLock;
 } Game;
+
+typedef struct {
+	int color;
+	Game* myGame;
+} PlayerS;
 
 int maxGames;
 Game* games;
@@ -83,6 +84,10 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
 /*-------------------------------------------------------------------------
  The main program. The program implements a snake game
  -------------------------------------------------------------------------*/
+
+int open_snake(struct inode * n, struct file * f) {
+
+}
 
 bool Init(Matrix *matrix) {
 	int i;
