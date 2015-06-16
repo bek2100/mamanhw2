@@ -83,22 +83,6 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
 /*-------------------------------------------------------------------------
  The main program. The program implements a snake game
  -------------------------------------------------------------------------*/
-int main() {
-	Player player = WHITE;
-	Matrix matrix = { { EMPTY } };
-
-	if (!Init(&matrix)) {
-		printf("Illegal M, N parameters.");
-		return -1;
-	}
-	while (Update(&matrix, player)) {
-		Print(&matrix);
-		/* switch turns */
-		player = -player;
-	}
-
-	return 0;
-}
 
 bool Init(Matrix *matrix) {
 	int i;
