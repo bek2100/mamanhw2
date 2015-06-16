@@ -4,6 +4,10 @@ Include files:
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+/*Rebecca's add*/
+#include <asm/uaccess.h>
+#include <linux/module.h>
+/*#include <linux/kernel.h> ? */
 
 /*=========================================================================
 Constants and definitions:
