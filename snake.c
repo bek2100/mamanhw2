@@ -338,3 +338,17 @@ void Print(Matrix *matrix)
 		printf("---");
 	printf("\n");
 }
+
+int init_module(int max_games) {
+	maxGames=max_games;
+	games= kmalloc(sizeof(Game)*max_games, GFP_KERNEL);
+	MODULE_PARM(maxGames, "i");
+	for(int i=0,i<max_games;i++) {
+		games[i].currentPlayer=WHITE;
+		games[i].openCount=0;
+		games[i].
+	}
+	major=register_chrdev(0, "snake", const struct file_operations * fops);
+	MODULE_PARM(games, "i");
+	MODULE_PARM(major, "i");
+}
