@@ -93,7 +93,6 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
  -------------------------------------------------------------------------*/
 
 //Anna's add
-// Anna's add
 int open_snake(struct inode * n, struct file * f) {
 	int count;
 	int minor = MINOR(n->i_rdev);
@@ -310,39 +309,77 @@ bool IsMatrixFull(Matrix *matrix) {
 }
 
 // Rebecca's add
-ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
-    int sem_wait((*PlayerS)(flip->private_data)->myGame->readWriteLock);
-    char *local_buff= kmalloc(count,GFP_KERNEL);
-    Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff);
-    copy_to_user(buff,local_buff, count)
-    kfree(local_buff);
+ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
+	char *local_buff = kmalloc(count, GFP_KERNEL);
+	Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff, count,
+			(*PlayerS)(flip->private_data)->myGame->readWriteLock);
+	if (copy_to_user(buff, local_buff, count))
+		// TODO: change
+		return ERROR;
+	kfree(local_buff);
 }
 
 //Rebecca's change
-void Print(Matrix *matrix, char *buff, size_t count) {
+//TODO: case count not long enough
+void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 	int i;
-    int current= 0;
+	int current = 0;
 	Point p;
-	for (i = 0; i < N + 1; ++i)
-		printf("---");
-	printf("\n");
+	for (i = 0; i < N + 1; ++i) {
+		buff[current++] = '-';
+		buff[current++] = '-';
+		buff[current++] = '-';
+	}
+	buff[current++] = '\n';
+	void down( sem);
 	for (p.y = 0; p.y < N; ++p.y) {
-		printf("|");
+		buff[current++] = '|';
 		for (p.x = 0; p.x < N; ++p.x) {
 			switch ((*matrix)[p.y][p.x]) {
 				case FOOD:
-					printf("  *");
+					buff[current++] = ' ';
+					buff[current++] = ' ';
+					buff[current++] = '*';
 					break;
 				case EMPTY:
-					printf("  .");
+					buff[current++] = ' ';
+					buff[current++] = ' ';
+					buff[current++] = '.;
 					break;
 				default:
-					printf("% 3d", (*matrix)[p.y][p.x]);
+					buff[current++] = ' ';
+					//TODO: check if correct
+					buff[current++] = (*matrix)[p.y][p.x] + '0';
+					buff[current++] = ' ';
 			}
 		}
-		printf(" |\n");
+		buff[current++] = ' ';
+		buff[current++] = '|';
+		buff[current++] = '\n';
 	}
-	for (i = 0; i < N + 1; ++i)
-		printf("---");
-	printf("\n");
+	void up( sem);
+	for (i = 0; i < N + 1; ++i) {
+		buff[current++] = '-';
+		buff[current++] = '-';
+		buff[current++] = '-';
+	}
+	buff[current++] = '\n';
+	while (current <= count)
+		buff[current++] = '\0';
 }
+}
+
+int init_module(int max_games) {
+maxGames = max_games;
+games = kmalloc(sizeof(Game) * max_games, GFP_KERNEL);
+MODULE_PARM(maxGames, "i");
+for(int i=0,i<max_games;i++
+		) {
+			games[i].currentPlayer=WHITE;
+			games[i].openCount=0;
+			games[i].
+		}
+		major=register_chrdev(0, "snake", const struct file_operations * fops);
+		MODULE_PARM(games, "i");
+		MODULE_PARM(major, "i");
+	}
