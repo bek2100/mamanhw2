@@ -60,10 +60,10 @@ typedef struct {
 	Matrix board;
 	Player currentPlayer;
 	int openCount;
-	struct semaphore countLock;
-	struct semaphore openLock;
-	struct semaphore readWriteLock;
-	struct semaphore writingLock;
+	struct semaphore countLock; // lock when check the openCount variable
+	struct semaphore openLock; // lock when the first player waits for the second one
+	struct semaphore readWriteLock; // lock when read or write (can't be both on the same time)
+	struct semaphore writingLock; // lock when more than one player tries to write
 } Game;
 
 typedef struct {
@@ -73,9 +73,8 @@ typedef struct {
 
 //Rebecca's change:
 static int maxGames;
-static struct Game* games = NULL;
+static Game* games = NULL;
 static int majorNumber; ///< Stores the device number -- determined automatically
-static int numberOpens = 0; ///< Counts the number of times the device is opened
 //TODO: do we need it?:
 static char message[256] = { 0 }; ///< Memory for the string that is passed from userspace
 static short size_of_message; ///< Used to remember the size of the string stored
@@ -109,7 +108,7 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
  The main program. The program implements a snake game
  -------------------------------------------------------------------------*/
 
-//Anna's add
+//Anna's add start
 int open_snake(struct inode * n, struct file * f) {
 	int count;
 	int minor = MINOR(n->i_rdev);
@@ -125,15 +124,18 @@ int open_snake(struct inode * n, struct file * f) {
 		PlayerS* specWhite = kmalloc(sizeof(PlayerS), GFP_KERNEL);
 		specWhite->color = WHITE;
 		specWhite->myGame = &(games[minor]);
-		//TODO: insert specWhite to current, check how to put on waiting
+		f->private_data = (void*) specWhite;
+		down(&(games[minor].openLock));
 	} else { // has to be 2
 		PlayerS* specBlack = kmalloc(sizeof(PlayerS), GFP_KERNEL);
 		specBlack->color = BLACK;
 		specBlack->myGame = &(games[minor]);
-		//TODO: insert specWhite to current, check how to put on waiting
+		f->private_data = (void*) specBlack;
+		up(&(games[minor].openLock));
 	}
 }
 
+// Anna's add end
 bool Init(Matrix *matrix) {
 	int i;
 	/* initialize the snakes location */
