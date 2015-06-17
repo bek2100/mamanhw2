@@ -54,20 +54,21 @@ typedef int ErrorCode;
 #define ERR_BOARD_FULL			((ErrorCode)-1)
 #define ERR_SNAKE_IS_TOO_HUNGRY ((ErrorCode)-2)
 
-// Anna's change structs
-typedef struct {
-	int color;
-} PlayerS;
-
+// Anna's add: structs and fields
 typedef struct {
 	Matrix board;
-	int currentPlayer;
+	Player currentPlayer;
 	int openCount;
 	struct semaphore countLock;
 	struct semaphore openLock;
 	struct semaphore readWriteLock;
-	struct semaphore writingLock
+	struct semaphore writingLock;
 } Game;
+
+typedef struct {
+	int color;
+	Game* myGame;
+} PlayerS;
 
 int maxGames;
 Game* games;
@@ -90,6 +91,17 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
 /*-------------------------------------------------------------------------
  The main program. The program implements a snake game
  -------------------------------------------------------------------------*/
+
+//Anna's add
+int open_snake(struct inode * n, struct file * f) {
+	int count;
+	int minor = MINOR(n->i_rdev);
+	down(&(games[minor].countLock));
+	if (games[minor].openCount == 2) {
+		up(&(games[minor].countLock));
+
+	}
+}
 
 bool Init(Matrix *matrix) {
 	int i;
@@ -297,20 +309,21 @@ bool IsMatrixFull(Matrix *matrix) {
 }
 
 // Rebecca's add
-ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp){
-    char *local_buff= kmalloc(count,GFP_KERNEL);
-    Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff, count, (*PlayerS)(flip->private_data)->myGame->readWriteLock);
-    if(copy_to_user(buff,local_buff, count))
-        // TODO: change
-        return ERROR;
-    kfree(local_buff);
+ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
+	char *local_buff = kmalloc(count, GFP_KERNEL);
+	Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff, count,
+			(*PlayerS)(flip->private_data)->myGame->readWriteLock);
+	if (copy_to_user(buff, local_buff, count))
+		// TODO: change
+		return ERROR;
+	kfree(local_buff);
 }
 
 //Rebecca's change
 //TODO: case count not long enough
 void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 	int i;
-    int current= 0;
+	int current = 0;
 	Point p;
     for (i = 0; i < N + 1; ++i){
 		buff[current++]='-';
@@ -321,29 +334,29 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
     
     down(sem);
 	for (p.y = 0; p.y < N; ++p.y) {
-		buff[current++]='|';
+		buff[current++] = '|';
 		for (p.x = 0; p.x < N; ++p.x) {
 			switch ((*matrix)[p.y][p.x]) {
 				case FOOD:
-					buff[current++]=' ';
-                    buff[current++]=' ';
-                    buff[current++]='*';
+					buff[current++] = ' ';
+					buff[current++] = ' ';
+					buff[current++] = '*';
 					break;
 				case EMPTY:
-                    buff[current++]=' ';
-                    buff[current++]=' ';
-                    buff[current++]='.;
+					buff[current++] = ' ';
+					buff[current++] = ' ';
+					buff[current++] = '.;
 					break;
 				default:
-                    buff[current++]=' ';
-                    //TODO: check if correct
-                    buff[current++]=(*matrix)[p.y][p.x]+'0';
-                    buff[current++]=' ';
-            }
+					buff[current++] = ' ';
+					//TODO: check if correct
+					buff[current++] = (*matrix)[p.y][p.x] + '0';
+					buff[current++] = ' ';
+			}
 		}
-        buff[current++]=' ';
-        buff[current++]='|';
-        buff[current++]='\n';
+		buff[current++] = ' ';
+		buff[current++] = '|';
+		buff[current++] = '\n';
 	}
     up(sem);
     for (i = 0; i < N + 1; ++i){
@@ -356,13 +369,18 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 }
 
 int init_module(int max_games) {
-	maxGames=max_games;
-	games= kmalloc(sizeof(Game)*max_games, GFP_KERNEL);
-	MODULE_PARM(maxGames, "i");
-	for(int i=0,i<max_games;i++) {
-		games[i].currentPlayer=WHITE;
-		games[i].openCount=0;
-		games[i].
+maxGames = max_games;
+games = kmalloc(sizeof(Game) * max_games, GFP_KERNEL);
+MODULE_PARM(maxGames, "i");
+for(int i=0,i<max_games;i++
+		) {
+			games[i].currentPlayer=WHITE;
+			games[i].openCount=0;
+			games[i].
+		}
+		major=register_chrdev(0, "snake", const struct file_operations * fops);
+		MODULE_PARM(games, "i");
+		MODULE_PARM(major, "i");
 	}
 	major=register_chrdev(0, "snake", const struct file_operations * fops);
 	MODULE_PARM(games, "i");
