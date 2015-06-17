@@ -101,7 +101,7 @@ ssize_t read_snake(struct file *, char *, size_t, loff_t *);
 ssize_t write_snake(struct file *, const char *, size_t, loff_t *);
 
 static struct file_operations fops = { .open = open_snake, .read = read_snake,
-		.write = write_snake, .release = release_snake, };
+		.write = write_snake, .release = release_snake, .llseek=llseek_snake};
 
 // end of Rebecca's change here
 
@@ -435,6 +435,10 @@ int init_module(int max_games) {
 	major=register_chrdev(0, "snake", const struct file_operations * fops);
 	MODULE_PARM(games, "i");
 	MODULE_PARM(major, "i");
+}
+
+void cleanup_module(){
+    kfree(games);
 }
 
 int ioctl_snake(int fd, int cmd) {
