@@ -75,10 +75,10 @@ typedef struct {
 static int maxGames;
 static struct Game* games = NULL;
 static int majorNumber; ///< Stores the device number -- determined automatically
-static int    numberOpens = 0;///< Counts the number of times the device is opened
+static int numberOpens = 0; ///< Counts the number of times the device is opened
 //TODO: do we need it?:
-static char message[256]={0}; ///< Memory for the string that is passed from userspace
-static short  size_of_message;///< Used to remember the size of the string stored
+static char message[256] = { 0 }; ///< Memory for the string that is passed from userspace
+static short size_of_message; ///< Used to remember the size of the string stored
 
 // The prototype functions for the character driver -- must come before the struct definition
 int open_snake(struct inode *, struct file *);
@@ -86,13 +86,8 @@ int release_snake(struct inode *, struct file *);
 ssize_t read_snake(struct file *, char *, size_t, loff_t *);
 ssize_t write_snake(struct file *, const char *, size_t, loff_t *);
 
-static struct file_operations fops =
-{
-    .open = open_snake,
-    .read = read_snake,
-    .write = write_snake,
-    .release = release_snake,
-};
+static struct file_operations fops = { .open = open_snake, .read = read_snake,
+		.write = write_snake, .release = release_snake, };
 
 // end of Rebecca's change here
 
@@ -346,10 +341,10 @@ bool IsMatrixFull(Matrix *matrix) {
 
 // Rebecca's add
 ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
-    if(!flip){
-        //TODO: type of error
-        return ERROR
-    }
+	if (!flip) {
+		//TODO: type of error
+		return ERROR;
+	}
 	char *local_buff = kmalloc(count, GFP_KERNEL);
 	Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff, count,
 			(*PlayerS)(flip->private_data)->myGame->readWriteLock);
@@ -365,14 +360,14 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 	int i;
 	int current = 0;
 	Point p;
-    for (i = 0; i < N + 1; ++i){
-		buff[current++]='-';
-        buff[current++]='-';
-        buff[current++]='-';
-    }
-	buff[current++]='\n';
-    //TODO: check semaphore location
-    down(sem);
+	for (i = 0; i < N + 1; ++i) {
+		buff[current++] = '-';
+		buff[current++] = '-';
+		buff[current++] = '-';
+	}
+	buff[current++] = '\n';
+	//TODO: check semaphore location
+	down(sem);
 	for (p.y = 0; p.y < N; ++p.y) {
 		buff[current++] = '|';
 		for (p.x = 0; p.x < N; ++p.x) {
@@ -385,7 +380,7 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 				case EMPTY:
 					buff[current++] = ' ';
 					buff[current++] = ' ';
-					buff[current++] = '.';
+					buff[current++] = '.;
 					break;
 				default:
 					buff[current++] = ' ';
@@ -398,15 +393,16 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 		buff[current++] = '|';
 		buff[current++] = '\n';
 	}
-    //TODO: check semaphore location
-    up(sem);
-    for (i = 0; i < N + 1; ++i){
-        buff[current++]='-';
-        buff[current++]='-';
-        buff[current++]='-';}
-	buff[current++]='\n';
-    while(current<=count)
-        buff[current++]='\0';}
+	//TODO: check semaphore location
+	up(sem);
+	for (i = 0; i < N + 1; ++i) {
+		buff[current++] = '-';
+		buff[current++] = '-';
+		buff[current++] = '-';
+	}
+	buff[current++] = '\n';
+	while (current <= count)
+		buff[current++] = '\0';
 }
 
 int init_module(int max_games) {
@@ -422,10 +418,8 @@ int init_module(int max_games) {
 	MODULE_PARM(games, "i");
 	MODULE_PARM(major, "i");
 }
-<<<<<<< HEAD
-=======
 
-int ioctl(int fd, int cmd,...){
+int ioctl(int fd, int cmd, ...) {
 
 }
->>>>>>> 1c4e0f0b71933821c4675948faed6f097fa6301e
+
