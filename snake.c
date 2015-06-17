@@ -11,6 +11,7 @@
 #include <linux/fs.h>
 #include <asm/semaphore.h>
 #include <linux/sched.h>
+#include <asm/ioctl.h>
 
 /*=========================================================================
  Constants and definitions:
@@ -70,9 +71,30 @@ typedef struct {
 	Game* myGame;
 } PlayerS;
 
-int maxGames;
-Game* games;
-int major;
+//Rebecca's change:
+static int maxGames;
+static struct Game* games = NULL;
+static int majorNumber; ///< Stores the device number -- determined automatically
+static int    numberOpens = 0;///< Counts the number of times the device is opened
+//TODO: do we need it?:
+static char message[256]={0}; ///< Memory for the string that is passed from userspace
+static short  size_of_message;///< Used to remember the size of the string stored
+
+// The prototype functions for the character driver -- must come before the struct definition
+int open_snake(struct inode *, struct file *);
+int release_snake(struct inode *, struct file *);
+ssize_t read_snake(struct file *, char *, size_t, loff_t *);
+ssize_t write_snake(struct file *, const char *, size_t, loff_t *);
+
+static struct file_operations fops =
+{
+    .open = open_snake,
+    .read = read_snake,
+    .write = write_snake,
+    .release = release_snake,
+};
+
+// end of Rebecca's change here
 
 bool Init(Matrix*); /* initialize the board. return false if the board is illegal (should not occur, affected by N, M parameters) */
 bool Update(Matrix*, Player);/* handle all updating to this player. returns whether to continue or not. */
@@ -99,7 +121,21 @@ int open_snake(struct inode * n, struct file * f) {
 	down(&(games[minor].countLock));
 	if (games[minor].openCount == 2) {
 		up(&(games[minor].countLock));
-
+		return -EINVAL; //TODO:check what error code whould be returned
+	}
+	games[minor].openCount++;
+	count = games[minor].openCount;
+	up(&(games[minor].countLock));
+	if (count == 1) {
+		PlayerS* specWhite = kmalloc(sizeof(PlayerS), GFP_KERNEL);
+		specWhite->color = WHITE;
+		specWhite->myGame = &(games[minor]);
+		//TODO: insert specWhite to current, check how to put on waiting
+	} else { // has to be 2
+		PlayerS* specBlack = kmalloc(sizeof(PlayerS), GFP_KERNEL);
+		specBlack->color = BLACK;
+		specBlack->myGame = &(games[minor]);
+		//TODO: insert specWhite to current, check how to put on waiting
 	}
 }
 
@@ -310,11 +346,15 @@ bool IsMatrixFull(Matrix *matrix) {
 
 // Rebecca's add
 ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
+    if(!flip){
+        //TODO: type of error
+        return ERROR
+    }
 	char *local_buff = kmalloc(count, GFP_KERNEL);
 	Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff, count,
 			(*PlayerS)(flip->private_data)->myGame->readWriteLock);
 	if (copy_to_user(buff, local_buff, count))
-		// TODO: change
+		// TODO: type of error
 		return ERROR;
 	kfree(local_buff);
 }
@@ -325,13 +365,14 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 	int i;
 	int current = 0;
 	Point p;
-	for (i = 0; i < N + 1; ++i) {
-		buff[current++] = '-';
-		buff[current++] = '-';
-		buff[current++] = '-';
-	}
-	buff[current++] = '\n';
-	void down( sem);
+    for (i = 0; i < N + 1; ++i){
+		buff[current++]='-';
+        buff[current++]='-';
+        buff[current++]='-';
+    }
+	buff[current++]='\n';
+    //TODO: check semaphore location
+    down(sem);
 	for (p.y = 0; p.y < N; ++p.y) {
 		buff[current++] = '|';
 		for (p.x = 0; p.x < N; ++p.x) {
@@ -357,15 +398,15 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 		buff[current++] = '|';
 		buff[current++] = '\n';
 	}
-	void up( sem);
-	for (i = 0; i < N + 1; ++i) {
-		buff[current++] = '-';
-		buff[current++] = '-';
-		buff[current++] = '-';
-	}
-	buff[current++] = '\n';
-	while (current <= count)
-		buff[current++] = '\0';
+    //TODO: check semaphore location
+    up(sem);
+    for (i = 0; i < N + 1; ++i){
+        buff[current++]='-';
+        buff[current++]='-';
+        buff[current++]='-';}
+	buff[current++]='\n';
+    while(current<=count)
+        buff[current++]='\0';}
 }
 
 int init_module(int max_games) {
@@ -381,3 +422,10 @@ int init_module(int max_games) {
 	MODULE_PARM(games, "i");
 	MODULE_PARM(major, "i");
 }
+<<<<<<< HEAD
+=======
+
+int ioctl(int fd, int cmd,...){
+
+}
+>>>>>>> 1c4e0f0b71933821c4675948faed6f097fa6301e
