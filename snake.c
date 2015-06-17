@@ -59,6 +59,8 @@ typedef int WinnerData;
 #define WHITE_IS_WINNER (4)
 #define BLACK_IS_WINNER (2)
 #define A_TIE (5)
+//Anna's add
+#define NOT_FINISHED (-1)
 
 typedef int ColorData;
 #define SNAKE_IS_WHITE (4)
@@ -68,15 +70,22 @@ typedef int ColorData;
 typedef struct {
 	Matrix board;
 	Player currentPlayer;
+	WinnerData winner;
+	bool isFinished;
+	bool isRealesed;
 	int openCount;
 	struct semaphore countLock; // lock when check the openCount variable
 	struct semaphore openLock; // lock when the first player waits for the second one
 	struct semaphore readWriteLock; // lock when read or write (can't be both on the same time)
-	struct semaphore writingLock; // lock when more than one player tries to write
+	struct semaphore whiteLock; // blocks the white player when it isn't his turn
+	struct semaphore blackLock; // blocks the black player when it isn't his turn
+	struct semaphore currentLock; //lock when checking the currentPlayer
+	struct semaphore isFinishedLock; //lock when checking if the game has finished
+	struct semaphore isReleasedLock; //lock when checking if one of the players released the game
 } Game;
 
 typedef struct {
-	int color;
+	Player color;
 	Game* myGame;
 } PlayerS;
 
@@ -105,7 +114,7 @@ static struct file_operations fops = { .open = open_snake, .read = read_snake,
 // end of Rebecca's change here
 
 bool Init(Matrix*); /* initialize the board. return false if the board is illegal (should not occur, affected by N, M parameters) */
-bool Update(Matrix*, Player);/* handle all updating to this player. returns whether to continue or not. */
+bool Update(Matrix*, Player, char);/* handle all updating to this player. returns whether to continue or not. */
 void Print(Matrix*);/* prints the state of the board */
 Point GetInputLoc(Matrix*, Player);/* calculates the location that the player wants to go to */
 bool CheckTarget(Matrix*, Player, Point);/* checks if the player can move to the specified location */
@@ -155,10 +164,73 @@ int open_snake(struct inode *n, struct file *f) {
 
 ssize_t write_snake(struct file *filp, const char *buff, size_t count,
 		loff_t *offp) {
-	if (!filp || !offp || count < 0 || (!buff) && count != 0) {
-		return -EINVAL;
+	// check parameters
+	if (!filp || !offp || count < 0 || (!buff && count != 0)) {
+		return -EFAULT;
 	}
-
+	if (count == 0) {
+		return 0;
+	}
+	Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
+	// check if game finished normally
+	down(&(currentGame->isFinishedLock));
+	if (currentGame->isFinished == TRUE) {
+		up(&(currentGame->isFinishedLock));
+		return -10;
+	}
+	up(&(currentGame->isFinishedLock));
+	// check if the other player released the game
+	down(&(currentGame->isReleasedLock));
+	if (currentGame->isReleasedLock == TRUE) {
+		up(&(currentGame->isReleasedLock));
+		return -10;
+	}
+	up(&(currentGame->isReleasedLock));
+	//start of function
+	char* myBuff = kmalloc(count, GFP_KERNEL);
+	int size = count;
+	if (myBuff == NULL) {
+		return -EFAULT;
+	}
+	int result = copy_from_user(myBuff, buff, count);
+	if (result == count) {
+		return -EFAULT;
+	}
+	size -= result;
+	PlayerS* currentP = (PlayerS*) (filp->private_data);
+	for (int i = 0; i < size; i++) {
+		down(&(currentGame->currentLock));
+		if (currentP->color == currentGame->currentPlayer) {
+			up(&(currentGame->currentLock));
+		} else {
+			up(&(currentGame->currentLock));
+			if (currentP->color == WHITE) {
+				down(&(currentGame->whiteLock));
+				down(&(currentGame->whiteLock));
+			} else {
+				down(&(currentGame->blackLock));
+				down(&(currentGame->blackLock));
+			}
+		}
+		down(&(currentGame->readWriteLock));
+		bool upResult = Update(&(currentGame->board), currentP->color,
+				myBuff[i]); //TODO: maybe delete
+		up(&(currentGame->readWriteLock));
+		//TODO: maybe needed to check upResult here
+		down(&(currentGame->currentLock));
+		if (currentP->color == WHITE) {
+			currentGame->currentPlayer = BLACK;
+		} else {
+			currentGame->currentPlayer = WHITE;
+		}
+		up(&(currentGame->currentLock));
+		if (currentP->color == WHITE) {
+			up(&(currentGame->blackLock));
+		} else {
+			up(&(currentGame->whiteLock));
+		}
+	}
+	return size;
 }
 
 // Anna's add end
@@ -180,7 +252,7 @@ bool Init(Matrix *matrix) {
 	return TRUE;
 }
 
-bool Update(Matrix *matrix, Player player) {
+bool Update(Matrix *matrix, Player player, char move) {
 	ErrorCode e;
 	Point p = GetInputLoc(matrix, player);
 
@@ -197,7 +269,7 @@ bool Update(Matrix *matrix, Player player) {
 		printf("% d lost. the snake is too hungry", player);
 		return FALSE;
 	}
-	// only option is that e == ERR_OK
+// only option is that e == ERR_OK
 	if (IsMatrixFull(matrix)) {
 		printf("the board is full, tie");
 		return FALSE;
@@ -345,7 +417,7 @@ ErrorCode RandFoodLocation(Matrix *matrix) {
 		p.x = p.x % N;
 		get_random_bytes(&p.y, sizeof(int));
 		p.y = p.y % N;
-	} while (!IsAvailable(matrix, p) || IsMatrixFull(matrix));
+	} while (!(IsAvailable(matrix, p) || IsMatrixFull(matrix))); //fixed by Piazza
 
 	if (IsMatrixFull(matrix))
 		return ERR_BOARD_FULL;
@@ -391,7 +463,7 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 		buff[current++] = '-';
 	}
 	buff[current++] = '\n';
-	//TODO: check semaphore location
+//TODO: check semaphore location
 	down(sem);
 	for (p.y = 0; p.y < N; ++p.y) {
 		buff[current++] = '|';
@@ -418,7 +490,7 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 		buff[current++] = '|';
 		buff[current++] = '\n';
 	}
-	//TODO: check semaphore location
+//TODO: check semaphore location
 	up(sem);
 	for (i = 0; i < N + 1; ++i) {
 		buff[current++] = '-';
