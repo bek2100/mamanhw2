@@ -93,7 +93,6 @@ static short size_of_message; ///< Used to remember the size of the string store
 
 #define SNAKE_GET_WINNER  _IOR(SNAKE_MAGIC, 1 , char *) //get driver data
 #define SNAKE_GET_COLOR  _IOR(SNAKE_MAGIC, 2 , char *) //set driver data
-
 // The prototype functions for the character driver -- must come before the struct definition
 int open_snake(struct inode *, struct file *);
 int release_snake(struct inode *, struct file *);
@@ -156,7 +155,7 @@ int open_snake(struct inode *n, struct file *f) {
 
 ssize_t write_snake(struct file *filp, const char *buff, size_t count,
 		loff_t *offp) {
-	if (!filp || !buff || !offp || count < 0) {
+	if (!filp || !offp || count < 0 || (!buff) && count != 0) {
 		return -EINVAL;
 	}
 
@@ -447,17 +446,17 @@ int init_module(int max_games) {
 }
 
 int ioctl_snake(int fd, int cmd) {
-    switch () {
-        case SNAKE_GET_WINNER:
-        //TODO: see how the rest of the functions work
-        return
-        case SNAKE_GET_COLOR;
-        if((*PlayerS)(flip->private_data)->color==1)
-            return SNAKE_IS_WHITE;
-        if((*PlayerS)(flip->private_data)->color==-1)
-            return SNAKE_IS_BLACK;
-        //TODO: add error
-        return ERROR;
-    }
+	switch () {
+		case SNAKE_GET_WINNER:
+		//TODO: see how the rest of the functions work
+		return
+		case SNAKE_GET_COLOR;
+		if ((*PlayerS)(flip->private_data)->color == 1)
+			return SNAKE_IS_WHITE;
+		if ((*PlayerS)(flip->private_data)->color == -1)
+			return SNAKE_IS_BLACK;
+		//TODO: add error
+		return ERROR;
+	}
 }
 
