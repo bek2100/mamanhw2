@@ -99,21 +99,7 @@ int open_snake(struct inode * n, struct file * f) {
 	down(&(games[minor].countLock));
 	if (games[minor].openCount == 2) {
 		up(&(games[minor].countLock));
-		return -EINVAL; //TODO:check what error code whould be returned
-	}
-	games[minor].openCount++;
-	count = games[minor].openCount;
-	up(&(games[minor].countLock));
-	if (count == 1) {
-		PlayerS* specWhite = kmalloc(sizeof(PlayerS), GFP_KERNEL);
-		specWhite->color = WHITE;
-		specWhite->myGame = &(games[minor]);
-		//TODO: insert specWhite to current, check how to put on waiting
-	} else { // has to be 2
-		PlayerS* specBlack = kmalloc(sizeof(PlayerS), GFP_KERNEL);
-		specBlack->color = BLACK;
-		specBlack->myGame = &(games[minor]);
-		//TODO: insert specWhite to current, check how to put on waiting
+
 	}
 }
 
