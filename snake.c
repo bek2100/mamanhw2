@@ -109,7 +109,10 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
  -------------------------------------------------------------------------*/
 
 //Anna's add start
-int open_snake(struct inode * n, struct file * f) {
+int open_snake(struct inode *n, struct file *f) {
+	if (!n || !f) {
+		return -EINVAL;
+	}
 	int count;
 	int minor = MINOR(n->i_rdev);
 	down(&(games[minor].countLock));
@@ -133,6 +136,15 @@ int open_snake(struct inode * n, struct file * f) {
 		f->private_data = (void*) specBlack;
 		up(&(games[minor].openLock));
 	}
+	return 0;
+}
+
+ssize_t write_snake(struct file *filp, const char *buff, size_t count,
+		loff_t *offp) {
+	if (!filp || !buff || !offp || count < 0) {
+		return -EINVAL;
+	}
+
 }
 
 // Anna's add end
@@ -185,17 +197,14 @@ Point GetInputLoc(Matrix *matrix, Player player) {
 	Point p;
 
 	printf("% d, please enter your move(DOWN2, LEFT4, RIGHT6, UP8):\n", player);
-	do {
-		if (scanf("%d", &dir) < 0) {
-			printf("an error occurred, the program will now exit.\n");
-			exit(1);
-		}
-		if (dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT) {
-			printf("invalid input, please try again\n");
-		} else {
-			break;
-		}
-	} while (TRUE);
+	if (scanf("%d", &dir) < 0) {
+		//TODO: change to error return instead of printing
+		printf("an error occurred, the program will now exit.\n");
+		exit(1);
+	}
+	if (dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT) {
+		printf("invalid input, please try again\n");
+	}
 
 	p = GetSegment(matrix, player);
 
