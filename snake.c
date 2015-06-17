@@ -93,7 +93,6 @@ static short size_of_message; ///< Used to remember the size of the string store
 
 #define SNAKE_GET_WINNER  _IOR(SNAKE_MAGIC, 1 , char *) //get driver data
 #define SNAKE_GET_COLOR  _IOR(SNAKE_MAGIC, 2 , char *) //set driver data
-
 // The prototype functions for the character driver -- must come before the struct definition
 int open_snake(struct inode *, struct file *);
 int release_snake(struct inode *, struct file *);
@@ -124,7 +123,10 @@ int GetSize(Matrix*, Player);/* gets the size of the snake */
  -------------------------------------------------------------------------*/
 
 //Anna's add start
-int open_snake(struct inode * n, struct file * f) {
+int open_snake(struct inode *n, struct file *f) {
+	if (!n || !f) {
+		return -EINVAL;
+	}
 	int count;
 	int minor = MINOR(n->i_rdev);
 	down(&(games[minor].countLock));
@@ -148,6 +150,15 @@ int open_snake(struct inode * n, struct file * f) {
 		f->private_data = (void*) specBlack;
 		up(&(games[minor].openLock));
 	}
+	return 0;
+}
+
+ssize_t write_snake(struct file *filp, const char *buff, size_t count,
+		loff_t *offp) {
+	if (!filp || !offp || count < 0 || (!buff) && count != 0) {
+		return -EINVAL;
+	}
+
 }
 
 // Anna's add end
@@ -200,17 +211,14 @@ Point GetInputLoc(Matrix *matrix, Player player) {
 	Point p;
 
 	printf("% d, please enter your move(DOWN2, LEFT4, RIGHT6, UP8):\n", player);
-	do {
-		if (scanf("%d", &dir) < 0) {
-			printf("an error occurred, the program will now exit.\n");
-			exit(1);
-		}
-		if (dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT) {
-			printf("invalid input, please try again\n");
-		} else {
-			break;
-		}
-	} while (TRUE);
+	if (scanf("%d", &dir) < 0) {
+		//TODO: change to error return instead of printing
+		printf("an error occurred, the program will now exit.\n");
+		exit(1);
+	}
+	if (dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT) {
+		printf("invalid input, please try again\n");
+	}
 
 	p = GetSegment(matrix, player);
 
@@ -442,17 +450,17 @@ void cleanup_module(){
 }
 
 int ioctl_snake(int fd, int cmd) {
-    switch () {
-        case SNAKE_GET_WINNER:
-        //TODO: see how the rest of the functions work
-        return
-        case SNAKE_GET_COLOR;
-        if((*PlayerS)(flip->private_data)->color==1)
-            return SNAKE_IS_WHITE;
-        if((*PlayerS)(flip->private_data)->color==-1)
-            return SNAKE_IS_BLACK;
-        //TODO: add error
-        return ERROR;
-    }
+	switch () {
+		case SNAKE_GET_WINNER:
+		//TODO: see how the rest of the functions work
+		return
+		case SNAKE_GET_COLOR;
+		if ((*PlayerS)(flip->private_data)->color == 1)
+			return SNAKE_IS_WHITE;
+		if ((*PlayerS)(flip->private_data)->color == -1)
+			return SNAKE_IS_BLACK;
+		//TODO: add error
+		return ERROR;
+	}
 }
 
