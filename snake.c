@@ -55,11 +55,14 @@ typedef int ErrorCode;
 #define ERR_BOARD_FULL			((ErrorCode)-1)
 #define ERR_SNAKE_IS_TOO_HUNGRY ((ErrorCode)-2)
 
-typedef int WinnerData:
+typedef int WinnerData;
 #define WHITE_IS_WINNER (4)
 #define BLACK_IS_WINNER (2)
 #define A_TIE (5)
 
+typedef int ColorData;
+#define SNAKE_IS_WHITE (4)
+#define SNAKE_IS_BLACK (2)
 
 // Anna's add: structs and fields
 typedef struct {
@@ -437,10 +440,15 @@ int init_module(int max_games) {
 int ioctl_snake(int fd, int cmd) {
     switch () {
         case SNAKE_GET_WINNER:
-            statements
-            break;
+        //TODO: see how the rest of the functions work
+        return
         case SNAKE_GET_COLOR;
-            break;
+        if((*PlayerS)(flip->private_data)->color==1)
+            return SNAKE_IS_WHITE;
+        if((*PlayerS)(flip->private_data)->color==-1)
+            return SNAKE_IS_BLACK;
+        //TODO: add error
+        return ERROR;
     }
 }
 
