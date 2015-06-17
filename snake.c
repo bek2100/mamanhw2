@@ -318,7 +318,8 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
         buff[current++]='-';
     }
 	buff[current++]='\n';
-    void down(sem);
+    
+    down(sem);
 	for (p.y = 0; p.y < N; ++p.y) {
 		buff[current++]='|';
 		for (p.x = 0; p.x < N; ++p.x) {
@@ -344,7 +345,7 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
         buff[current++]='|';
         buff[current++]='\n';
 	}
-    void up(sem);
+    up(sem);
     for (i = 0; i < N + 1; ++i){
         buff[current++]='-';
         buff[current++]='-';
@@ -366,4 +367,8 @@ int init_module(int max_games) {
 	major=register_chrdev(0, "snake", const struct file_operations * fops);
 	MODULE_PARM(games, "i");
 	MODULE_PARM(major, "i");
+}
+
+int ioctl(int fd, int cmd,...){
+    
 }
