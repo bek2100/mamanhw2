@@ -414,6 +414,7 @@ int init_module(int max_games) {
 		games[i].openCount = 0;
 //			games[i].
 	}
+
 	major=register_chrdev(0, "snake", const struct file_operations * fops);
 	MODULE_PARM(games, "i");
 	MODULE_PARM(major, "i");
