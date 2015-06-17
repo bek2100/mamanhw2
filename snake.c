@@ -55,6 +55,12 @@ typedef int ErrorCode;
 #define ERR_BOARD_FULL			((ErrorCode)-1)
 #define ERR_SNAKE_IS_TOO_HUNGRY ((ErrorCode)-2)
 
+typedef int WinnerData:
+#define WHITE_IS_WINNER (4)
+#define BLACK_IS_WINNER (2)
+#define A_TIE (5)
+
+
 // Anna's add: structs and fields
 typedef struct {
 	Matrix board;
@@ -78,6 +84,12 @@ static int majorNumber; ///< Stores the device number -- determined automaticall
 //TODO: do we need it?:
 static char message[256] = { 0 }; ///< Memory for the string that is passed from userspace
 static short size_of_message; ///< Used to remember the size of the string stored
+
+/* magic number for SCMD IOCTL operations */
+#define SNAKE_MAGIC 's'
+
+#define SNAKE_GET_WINNER  _IOR(SNAKE_MAGIC, 1 , char *) //get driver data
+#define SNAKE_GET_COLOR  _IOR(SNAKE_MAGIC, 2 , char *) //set driver data
 
 // The prototype functions for the character driver -- must come before the struct definition
 int open_snake(struct inode *, struct file *);
@@ -422,7 +434,13 @@ int init_module(int max_games) {
 	MODULE_PARM(major, "i");
 }
 
-int ioctl(int fd, int cmd, ...) {
-
+int ioctl_snake(int fd, int cmd) {
+    switch () {
+        case SNAKE_GET_WINNER:
+            statements
+            break;
+        case SNAKE_GET_COLOR;
+            break;
+    }
 }
 
