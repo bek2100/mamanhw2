@@ -552,25 +552,26 @@ int init_module(int max_games) {
 //			games[i].
 	}
 
-	major=register_chrdev(0, "snake", const struct file_operations * fops);
+	major = register_chrdev(0, "snake", fops);
 	MODULE_PARM(games, "i");
 	MODULE_PARM(major, "i");
 }
 // Rrebecca's adds:
 
-int ioctl_snake(int fd, int cmd) {
-	switch () {
+int ioctl(struct inode *inode, struct file *filp, unsigned int cmd,
+		unsigned long arg) {
+	switch (cmd) {
 		case SNAKE_GET_WINNER:
-		Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
+		Game* currentGame =((PlayerS*) (filp->private_data))->myGame;
 		down(&(currentGame->isFinishedLock));
 		if (currentGame->isFinished == TRUE) {
 			up(&(currentGame->isFinishedLock));
 			return currentGame->winner;
 		}
 		case SNAKE_GET_COLOR;
-		if (((PlayerS*) (flip->private_data))->color == 1)
+		if (((PlayerS*) (filp->private_data))->color == 1)
 			return SNAKE_IS_WHITE;
-		if (((PlayerS*) (flip->private_data))->color == -1)
+		if (((PlayerS*) (filp->private_data))->color == -1)
 			return SNAKE_IS_BLACK;
 		//TODO: add error
 		return ERROR;
@@ -583,7 +584,7 @@ int release_snake(struct inode *n, struct file *f) {
 	}
 	Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
 	down(&currentGame->isReleasedLock)
-	currentGame->isRealesed = TRUE;
+	currentGame->isReleased = TRUE;
 	up(&currentGame->isReleasedLock)
 
 }
