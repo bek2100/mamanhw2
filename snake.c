@@ -568,7 +568,10 @@ int release_snake(struct inode *n, struct file *f){
         return -EINVAL;
     }
     Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
-    
+    down(&currentGame->isReleasedLock)
+    currentGame->isRealesed=TRUE;
+    up(&currentGame->isReleasedLock)
+
 }
 
 //TODO: finish
