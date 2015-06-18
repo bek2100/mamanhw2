@@ -546,15 +546,14 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 int init_module(int max_games) {
     maxGames = max_games;
     games = kmalloc(sizeof(Game) * max_games, GFP_KERNEL);
-    /*for (int i = 0; i < max_games; i++) {
-     games[i].currentPlayer = WHITE;
-     games[i].openCount = 0;
-     //			games[i].
-     } */
     for(int i=0,i<max_games;i++) {
+        games[i].board=kmalloc(sizeof(int) * N*N, GFP_KERNEL);
         Init(&(games[i].board));
         games[i].currentPlayer=WHITE;
         games[i].openCount=0;
+        games[i].isFinished=false;
+        games[i].isRealesed=false;
+        games[i].winner=NOT_FINISHED;
         sema_init(&(games[i].countLock), 0);
         sema_init(&(games[i].openLock), 0);
         sema_init(&(games[i].readWriteLock), 0);
@@ -565,16 +564,12 @@ int init_module(int max_games) {
         sema_init(&(games[i].winnerLock), 0);
     }
     
-    
-    Matrix board;
-    WinnerData winner;
-    bool isFinished;
-    bool isRealesed;
-    
-    major=register_chrdev(0, "snake", const struct file_operations * fops);
+    major=register_chrdev(0, "snake", &fops);
     MODULE_PARM(maxGames, "i");
     MODULE_PARM(games, "i");
     MODULE_PARM(major, "i");
+    SET_MODULE_OWNER(&fops);
+    return 0;
 }
 // Rrebecca's adds:
 
