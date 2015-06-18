@@ -72,7 +72,7 @@ typedef struct {
 	Player currentPlayer;
 	WinnerData winner;
 	bool isFinished;
-	bool isRealesed;
+	bool isReleased;
 	int openCount;
 	struct semaphore countLock; // lock when check the openCount variable
 	struct semaphore openLock; // lock when the first player waits for the second one
@@ -110,7 +110,7 @@ ssize_t read_snake(struct file *, char *, size_t, loff_t *);
 ssize_t write_snake(struct file *, const char *, size_t, loff_t *);
 
 static struct file_operations fops = { .open = open_snake, .read = read_snake,
-		.write = write_snake, .release = release_snake, .llseek=llseek_snake};
+		.write = write_snake, .release = release_snake, .llseek = llseek_snake };
 
 // end of Rebecca's change here
 
@@ -148,7 +148,7 @@ int open_snake(struct inode *n, struct file *f) {
 	count = games[minor].openCount;
 	up(&(games[minor].countLock));
 	if (count == 1) {
-        //why is malloc needed? -Rebecca
+		//why is malloc needed? -Rebecca
 		PlayerS* specWhite = kmalloc(sizeof(PlayerS), GFP_KERNEL);
 		specWhite->color = WHITE;
 		specWhite->myGame = &(games[minor]);
@@ -214,6 +214,18 @@ ssize_t write_snake(struct file *filp, const char *buff, size_t count,
 				down(&(currentGame->blackLock));
 			}
 		}
+		down(&(currentGame->isFinishedLock));
+		if (currentGame->isFinished == TRUE) {
+			up(&(currentGame->isFinishedLock));
+			return -10;
+		}
+		up(&(currentGame->isFinishedLock));
+		down(&(currentGame->isReleasedLock));
+		if (currentGame->isReleased == TRUE) {
+			up(&(currentGame->isReleasedLock));
+			return -10;
+		}
+		up(&(currentGame->isReleasedLock));
 		down(&(currentGame->readWriteLock));
 		bool upResult = Update(&(currentGame->board), currentP, myBuff[i]);
 		up(&(currentGame->readWriteLock));
@@ -233,6 +245,7 @@ ssize_t write_snake(struct file *filp, const char *buff, size_t count,
 			break;
 		}
 	}
+	kfree(myBuff);
 	return size;
 }
 
@@ -260,6 +273,7 @@ bool Update(Matrix *matrix, PlayerS* player, char move) {
 	Point p = GetInputLoc(matrix, player->color, atoi(move));
 	Game* currentGame = player->myGame;
 
+	//TODO: check why doesn't recognize PlayerS fields
 	if (!CheckTarget(matrix, player->color, p)) {
 		// if the move is illegal, out of bounds, or trying to eat a snake
 		down(&(currentGame->isFinishedLock));
@@ -283,23 +297,23 @@ bool Update(Matrix *matrix, PlayerS* player, char move) {
 		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
-    //Rebeca's change
+	//Rebeca's change
 	if (e == ERR_SNAKE_IS_TOO_HUNGRY) {
-        down(&(currentGame->winnerLock));
-        if (player->color == WHITE) {
-            currentGame->winner = BLACK_IS_WINNER;
-        } else {
-            currentGame->winner = WHITE_IS_WINNER;
-        }
-        up(&(currentGame->winnerLock));
+		down(&(currentGame->winnerLock));
+		if (player->color == WHITE) {
+			currentGame->winner = BLACK_IS_WINNER;
+		} else {
+			currentGame->winner = WHITE_IS_WINNER;
+		}
+		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
 // only option is that e == ERR_OK
-    //probabely checks if board is full after the snake has moved
+	//probabely checks if board is full after the snake has moved
 	if (IsMatrixFull(matrix)) {
-        down(&(currentGame->winnerLock));
-        currentGame->winner = A_TIE;
-        up(&(currentGame->winnerLock));
+		down(&(currentGame->winnerLock));
+		currentGame->winner = A_TIE;
+		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
 
@@ -461,12 +475,12 @@ bool IsMatrixFull(Matrix *matrix) {
 
 // Rebecca's add
 ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
-    if (!filp || !offp || count < 0 || (!buff && count != 0)) {
-        return -EFAULT;
-    }
-    if (count == 0) {
-        return 0;
-    }
+	if (!filp || !offp || count < 0 || (!buff && count != 0)) {
+		return -EFAULT;
+	}
+	if (count == 0) {
+		return 0;
+	}
 	char *local_buff = kmalloc(count, GFP_KERNEL);
 	Print(&(((PlayerS*) (flip->private_data))->myGame->board), local_buff,
 			count, &(((PlayerS*) (flip->private_data))->myGame->readWriteLock));
@@ -564,33 +578,34 @@ int init_module(int max_games) {
 }
 // Rrebecca's adds:
 
-int ioctl_snake(int fd, int cmd) {
-	switch () {
+int ioctl(struct inode *inode, struct file *filp, unsigned int cmd,
+		unsigned long arg) {
+	switch (cmd) {
 		case SNAKE_GET_WINNER:
-        Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
-        down(&(currentGame->isFinishedLock));
-        if (currentGame->isFinished == TRUE) {
-        up(&(currentGame->isFinishedLock));
-            return currentGame->winner;
-        }
+		Game* currentGame =((PlayerS*) (filp->private_data))->myGame;
+		down(&(currentGame->isFinishedLock));
+		if (currentGame->isFinished == TRUE) {
+			up(&(currentGame->isFinishedLock));
+			return currentGame->winner;
+		}
 		case SNAKE_GET_COLOR;
-		if (((PlayerS*) (flip->private_data))->color == 1)
+		if (((PlayerS*) (filp->private_data))->color == 1)
 			return SNAKE_IS_WHITE;
-		if (((PlayerS*) (flip->private_data))->color == -1)
+		if (((PlayerS*) (filp->private_data))->color == -1)
 			return SNAKE_IS_BLACK;
 		//TODO: add error
 		return ERROR;
 	}
 }
 
-int release_snake(struct inode *n, struct file *f){
-    if (!n || !f) {
-        return -EINVAL;
-    }
-    Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
-    down(&currentGame->isReleasedLock)
-    currentGame->isRealesed=TRUE;
-    up(&currentGame->isReleasedLock)
+int release_snake(struct inode *n, struct file *f) {
+	if (!n || !f) {
+		return -EINVAL;
+	}
+	Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
+	down(&currentGame->isReleasedLock)
+	currentGame->isReleased = TRUE;
+	up(&currentGame->isReleasedLock)
 
 }
 
