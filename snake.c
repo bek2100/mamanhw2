@@ -82,6 +82,7 @@ typedef struct {
 	struct semaphore currentLock; //lock when checking the currentPlayer
 	struct semaphore isFinishedLock; //lock when checking if the game has finished
 	struct semaphore isReleasedLock; //lock when checking if one of the players released the game
+	struct semaphore winnerLock; // lock when check or change the winner
 } Game;
 
 typedef struct {
@@ -213,10 +214,8 @@ ssize_t write_snake(struct file *filp, const char *buff, size_t count,
 			}
 		}
 		down(&(currentGame->readWriteLock));
-		bool upResult = Update(&(currentGame->board), currentP->color,
-				myBuff[i]); //TODO: maybe delete
+		bool upResult = Update(&(currentGame->board), currentP, myBuff[i]);
 		up(&(currentGame->readWriteLock));
-		//TODO: maybe needed to check upResult here
 		down(&(currentGame->currentLock));
 		if (currentP->color == WHITE) {
 			currentGame->currentPlayer = BLACK;
@@ -228,6 +227,9 @@ ssize_t write_snake(struct file *filp, const char *buff, size_t count,
 			up(&(currentGame->blackLock));
 		} else {
 			up(&(currentGame->whiteLock));
+		}
+		if (upResult == FALSE) {
+			break;
 		}
 	}
 	return size;
@@ -252,17 +254,32 @@ bool Init(Matrix *matrix) {
 	return TRUE;
 }
 
-bool Update(Matrix *matrix, Player player, char move) {
+bool Update(Matrix *matrix, PlayerS* player, char move) {
 	ErrorCode e;
-	Point p = GetInputLoc(matrix, player);
+	Point p = GetInputLoc(matrix, player->color, atoi(move));
+	Game* currentGame = player->myGame;
 
-	if (!CheckTarget(matrix, player, p)) {
-		printf("% d lost.", player);
+	if (!CheckTarget(matrix, player->color, p)) {
+		// if the move is illegal, out of bounds, or trying to eat a snake
+		down(&(currentGame->isFinishedLock));
+		currentGame->isFinished = TRUE;
+		up(&(currentGame->isFinishedLock));
+		//set winner
+		down(&(currentGame->winnerLock));
+		if (player->color == WHITE) {
+			currentGame->winner = BLACK_IS_WINNER;
+		} else {
+			currentGame->winner = WHITE_IS_WINNER;
+		}
+		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
 	e = CheckFoodAndMove(matrix, player, p);
 	if (e == ERR_BOARD_FULL) {
-		printf("the board is full, tie");
+//		printf("the board is full, tie");
+		down(&(currentGame->winnerLock));
+		currentGame->winner = A_TIE;
+		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
 	if (e == ERR_SNAKE_IS_TOO_HUNGRY) {
@@ -278,21 +295,16 @@ bool Update(Matrix *matrix, Player player, char move) {
 	return TRUE;
 }
 
-Point GetInputLoc(Matrix *matrix, Player player) {
-	Direction dir;
+Point GetInputLoc(Matrix *matrix, Player player, Direction dir) {
 	Point p;
 
-	printf("% d, please enter your move(DOWN2, LEFT4, RIGHT6, UP8):\n", player);
-	if (scanf("%d", &dir) < 0) {
-		//TODO: change to error return instead of printing
-		printf("an error occurred, the program will now exit.\n");
-		exit(1);
-	}
 	if (dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT) {
-		printf("invalid input, please try again\n");
+		p.x = -1;
+		p.y = -1;
+		return p;
 	}
 
-	p = GetSegment(matrix, player);
+	p = GetSegment(matrix, player); //gets the point of the player's head
 
 	switch (dir) {
 		case UP:
@@ -443,8 +455,8 @@ ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
 		return ERROR;
 	}
 	char *local_buff = kmalloc(count, GFP_KERNEL);
-	Print(&(*PlayerS)(flip->private_data)->myGame->board, local_buff, count,
-			(*PlayerS)(flip->private_data)->myGame->readWriteLock);
+	Print(&(((PlayerS*) (flip->private_data))->myGame->board), local_buff,
+			count, &(((PlayerS*) (flip->private_data))->myGame->readWriteLock));
 	if (copy_to_user(buff, local_buff, count))
 		// TODO: type of error
 		return ERROR;
@@ -527,9 +539,9 @@ int ioctl_snake(int fd, int cmd) {
 		//TODO: see how the rest of the functions work
 		return
 		case SNAKE_GET_COLOR;
-		if ((*PlayerS)(flip->private_data)->color == 1)
+		if (((PlayerS*) (flip->private_data))->color == 1)
 			return SNAKE_IS_WHITE;
-		if ((*PlayerS)(flip->private_data)->color == -1)
+		if (((PlayerS*) (flip->private_data))->color == -1)
 			return SNAKE_IS_BLACK;
 		//TODO: add error
 		return ERROR;
