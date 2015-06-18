@@ -259,6 +259,7 @@ bool Update(Matrix *matrix, PlayerS* player, char move) {
 	Point p = GetInputLoc(matrix, player->color, atoi(move));
 	Game* currentGame = player->myGame;
 
+	//TODO: check why doesn't recognize PlayerS fields
 	if (!CheckTarget(matrix, player->color, p)) {
 		// if the move is illegal, out of bounds, or trying to eat a snake
 		down(&(currentGame->isFinishedLock));
