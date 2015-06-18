@@ -577,6 +577,17 @@ int ioctl_snake(int fd, int cmd) {
 	}
 }
 
+int release_snake(struct inode *n, struct file *f) {
+	if (!n || !f) {
+		return -EINVAL;
+	}
+	Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
+	down(&currentGame->isReleasedLock)
+	currentGame->isRealesed = TRUE;
+	up(&currentGame->isReleasedLock)
+
+}
+
 //TODO: finish
 void cleanup_module() {
 	kfree(games);
