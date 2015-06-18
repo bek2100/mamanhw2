@@ -12,6 +12,7 @@
 #include <asm/semaphore.h>
 #include <linux/sched.h>
 #include <asm/ioctl.h>
+#include "snake.h"
 
 /*=========================================================================
  Constants and definitions:
@@ -99,10 +100,7 @@ static char message[256] = { 0 }; ///< Memory for the string that is passed from
 static short size_of_message; ///< Used to remember the size of the string stored
 
 /* magic number for SCMD IOCTL operations */
-#define SNAKE_MAGIC 's'
 
-#define SNAKE_GET_WINNER  _IOR(SNAKE_MAGIC, 1 , char *) //get driver data
-#define SNAKE_GET_COLOR  _IOR(SNAKE_MAGIC, 2 , char *) //set driver data
 // The prototype functions for the character driver -- must come before the struct definition
 int open_snake(struct inode *, struct file *);
 int release_snake(struct inode *, struct file *);
@@ -269,6 +267,7 @@ bool Init(Matrix *matrix) {
 }
 
 bool Update(Matrix *matrix, PlayerS* player, char move) {
+	//the matrix we got is the board of the current game
 	ErrorCode e;
 	Point p = GetInputLoc(matrix, player->color, atoi(move));
 	Game* currentGame = player->myGame;
@@ -289,16 +288,12 @@ bool Update(Matrix *matrix, PlayerS* player, char move) {
 		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
-	e = CheckFoodAndMove(matrix, player, p);
-	if (e == ERR_BOARD_FULL) {
-//		printf("the board is full, tie");
-		down(&(currentGame->winnerLock));
-		currentGame->winner = A_TIE;
-		up(&(currentGame->winnerLock));
-		return FALSE;
-	}
+	e = CheckFoodAndMove(matrix, player->color, p);
 	//Rebeca's change
 	if (e == ERR_SNAKE_IS_TOO_HUNGRY) {
+		down(&(currentGame->isFinishedLock));
+		currentGame->isFinished = TRUE;
+		up(&(currentGame->isFinishedLock));
 		down(&(currentGame->winnerLock));
 		if (player->color == WHITE) {
 			currentGame->winner = BLACK_IS_WINNER;
@@ -308,15 +303,16 @@ bool Update(Matrix *matrix, PlayerS* player, char move) {
 		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
-// only option is that e == ERR_OK
 	//probabely checks if board is full after the snake has moved
-	if (IsMatrixFull(matrix)) {
+	if (e == ERR_BOARD_FULL || IsMatrixFull(matrix)) {
+		down(&(currentGame->isFinishedLock));
+		currentGame->isFinished = TRUE;
+		up(&(currentGame->isFinishedLock));
 		down(&(currentGame->winnerLock));
 		currentGame->winner = A_TIE;
 		up(&(currentGame->winnerLock));
 		return FALSE;
 	}
-
 	return TRUE;
 }
 
@@ -488,7 +484,7 @@ ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
 		// TODO: type of error
 		return -EINVAL;
 	kfree(local_buff);
-    return count;
+	return count;
 }
 
 //Rebecca's change
@@ -544,85 +540,86 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 
 //Genia's add:
 int init_module(int max_games) {
-    maxGames = max_games;
-    games = kmalloc(sizeof(Game) * max_games, GFP_KERNEL);
-    for(int i=0,i<max_games;i++) {
-        games[i].board=kmalloc(sizeof(int) * N*N, GFP_KERNEL);
-        Init(&(games[i].board));
-        games[i].currentPlayer=WHITE;
-        games[i].openCount=0;
-        games[i].isFinished=false;
-        games[i].isRealesed=false;
-        games[i].winner=NOT_FINISHED;
-        sema_init(&(games[i].countLock), 0);
-        sema_init(&(games[i].openLock), 0);
-        sema_init(&(games[i].readWriteLock), 0);
-        sema_init(&(games[i].whiteLock), 0);
-        sema_init(&(games[i].blackLock), 0);
-        sema_init(&(games[i].isFinishedLock), 0);
-        sema_init(&(games[i].isReleasedLock), 0);
-        sema_init(&(games[i].winnerLock), 0);
-    }
-    
-    major=register_chrdev(0, "snake", &fops);
-    MODULE_PARM(maxGames, "i");
-    MODULE_PARM(games, "i");
-    MODULE_PARM(major, "i");
-    SET_MODULE_OWNER(&fops);
-    return 0;
-}
+	maxGames = max_games;
+	games = kmalloc(sizeof(Game) * max_games, GFP_KERNEL);
+	for(int i=0,i<max_games;i++
+			) {
+				games[i].board=kmalloc(sizeof(int) * N*N, GFP_KERNEL);
+				Init(&(games[i].board));
+				games[i].currentPlayer=WHITE;
+				games[i].openCount=0;
+				games[i].isFinished=false;
+				games[i].isRealesed=false;
+				games[i].winner=NOT_FINISHED;
+				sema_init(&(games[i].countLock), 0);
+				sema_init(&(games[i].openLock), 0);
+				sema_init(&(games[i].readWriteLock), 0);
+				sema_init(&(games[i].whiteLock), 0);
+				sema_init(&(games[i].blackLock), 0);
+				sema_init(&(games[i].isFinishedLock), 0);
+				sema_init(&(games[i].isReleasedLock), 0);
+				sema_init(&(games[i].winnerLock), 0);
+			}
+
+			major = register_chrdev(0, "snake", &fops);
+			MODULE_PARM(maxGames, "i");
+			MODULE_PARM(games, "i");
+			MODULE_PARM(major, "i");
+			SET_MODULE_OWNER(&fops);
+			return 0;
+		}
 // Rrebecca's adds:
 
-int ioctl(struct inode *inode, struct file *filp, unsigned int cmd,
-		unsigned long arg) {
-	switch (cmd) {
-		case SNAKE_GET_WINNER:
-		Game* currentGame =((PlayerS*) (filp->private_data))->myGame;
-		down(&(currentGame->isFinishedLock));
-		if (currentGame->isFinished == TRUE) {
-			up(&(currentGame->isFinishedLock));
-			return currentGame->winner;
+		int ioctl(struct inode *inode, struct file *filp, unsigned int cmd,
+				unsigned long arg) {
+			switch (cmd) {
+				case SNAKE_GET_WINNER:
+				Game* currentGame =((PlayerS*) (filp->private_data))->myGame;
+				down(&(currentGame->isFinishedLock));
+				if (currentGame->isFinished == TRUE) {
+					up(&(currentGame->isFinishedLock));
+					return currentGame->winner;
+				}
+				case SNAKE_GET_COLOR;
+				if (((PlayerS*) (filp->private_data))->color == 1)
+					return SNAKE_IS_WHITE;
+				if (((PlayerS*) (filp->private_data))->color == -1)
+					return SNAKE_IS_BLACK;
+				//TODO: add error
+				return ERROR;
+			}
 		}
-		case SNAKE_GET_COLOR;
-		if (((PlayerS*) (filp->private_data))->color == 1)
-			return SNAKE_IS_WHITE;
-		if (((PlayerS*) (filp->private_data))->color == -1)
-			return SNAKE_IS_BLACK;
-		//TODO: add error
-		return ERROR;
-	}
-}
 
-int release_snake(struct inode *n, struct file *f) {
-	if (!n || !f) {
-		return -EINVAL;
-	}
-	Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
-	down(&currentGame->isReleasedLock)
-	currentGame->isReleased = TRUE;
-	up(&currentGame->isReleasedLock)
+		int release_snake(struct inode *n, struct file *f) {
+			if (!n || !f) {
+				return -EINVAL;
+			}
+			Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
+			down(&currentGame->isReleasedLock)
+			currentGame->isReleased = TRUE;
+			up(&currentGame->isReleasedLock)
 
-}
+		}
 
 //TODO: finish
-void cleanup_module(){
-    for(int i=0,i<max_games;i++) {
-        Init(&(games[i].board));
-        games[i].currentPlayer=WHITE;
-        games[i].openCount=0;
-        sema_init(&(games[i].countLock), 0);
-        sema_init(&(games[i].openLock), 0);
-        sema_init(&(games[i].readWriteLock), 0);
-        sema_init(&(games[i].whiteLock), 0);
-        sema_init(&(games[i].blackLock), 0);
-        sema_init(&(games[i].isFinishedLock), 0);
-        sema_init(&(games[i].isReleasedLock), 0);
-        sema_init(&(games[i].winnerLock), 0);
-    }
-    
-    
-    Matrix board;
-    WinnerData winner;
-    bool isFinished;
-    kfree(games);
-}
+		void cleanup_module() {
+			for(int i=0,i<max_games;i++
+					) {
+						Init(&(games[i].board));
+						games[i].currentPlayer=WHITE;
+						games[i].openCount=0;
+						sema_init(&(games[i].countLock), 0);
+						sema_init(&(games[i].openLock), 0);
+						sema_init(&(games[i].readWriteLock), 0);
+						sema_init(&(games[i].whiteLock), 0);
+						sema_init(&(games[i].blackLock), 0);
+						sema_init(&(games[i].isFinishedLock), 0);
+						sema_init(&(games[i].isReleasedLock), 0);
+						sema_init(&(games[i].winnerLock), 0);
+					}
+
+					Matrix board;
+					WinnerData winner;
+					bool isFinished;
+					kfree(games);
+				}
