@@ -221,7 +221,7 @@ ssize_t write_snake(struct file *filp, const char *buff, size_t count,
 		}
 		up(&(currentGame->isFinishedLock));
 		down(&(currentGame->isReleasedLock));
-		if (currentGame->isReleased== TRUE) {
+		if (currentGame->isReleased == TRUE) {
 			up(&(currentGame->isReleasedLock));
 			return -10;
 		}
@@ -575,14 +575,6 @@ int ioctl_snake(int fd, int cmd) {
 		//TODO: add error
 		return ERROR;
 	}
-}
-
-int release_snake(struct inode *n, struct file *f) {
-	if (!n || !f) {
-		return -EINVAL;
-	}
-	Game* currentGame = ((PlayerS*) (filp->private_data))->myGame;
-
 }
 
 //TODO: finish
