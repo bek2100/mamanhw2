@@ -472,9 +472,9 @@ ssize_t read_snake(struct file *filp, char *buff, size_t count, loff_t *offp) {
 			count, &(((PlayerS*) (flip->private_data))->myGame->readWriteLock));
 	if (copy_to_user(buff, local_buff, count))
 		// TODO: type of error
-		return ERROR;
+		return -EINVAL;
 	kfree(local_buff);
-    return 0;
+    return count;
 }
 
 //Rebecca's change
@@ -528,19 +528,39 @@ void Print(Matrix *matrix, char *buff, size_t count, struct semaphore *sem) {
 		buff[current++] = '\0';
 }
 
+//Genia's add:
 int init_module(int max_games) {
-	maxGames = max_games;
-	games = kmalloc(sizeof(Game) * max_games, GFP_KERNEL);
-	MODULE_PARM(maxGames, "i");
-	for (int i = 0; i < max_games; i++) {
-		games[i].currentPlayer = WHITE;
-		games[i].openCount = 0;
-//			games[i].
-	}
-
-	major=register_chrdev(0, "snake", const struct file_operations * fops);
-	MODULE_PARM(games, "i");
-	MODULE_PARM(major, "i");
+    maxGames = max_games;
+    games = kmalloc(sizeof(Game) * max_games, GFP_KERNEL);
+    /*for (int i = 0; i < max_games; i++) {
+     games[i].currentPlayer = WHITE;
+     games[i].openCount = 0;
+     //			games[i].
+     } */
+    for(int i=0,i<max_games;i++) {
+        Init(&(games[i].board));
+        games[i].currentPlayer=WHITE;
+        games[i].openCount=0;
+        sema_init(&(games[i].countLock), 0);
+        sema_init(&(games[i].openLock), 0);
+        sema_init(&(games[i].readWriteLock), 0);
+        sema_init(&(games[i].whiteLock), 0);
+        sema_init(&(games[i].blackLock), 0);
+        sema_init(&(games[i].isFinishedLock), 0);
+        sema_init(&(games[i].isReleasedLock), 0);
+        sema_init(&(games[i].winnerLock), 0);
+    }
+    
+    
+    Matrix board;
+    WinnerData winner;
+    bool isFinished;
+    bool isRealesed;
+    
+    major=register_chrdev(0, "snake", const struct file_operations * fops);
+    MODULE_PARM(maxGames, "i");
+    MODULE_PARM(games, "i");
+    MODULE_PARM(major, "i");
 }
 // Rrebecca's adds:
 
@@ -576,5 +596,23 @@ int release_snake(struct inode *n, struct file *f){
 
 //TODO: finish
 void cleanup_module(){
+    for(int i=0,i<max_games;i++) {
+        Init(&(games[i].board));
+        games[i].currentPlayer=WHITE;
+        games[i].openCount=0;
+        sema_init(&(games[i].countLock), 0);
+        sema_init(&(games[i].openLock), 0);
+        sema_init(&(games[i].readWriteLock), 0);
+        sema_init(&(games[i].whiteLock), 0);
+        sema_init(&(games[i].blackLock), 0);
+        sema_init(&(games[i].isFinishedLock), 0);
+        sema_init(&(games[i].isReleasedLock), 0);
+        sema_init(&(games[i].winnerLock), 0);
+    }
+    
+    
+    Matrix board;
+    WinnerData winner;
+    bool isFinished;
     kfree(games);
 }
