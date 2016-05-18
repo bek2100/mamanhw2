@@ -1,5 +1,6 @@
 #include "wet.h"
 #include "libpq-fe.h"
+#include <stdio.h>
 
 
 // This is the global connection object
@@ -545,7 +546,7 @@ void* associates(int ID) {
     
     if (!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int t_num = PQntuples(res);
+    int t_num = atof(PQntuples(res));
     
     int i;
     
@@ -596,7 +597,7 @@ void* moneyLaundering() {
     
     if (!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int t_num = PQntuples(res);
+    int t_num = atof(PQntuples(res));
     
     int i;
     
