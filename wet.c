@@ -525,7 +525,7 @@ void* balances(int ID, int ANumber) {
 void* associates(int ID) {
     
     printf(ASSOCIATES, ID);
-        
+    
     char cmd[200];
     
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
@@ -551,7 +551,7 @@ void* associates(int ID) {
     if(!t_num) printf(EMPTY);
     else
         for(i=1; i<=t_num;i++)
-            fprintf(ASSOCIATES, PQgetvalue(res, i, 1));
+            fprintf(ASSOCIATES, atoi(PQgetvalue(res, i, 1)));
     
     PQclear(res); return NULL;
 }
