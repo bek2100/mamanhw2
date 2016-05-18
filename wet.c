@@ -13,7 +13,6 @@ PGresult    *res;
 
 int main(int argc, char** argv) {
     /* Make a connection to the DB. If parameters omitted, default values are used */
-    printf("hello");
     char connect_param[CMD_SIZE + 2];
     sprintf(connect_param,"host=pgsql.cs.technion.ac.il dbname=%s user=%s password=%s",
             USERNAME, USERNAME, PASSWORD);
@@ -84,7 +83,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Accounts VALUES (%d, 0, -100)", ANumber);
+    sprintf(cmd, "INSERT INTO Account VALUES (%d, 0, -100)", ANumber);
     
     res = PQexec(conn, cmd);
     
