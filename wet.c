@@ -160,7 +160,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
+    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
     
     res = PQexec(conn, cmd);
     
@@ -300,9 +300,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     }
     
     
-    
-    PQclear(res);
-    
+        
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", IDF);
     
     res = PQexec(conn, cmd);
