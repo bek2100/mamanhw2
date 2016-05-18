@@ -54,6 +54,13 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     char cmd[200];
     
+    sprintf(cmd, "DROP TABLE Account; CREATE TABLE Account AS SELECT * FROM course_Account;", ID);
+
+    res = PQexec(conn, cmd);
+    
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+
+
    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
     
     res = PQexec(conn, cmd);
@@ -80,21 +87,20 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     }
     
     PQclear(res);
-    sprintf(cmd, "SELECT COUNT(ANumber) FROM Account WHERE ANumber=%d", ANumber);
+    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    if(res != 0) {
+    if(PQntuples(res) != 0) {
         printf("3\n");
-
         printf(ILL_PARAMS);
         PQclear(res); return NULL;
     }
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account VALUES (%d, 0, -1000)", ANumber);
+    sprintf(cmd, "INSERT INTO Accounts VALUES (%d, 0, -1000)", ANumber);
     
     res = PQexec(conn, cmd);
     
