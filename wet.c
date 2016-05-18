@@ -78,7 +78,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     }
     
     PQclear(res);
-    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
+    sprintf(cmd, "SELECT ANumber FROM Accounts WHERE ANumber=%d", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -90,7 +90,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account VALUES (%d, 0, -1000)", ANumber);
+    sprintf(cmd, "INSERT INTO Accounts VALUES (%d, 0, -1000)", ANumber);
     
     res = PQexec(conn, cmd);
     
