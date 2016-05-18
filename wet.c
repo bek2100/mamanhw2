@@ -23,6 +23,8 @@ int main(int argc, char** argv) {
         PQfinish(conn);
         return 1;
     }
+    sprintf(cmd, "DROP TABLE Account; CREATE TABLE Account AS SELECT * FROM course_Account;", ID);
+    res = PQexec(conn, cmd);
     parseInput();
     PQfinish(conn);
     return 0;
@@ -54,7 +56,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     char cmd[200];
 
-
+    
    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
     
     res = PQexec(conn, cmd);
