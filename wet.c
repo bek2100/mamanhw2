@@ -477,11 +477,10 @@ void* balances(int ID, int ANumber) {
     sprintf(cmd, "set @balance := 0; / SELECT WID, WAmout, WCommision, WTime, type, diff, @b := @b - diff AS Balance FROM (((SELECT WID, WAmout, WCommision, WTime, 0 AS type, SUM(WComission + WAmount) AS diff, FROM Withdrawal WHERE ANumberF = %d) / UNION / (SELECT TID, TAmount, Tcomission, TTime,  0 AS type, SUM(WComission + WAmount) AS diff, FROM Transfer Where ANumberT = %d) ) / UNION / (SELECT TID, TAmount, Tcomission, TTime,  1 AS type, SUM(WComission - WAmount) AS diff, Transfer Where ANumberT = %d) / ORDER BY WID) / ORDER BY WID ", ANumber, ANumber, ANumber);
     
     res = PQexec(conn, cmd);
-    PGresult *res_num = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int t_num = PQntuples(res_num);
+    int t_num = PQntuples(res);
     
     int i;
     
@@ -500,9 +499,7 @@ void* balances(int ID, int ANumber) {
             }
     }
     
-    PQclear(res);
-    PQclear(res_num);
-    return NULL;
+    PQclear(res); return NULL;
     
     
 }
@@ -544,22 +541,19 @@ void* associates(int ID) {
     sprintf(cmd, "(SELECT IDF FROM Transfer WHERE (IDT = (SELECT IDT WHERE IDF =%d) OR IDT = (SELECT IDF WHERE IDT =%d) OR IDT = %d) / UNION / (SELECT IDT FROM Transfer WHERE (IDF = (SELECT IDF WHERE IDT =%d) OR IDF = (SELECT IDT WHERE IDF =%d) OR IDF = %d)) / ORDER BY IDF", ID, ID);
     
     res = PQexec(conn, cmd);
-    PGresult *res_num = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int t_num = PQntuples(res_num);
+    int t_num = PQntuples(res);
     
     int i;
     
     if(!t_num) printf(EMPTY);
     else
         for(i=1; i<=t_num;i++)
-            fprintf(ASSOCIATES, PQgetvalue(res, i, 1));
+            printf(ASSOCIATES, PQgetvalue(res, i, 1));
     
-    PQclear(res);
-    PQclear(res_num);
-    return NULL;
+    PQclear(res); return NULL;
 }
 
 /*
@@ -605,7 +599,7 @@ void* moneyLaundering() {
     if(!t_num) printf(EMPTY);
     else
         for(i=1; i<=t_num;i++)
-            fprintf("%d\n", PQgetvalue(res, i, 1));
+            printf("%d\n", PQgetvalue(res, i, 1));
     
     PQclear(res); return NULL;
 }
