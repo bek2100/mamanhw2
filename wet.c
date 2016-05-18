@@ -525,9 +525,7 @@ void* balances(int ID, int ANumber) {
 void* associates(int ID) {
     
     printf(ASSOCIATES, ID);
-    
-    PQclear(res);
-    
+        
     char cmd[200];
     
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
@@ -583,8 +581,6 @@ void* associates(int ID) {
  */
 
 void* moneyLaundering() {
-    
-    PGresult *res;
     
     printf(MONEY_LAUNDERING);
     
