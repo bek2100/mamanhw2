@@ -12,7 +12,7 @@ PGresult    *res;
 /*************************************************************************************/
 
 int main(int argc, char** argv) {
-    ""* Make a connection to the DB. If parameters omitted, default values are used *""
+    /* Make a connection to the DB. If parameters omitted, default values are used */
     char connect_param[CMD_SIZE + 2];
     sprintf(connect_param,"host=pgsql.cs.technion.ac.il dbname=%s user=%s password=%s",
             USERNAME, USERNAME, PASSWORD);
@@ -591,7 +591,7 @@ void* moneyLaundering() {
     
     char cmd[200];
     
-   ""* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer "" UNION "" SELECT T.IDT, T1.IDF FROM Transfer T1"" JOIN CTE T "" ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) "" SELECT IDF FROM CDE R WHERE R.IDF = R.IDT "" ORDER BY IDF");
+   /* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer "" UNION "" SELECT T.IDT, T1.IDF FROM Transfer T1"" JOIN CTE T "" ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) "" SELECT IDF FROM CDE R WHERE R.IDF = R.IDT "" ORDER BY IDF");
     
     res = PQexec(conn, cmd);
     
@@ -606,7 +606,7 @@ void* moneyLaundering() {
         for(i=1; i<=t_num;i++)
             printf("%d\n", PQgetvalue(res, i, 1));
     
-    PQclear(res); *""
+    PQclear(res); */
     return NULL;
 }
 
