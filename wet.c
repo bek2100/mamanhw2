@@ -53,12 +53,6 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     printf(ADD_ACCOUNT, ANumber, ID, BrNumber);
     
     char cmd[200];
-    
-    sprintf(cmd, "DROP TABLE Account; CREATE TABLE Account AS SELECT * FROM course_Account;", ID);
-
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
 
    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
