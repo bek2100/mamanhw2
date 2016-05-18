@@ -377,7 +377,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     int TID =0;
     if ( PQntuples(res) == 0 ) TID = 0;
-    else TID = atoi(PQgetvalue(res, 1, 1)) + 1;
+    else TID = atof(PQgetvalue(res, 1, 1)) + 1;
     
     PQclear(res);  sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d, %d)", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
     
@@ -452,7 +452,7 @@ void* balances(int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    double CBalance = atoi(PQgetvalue(res, 1, 2));
+    double CBalance = atof(PQgetvalue(res, 1, 2));
     
     PQclear(res);
     
@@ -488,14 +488,14 @@ void* balances(int ID, int ANumber) {
         printf(EMPTY);
     } else {
         
-        int Diff = CBalance - atoi(PQgetvalue(res, t_num, 7));
+        int Diff = CBalance - atof(PQgetvalue(res, t_num, 7));
         
         for(i = 1; i<=t_num; i++)
             if(atof(PQgetvalue(res, i, 5))){
-                printf(CREDIT_RESULT, PQgetvalue(res, i, 1), atoi(PQgetvalue(res, i, 2)), atoi(PQgetvalue(res, i, 3)), atoi(PQgetvalue(res, i, 7))+Diff);
+                printf(CREDIT_RESULT, PQgetvalue(res, i, 1), atof(PQgetvalue(res, i, 2)), atof(PQgetvalue(res, i, 7))+Diff);
             }
             else{
-                printf(DEBIT_RESULT, PQgetvalue(res, i, 1), atoi(PQgetvalue(res, i, 2)), atoi(PQgetvalue(res, i, 3)), atoi(PQgetvalue(res, i, 7))+Diff);
+                printf(DEBIT_RESULT, PQgetvalue(res, i, 1), atof(PQgetvalue(res, i, 2)), atof(PQgetvalue(res, i, 3)), atof(PQgetvalue(res, i, 7))+Diff);
             }
     }
     
@@ -553,7 +553,7 @@ void* associates(int ID) {
     if(!t_num) printf(EMPTY);
     else
         for(i=1; i<=t_num;i++)
-           // fprintf(ASSOCIATES, atoi(PQgetvalue(res, i, 1)));
+            fprintf(ASSOCIATES, atoi(PQgetvalue(res, i, 1)));
     
     PQclear(res); return NULL;
 }
@@ -603,7 +603,7 @@ void* moneyLaundering() {
     if(!t_num) printf(EMPTY);
     else
         for(i=1; i<=t_num;i++)
-           // fprintf("%d\n", atoi(PQgetvalue(res, i, 1)));
+            fprintf("%d\n", atoi(PQgetvalue(res, i, 1)));
     
     PQclear(res); return NULL;
 }
