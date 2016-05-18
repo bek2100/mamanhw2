@@ -551,10 +551,9 @@ void* associates(int ID) {
     int i;
     
     if(!t_num) printf(EMPTY);
-    else{
+    else
         for(i=1; i<=t_num;i++)
            // fprintf(ASSOCIATES, atoi(PQgetvalue(res, i, 1)));
-    }
     
     PQclear(res); return NULL;
 }
@@ -602,10 +601,9 @@ void* moneyLaundering() {
     int i;
     
     if(!t_num) printf(EMPTY);
-    else{
+    else
         for(i=1; i<=t_num;i++)
-         //   fprintf("%d\n", atoi(PQgetvalue(res, i, 1)));
-    }
+           // fprintf("%d\n", atoi(PQgetvalue(res, i, 1)));
     
     PQclear(res); return NULL;
 }
