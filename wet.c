@@ -1,6 +1,5 @@
 #include "wet.h"
 #include "libpq-fe.h"
-#include <stdio.h>
 
 
 // This is the global connection object

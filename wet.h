@@ -2,6 +2,8 @@
 #define __WET_H_
 
 #include <stdbool.h>
+#include <stdio.h>
+
 
 /*==========================================================*/
 /*  -----  DBMS course, 236363, Spring - 2016  ----- */
