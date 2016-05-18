@@ -1,5 +1,7 @@
 #include "wet.h"
 #include "libpq-fe.h"
+#include <stdio.h>
+
 
 // This is the global connection object
 PGconn     *conn;
@@ -587,7 +589,9 @@ void* moneyLaundering() {
     
     printf(MONEY_LAUNDERING);
     
-    sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer \ UNION \ SELECT T.IDT, T1.IDF FROM Transfer T1\ JOIN CTE T \ ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) \ SELECT IDF FROM CDE R WHERE R.IDF = R.IDT \ ORDER BY IDF");
+    char cmd[200];
+    
+    sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer / UNION / SELECT T.IDT, T1.IDF FROM Transfer T1/ JOIN CTE T / ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) / SELECT IDF FROM CDE R WHERE R.IDF = R.IDT / ORDER BY IDF");
     
     res = PQexec(conn, cmd);
     
