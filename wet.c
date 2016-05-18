@@ -3,13 +3,13 @@
 #include <stdio.h>
 
 
-"""" This is the global connection object
+// This is the global connection object
 PGconn     *conn;
 PGresult    *res;
 
 #define CMD_SIZE 550
 
-""*************************************************************************************""
+/*************************************************************************************/
 
 int main(int argc, char** argv) {
     ""* Make a connection to the DB. If parameters omitted, default values are used *""
