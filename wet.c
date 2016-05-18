@@ -592,6 +592,7 @@ void* moneyLaundering() {
     char cmd[200];
     
    // sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer / UNION / SELECT T.IDT, T1.IDF FROM Transfer T1/ JOIN CTE T / ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) / SELECT IDF FROM CDE R WHERE R.IDF = R.IDT / ORDER BY IDF");
+    int ID =0;
     
     sprintf(cmd, "(SELECT IDF FROM Transfer WHERE (IDT = (SELECT IDT WHERE IDF =%d) OR IDT = (SELECT IDF WHERE IDT =%d) OR IDT = %d) / UNION / (SELECT IDT FROM Transfer WHERE (IDF = (SELECT IDF WHERE IDT =%d) OR IDF = (SELECT IDT WHERE IDF =%d) OR IDF = %d)) / ORDER BY IDF", ID, ID);
 
