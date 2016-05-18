@@ -17,6 +17,12 @@ int main(int argc, char** argv) {
     sprintf(connect_param,"host=pgsql.cs.technion.ac.il dbname=%s user=%s password=%s",
             USERNAME, USERNAME, PASSWORD);
     conn = PQconnectdb(connect_param);
+    if (!conn || PQstatus(conn) == CONNECTION_BAD) {
+        fprintf(stderr, "Connection to server failed: %s\n",
+                PQerrorMessage(conn));
+        PQfinish(conn);
+        return 1;
+    }
     parseInput();
     PQfinish(conn);
     return 0;
@@ -71,7 +77,8 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
         PQclear(res); return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
+    PQclear(res);
+    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -83,7 +90,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account VALUES (%d, 0, -100)", ANumber);
+    sprintf(cmd, "INSERT INTO Account VALUES (%d, 0, -1000)", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -183,7 +190,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT * FROM OwnAcc WHERE ANumber=%d AND ID=%d", ANumber);
+    PQclear(res);  sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID=%d", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -198,7 +205,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     if (WAmount > 10000) WCommission = 0.15 * WAmount;
     else {
-        PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManageAcc WHERE ANumber=%d", ANumber);
+        PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d", ANumber);
         res = PQexec(conn, cmd);
         if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         if(atoi(PQgetvalue(res, 1, 1)) == BrNumber) WCommission = 3.8;
@@ -320,7 +327,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT * FROM OwnAcc WHERE (ANumber=%d AND ID = %d) OR (ANumber=%d AND ID = %d)", ANumberT, IDT, ANumberF, IDF);
+    sprintf(cmd, "SELECT * FROM OwnsAcc WHERE (ANumber=%d AND ID = %d) OR (ANumber=%d AND ID = %d)", ANumberT, IDT, ANumberF, IDF);
     
     res = PQexec(conn, cmd);
     
@@ -458,7 +465,7 @@ void* balances(int ID, int ANumber) {
     
     printf(CURRENT_BALANCES, CBalance);
     
-    sprintf(cmd, "SELECT * FROM OwnAcc WHERE ANumber=%d AND ID = %d", ANumber, ID);
+    sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID = %d", ANumber, ID);
     
     res = PQexec(conn, cmd);
     
