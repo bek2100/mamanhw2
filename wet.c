@@ -3,16 +3,16 @@
 #include <stdio.h>
 
 
-// This is the global connection object
+"""" This is the global connection object
 PGconn     *conn;
 PGresult    *res;
 
 #define CMD_SIZE 550
 
-/*************************************************************************************/
+""*************************************************************************************""
 
 int main(int argc, char** argv) {
-    /* Make a connection to the DB. If parameters omitted, default values are used */
+    ""* Make a connection to the DB. If parameters omitted, default values are used *""
     char connect_param[CMD_SIZE + 2];
     sprintf(connect_param,"host=pgsql.cs.technion.ac.il dbname=%s user=%s password=%s",
             USERNAME, USERNAME, PASSWORD);
@@ -479,7 +479,7 @@ void* balances(int ID, int ANumber) {
     PQclear(res);
     
     
-    sprintf(cmd, "set @balance := 0; / SELECT WID, WAmout, WCommision, WTime, type, diff, @b := @b - diff AS Balance FROM (((SELECT WID, WAmout, WCommision, WTime, 0 AS type, SUM(WComission + WAmount) AS diff, FROM Withdrawal WHERE ANumberF = %d) / UNION / (SELECT TID, TAmount, Tcomission, TTime,  0 AS type, SUM(WComission + WAmount) AS diff, FROM Transfer Where ANumberT = %d) ) / UNION / (SELECT TID, TAmount, Tcomission, TTime,  1 AS type, SUM(WComission - WAmount) AS diff, Transfer Where ANumberT = %d) / ORDER BY WID) / ORDER BY WID ", ANumber, ANumber, ANumber);
+    sprintf(cmd, "set @balance := 0; "" SELECT WID, WAmout, WCommision, WTime, type, diff, @b := @b - diff AS Balance FROM (((SELECT WID, WAmout, WCommision, WTime, 0 AS type, SUM(WComission + WAmount) AS diff, FROM Withdrawal WHERE ANumberF = %d) "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  0 AS type, SUM(WComission + WAmount) AS diff, FROM Transfer Where ANumberT = %d) ) "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  1 AS type, SUM(WComission - WAmount) AS diff, Transfer Where ANumberT = %d) "" ORDER BY WID) "" ORDER BY WID ", ANumber, ANumber, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -543,7 +543,7 @@ void* associates(int ID) {
         PQclear(res); return NULL;
     }
     
-    sprintf(cmd, "(SELECT IDF FROM Transfer WHERE (IDT = (SELECT IDT WHERE IDF =%d) OR IDT = (SELECT IDF WHERE IDT =%d) OR IDT = %d) / UNION / (SELECT IDT FROM Transfer WHERE (IDF = (SELECT IDF WHERE IDT =%d) OR IDF = (SELECT IDT WHERE IDF =%d) OR IDF = %d)) / ORDER BY IDF", ID, ID);
+    sprintf(cmd, "(SELECT IDF FROM Transfer WHERE (IDT = (SELECT IDT WHERE IDF =%d) OR IDT = (SELECT IDF WHERE IDT =%d) OR IDT = %d) "" UNION "" (SELECT IDT FROM Transfer WHERE (IDF = (SELECT IDF WHERE IDT =%d) OR IDF = (SELECT IDT WHERE IDF =%d) OR IDF = %d)) "" ORDER BY IDF", ID, ID);
     
     res = PQexec(conn, cmd);
     
@@ -591,7 +591,7 @@ void* moneyLaundering() {
     
     char cmd[200];
     
-   /* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer / UNION / SELECT T.IDT, T1.IDF FROM Transfer T1/ JOIN CTE T / ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) / SELECT IDF FROM CDE R WHERE R.IDF = R.IDT / ORDER BY IDF");
+   ""* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer "" UNION "" SELECT T.IDT, T1.IDF FROM Transfer T1"" JOIN CTE T "" ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) "" SELECT IDF FROM CDE R WHERE R.IDF = R.IDT "" ORDER BY IDF");
     
     res = PQexec(conn, cmd);
     
@@ -606,7 +606,7 @@ void* moneyLaundering() {
         for(i=1; i<=t_num;i++)
             printf("%d\n", PQgetvalue(res, i, 1));
     
-    PQclear(res); */
+    PQclear(res); *""
     return NULL;
 }
 
