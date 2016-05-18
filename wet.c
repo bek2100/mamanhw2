@@ -13,6 +13,7 @@ PGresult    *res;
 
 int main(int argc, char** argv) {
     /* Make a connection to the DB. If parameters omitted, default values are used */
+    printf("hello");
     char connect_param[CMD_SIZE + 2];
     sprintf(connect_param,"host=pgsql.cs.technion.ac.il dbname=%s user=%s password=%s",
             USERNAME, USERNAME, PASSWORD);
