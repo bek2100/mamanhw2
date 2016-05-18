@@ -546,14 +546,14 @@ void* associates(int ID) {
     
     if (!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int t_num = atof(PQntuples(res));
+    int t_num = PQntuples(res);
     
     int i;
     
     if(!t_num) printf(EMPTY);
     else{
         for(i=1; i<=t_num;i++)
-            fprintf(ASSOCIATES, atof(PQgetvalue(res, i, 1)));
+            fprintf(ASSOCIATES, atoi(PQgetvalue(res, i, 1)));
     }
     
     PQclear(res); return NULL;
@@ -597,14 +597,14 @@ void* moneyLaundering() {
     
     if (!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int t_num = atof(PQntuples(res));
+    int t_num = PQntuples(res);
     
     int i;
     
     if(!t_num) printf(EMPTY);
     else{
         for(i=1; i<=t_num;i++)
-            fprintf("%d\n", atof(PQgetvalue(res, i, 1)));
+            fprintf("%d\n", atoi(PQgetvalue(res, i, 1)));
     }
     
     PQclear(res); return NULL;
