@@ -80,12 +80,12 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     }
     
     PQclear(res);
-    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
+    sprintf(cmd, "SELECT COUNT(ANumber) FROM Account WHERE ANumber=%d", ANumber);
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    if(PQntuples(res) != 0) {
+    if(res != 0) {
         printf("3\n");
 
         printf(ILL_PARAMS);
