@@ -553,7 +553,7 @@ void* associates(int ID) {
     if(!t_num) printf(EMPTY);
     else{
         for(i=1; i<=t_num;i++)
-            fprintf(ASSOCIATES, atoi(PQgetvalue(res, i, 1)));
+            fprintf(ASSOCIATES, atoi(PQgetvalue(res, 1, 1)));
     }
     
     PQclear(res); return NULL;
