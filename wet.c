@@ -78,7 +78,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     }
     
     PQclear(res);
-    sprintf(cmd, "SELECT ANumber FROM Accounts WHERE ANumber=%d", ANumber);
+    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
     
     res = PQexec(conn, cmd);
     
