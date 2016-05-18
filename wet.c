@@ -554,9 +554,10 @@ void* associates(int ID) {
     int i;
     
     if(!t_num) printf(EMPTY);
-    else
+    else{
         for(i=1; i<=t_num;i++)
             printf(ASSOCIATES, PQgetvalue(res, i, 1));
+    }
     
     PQclear(res); return NULL;
 }
@@ -602,9 +603,10 @@ void* moneyLaundering() {
     int i;
     
     if(!t_num) printf(EMPTY);
-    else
+    else{
         for(i=1; i<=t_num;i++)
             printf("%d\n", PQgetvalue(res, i, 1));
+    }
     
     PQclear(res); */
     return NULL;
