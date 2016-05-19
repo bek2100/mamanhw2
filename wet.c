@@ -1,6 +1,7 @@
 #include "wet.h"
 #include "libpq-fe.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 // This is the global connection object
@@ -247,7 +248,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double Balance = 0;
     
-    if((Balance = (atof(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 0, 2))){
+    if((Balance = (atoi(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atoi(PQgetvalue(res, 0, 2))){
         printf("2, %lf, %lf\n", Balance, atof(PQgetvalue(res, 0, 2)));
         printf(NOT_APPLICABLE);
         PQclear(res);
