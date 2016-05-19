@@ -111,7 +111,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
         PQclear(res); return NULL;
     }
     
-    PQclear(res);
+    //PQclear(res);
     
     sprintf(cmd, "INSERT INTO Account VALUES(%d,%d,%d);", ANumber, 0, -1000);
     
@@ -119,7 +119,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    PQclear(res);
+    //PQclear(res);
     
     sprintf(cmd, "INSERT INTO OwnsAcc VALUES(%d,%d);", ID, ANumber);
     
@@ -127,7 +127,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    PQclear(res);
+    //PQclear(res);
     
     sprintf(cmd, "INSERT INTO ManagesAcc VALUES(%d,%d);", BrNumber, ANumber);
     
