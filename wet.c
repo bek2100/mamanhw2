@@ -369,13 +369,13 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
         printf(NOT_APPLICABLE);
         PQclear(res); return NULL;
     }
-    
-    PQclear(res);
-    
+        
     double TCommission = 0;
     
     
-    PQclear(res);  sprintf(cmd, "SELECT Family, COUNT(ID) FROM (SPLIT_PART(Name,' ',2) as Family from (SELECT *  FROM Customer WHERE ID=%d OR ID=%d) GROUP BY FAMILY" , IDT, IDF);
+    PQclear(res);
+    
+    sprintf(cmd, "SELECT Family, COUNT(ID) FROM (SPLIT_PART(Name,' ',2) as Family from (SELECT *  FROM Customer WHERE ID=%d OR ID=%d) GROUP BY FAMILY" , IDT, IDF);
     
     res = PQexec(conn, cmd);
     
@@ -514,7 +514,7 @@ void* balances(int ID, int ANumber) {
     PQclear(res);
     
     
-    sprintf(cmd, "set @balance := 0; "" SELECT WID, WAmout, WCommision, WTime, type, diff, @b := @b - diff AS Balance FROM (((SELECT WID, WAmout, WCommision, WTime, 0 AS type, SUM(WComission + WAmount) AS diff, FROM Withdrawal WHERE ANumberF = %d) "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  0 AS type, SUM(WComission + WAmount) AS diff, FROM Transfer Where ANumberT = %d) ) "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  1 AS type, SUM(WComission - WAmount) AS diff, Transfer Where ANumberT = %d) "" ORDER BY WID) "" ORDER BY WID ", ANumber, ANumber, ANumber);
+    sprintf(cmd, "SET @balance := 0; "" SELECT WID, WAmout, WCommision, WTime, type, diff, @b := @b - diff AS Balance FROM (((SELECT WID, WAmout, WCommision, WTime, 0 AS type, SUM(WComission + WAmount) AS diff, FROM Withdrawal WHERE ANumberF = %d) "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  0 AS type, SUM(WComission + WAmount) AS diff, FROM Transfer Where ANumberT = %d) ) "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  1 AS type, SUM(WComission - WAmount) AS diff, Transfer Where ANumberT = %d) "" ORDER BY WID) "" ORDER BY WID ", ANumber, ANumber, ANumber);
     
     res = PQexec(conn, cmd);
     
