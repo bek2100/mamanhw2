@@ -381,7 +381,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    if(PQgetvalue(res, 1, 2) != 1) TCommission = 10.3;
+    if)atoi(PQgetvalue(res, 1, 2)) != 2) TCommission = 10.3;
     
     if(TCommission>10000) TCommission+= 0.15*TAmount;
     
