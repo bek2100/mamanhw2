@@ -24,8 +24,6 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-    parseInput();
-    
     char cmd[CMD_SIZE];
     
     sprintf(cmd, "DROP TABLE Account;""CREATE TABLE tableName AS SELECT * FROM course_Account;");
@@ -53,6 +51,9 @@ int main(int argc, char** argv) {
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
+    
+    parseInput();
+    
     
     PQfinish(conn);
     return 0;
@@ -375,7 +376,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT COUNT(Family) FROM (SPLIT_PART(Name,' ',2) AS Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d) GROUP BY Family" , IDT, IDF);
+    sprintf(cmd, "SELECT COUNT(Family) FROM (SELECT SPLIT_PART(Name,' ',2) AS Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d)) GROUP BY Family" , IDT, IDF);
     
     res = PQexec(conn, cmd);
     
