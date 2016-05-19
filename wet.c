@@ -256,7 +256,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     }
     
     PQclear(res);
-    sprintf(cmd, "SELECT MAX(WID) FROM Withdrawal;");
+    sprintf(cmd, "SELECT MAX(WID),COUNT(WID) FROM Withdrawal;");
     
     res = PQexec(conn, cmd);
     
@@ -264,7 +264,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     int WID =0;
     
-    if (atoi(PQgetvalue(res, 0, 0)) == 0 ) WID = 0;
+    if (atoi(PQgetvalue(res, 0, 1)) == 0 ) WID = 0;
     else WID = atoi(PQgetvalue(res, 0, 0)) + 1;
     
     PQclear(res);
@@ -374,7 +374,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT COUNT(Family) FROM (SELECT SPLIT_PART(Name,' ',2) AS Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d)) GROUP BY Family" , IDT, IDF);
+    sprintf(cmd, "SELECT COUNT(Family) FROM (SELECT SPLIT_PART(Name,' ',2) AS Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d)AS IDS) AS FAM GROUP BY Family" , IDT, IDF);
     
     res = PQexec(conn, cmd);
     
