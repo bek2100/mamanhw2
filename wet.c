@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
     
     char cmd[CMD_SIZE];
     
-    sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account;");
+    sprintf(cmd, "CREATE TABLE Accounts AS SELECT * FROM course_Account;");
     
     res = PQexec(conn, cmd);
     
