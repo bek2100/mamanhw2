@@ -24,18 +24,18 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-    char cmd[CMD_SIZE];
+    /*char cmd[CMD_SIZE];
     
     sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account; CREATE TABLE OwnsAcc AS SELECT * FROM course_OwnsAcc; CREATE TABLE Withdrawal AS SELECT * FROM course_Withdrawal; CREATE TABLE ManagesAcc AS SELECT * FROM course_ManagesAcc; CREATE TABLE Transfer AS SELECT * FROM course_Transfer; CREATE TABLE Branch AS SELECT * FROM course_Branch;");
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    
+    */
     
     parseInput();
     
-    sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
+    /*sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
     
     res = PQexec(conn, cmd);
     
@@ -43,6 +43,7 @@ int main(int argc, char** argv) {
     
     
     PQfinish(conn);
+     */
     return 0;
 }
 
@@ -112,7 +113,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account VALUES(%d, %f, %f)", ANumber, 0, -1000);
+    sprintf(cmd, "INSERT INTO Account VALUES(%d, 0, -1000)", ANumber);
     
     res = PQexec(conn, cmd);
     
