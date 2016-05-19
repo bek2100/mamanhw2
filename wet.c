@@ -74,7 +74,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     char cmd[CMD_SIZE];
     
     
-    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
+    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d;", ID);
     
     res = PQexec(conn, cmd);
     
@@ -88,7 +88,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT BrNumber FROM Branch WHERE BrNumber=%d", BrNumber);
+    sprintf(cmd, "SELECT BrNumber FROM Branch WHERE BrNumber=%d;", BrNumber);
     
     res = PQexec(conn, cmd);
     
@@ -100,7 +100,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     }
     
     PQclear(res);
-    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
+    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d;", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -113,7 +113,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account VALUES(%d, %d, %d)", ANumber, 0, -1000);
+    sprintf(cmd, "INSERT INTO Account VALUES(%d, %d, %d);", ANumber, 0, -1000);
     
     res = PQexec(conn, cmd);
     
@@ -121,7 +121,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO OwnsAcc VALUES(%d, %d)", ID, ANumber);
+    sprintf(cmd, "INSERT INTO OwnsAcc VALUES(%d, %d);", ID, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -129,7 +129,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO ManagesAcc VALUES(%d, %d)", BrNumber, ANumber);
+    sprintf(cmd, "INSERT INTO ManagesAcc VALUES(%d, %d);", BrNumber, ANumber);
     
     res = PQexec(conn, cmd);
     
