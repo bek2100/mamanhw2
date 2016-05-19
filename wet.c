@@ -263,7 +263,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     int WID =0;
     
-    if ( PQntuples(res) == 0 ) WID = 0;
+    if (atoi(PQgetvalue(res, 0, 0)) == 0 ) WID = 0;
     else WID = atoi(PQgetvalue(res, 0, 0)) + 1;
     
     PQclear(res);
