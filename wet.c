@@ -83,7 +83,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     printf(ADD_ACCOUNT, ANumber, ID, BrNumber);
     
     char cmd[CMD_SIZE];
-
+    
     
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
     
@@ -381,7 +381,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    if)atoi(PQgetvalue(res, 1, 2)) != 2) TCommission = 10.3;
+    if(atoi(PQgetvalue(res, 1, 2)) != 2) TCommission = 10.3;
     
     if(TCommission>10000) TCommission+= 0.15*TAmount;
     
@@ -628,23 +628,23 @@ void* moneyLaundering() {
     
     char cmd[CMD_SIZE];
     
-   /* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer "" UNION "" SELECT T.IDT, T1.IDF FROM Transfer T1"" JOIN CTE T "" ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) "" SELECT IDF FROM CDE R WHERE R.IDF = R.IDT "" ORDER BY IDF");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    
-    int t_num = PQntuples(res);
-    
-    int i;
-    
-    if(!t_num) printf(EMPTY);
-    else{
-        for(i=1; i<=t_num;i++)
-            printf("%d\n", PQgetvalue(res, i, 1));
-    }
-    
-    PQclear(res); */
+    /* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer "" UNION "" SELECT T.IDT, T1.IDF FROM Transfer T1"" JOIN CTE T "" ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) "" SELECT IDF FROM CDE R WHERE R.IDF = R.IDT "" ORDER BY IDF");
+     
+     res = PQexec(conn, cmd);
+     
+     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+     
+     int t_num = PQntuples(res);
+     
+     int i;
+     
+     if(!t_num) printf(EMPTY);
+     else{
+     for(i=1; i<=t_num;i++)
+     printf("%d\n", PQgetvalue(res, i, 1));
+     }
+     
+     PQclear(res); */
     return NULL;
 }
 
