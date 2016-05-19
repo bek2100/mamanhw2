@@ -25,35 +25,6 @@ int main(int argc, char** argv) {
     }
     
     char cmd[CMD_SIZE];
-
-    
-   sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account; ");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-
-    
-    sprintf(cmd, "CREATE TABLE OwnsAcc AS SELECT * FROM course_OwnsAcc;");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "CREATE TABLE Withdrawal AS SELECT * FROM course_Withdrawal;");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "CREATE TABLE ManagesAcc AS SELECT * FROM course_ManagesAcc;");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "CREATE TABLE Transfer AS SELECT * FROM course_Transfer;");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
     
     parseInput();
     
@@ -62,6 +33,15 @@ int main(int argc, char** argv) {
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
+    
+    
+    
+    sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account; CREATE TABLE OwnsAcc AS SELECT * FROM course_OwnsAcc; CREATE TABLE Withdrawal AS SELECT * FROM course_Withdrawal; CREATE TABLE ManagesAcc AS SELECT * FROM course_ManagesAcc; CREATE TABLE Transfer AS SELECT * FROM course_Transfer;");
+    
+    res = PQexec(conn, cmd);
+    
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
+
     
     PQfinish(conn);
     return 0;
