@@ -247,7 +247,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double Balance = 0;
     
-    if((Balance = (atof(PQgetvalue(res, 0, 2)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 0, 3))){
+    if((Balance = (atof(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 0, 2))){
         printf("2\n");
         printf(NOT_APPLICABLE);
         PQclear(res);
@@ -379,7 +379,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    if(atoi(PQgetvalue(res, 1, 2)) != 2) TCommission = 10.3;
+    if(atoi(PQgetvalue(res, 0, 1)) != 2) TCommission = 10.3;
     
     if(TCommission>10000) TCommission+= 0.15*TAmount;
     
@@ -415,7 +415,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     int TID =0;
     if ( PQntuples(res) == 0 ) TID = 0;
-    else TID = atof(PQgetvalue(res, 1, 1)) + 1;
+    else TID = atof(PQgetvalue(res, 0, 0)) + 1;
     
     PQclear(res);
     sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
@@ -491,7 +491,7 @@ void* balances(int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    double CBalance = atof(PQgetvalue(res, 1, 2));
+    double CBalance = atof(PQgetvalue(res, 0, 1));
     
     PQclear(res);
     
@@ -527,14 +527,14 @@ void* balances(int ID, int ANumber) {
         printf(EMPTY);
     } else {
         
-        int Diff = CBalance - atof(PQgetvalue(res, t_num, 7));
+        int Diff = CBalance - atof(PQgetvalue(res, t_num, 6));
         
-        for(i = 1; i<=t_num; i++)
-            if(atof(PQgetvalue(res, i, 5))){
-                printf(CREDIT_RESULT, PQgetvalue(res, i, 1), atof(PQgetvalue(res, i, 2)), atof(PQgetvalue(res, i, 7))+Diff);
+        for(i = 0; i<t_num; i++)
+            if(atof(PQgetvalue(res, i, 4))){
+                printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 6))+Diff);
             }
             else{
-                printf(DEBIT_RESULT, PQgetvalue(res, i, 1), atof(PQgetvalue(res, i, 2)), atof(PQgetvalue(res, i, 3)), atof(PQgetvalue(res, i, 7))+Diff);
+                printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), atof(PQgetvalue(res, i, 6))+Diff);
             }
     }
     
@@ -589,8 +589,8 @@ void* associates(int ID) {
     
     if(!t_num) printf(EMPTY);
     else{
-        for(i=1; i<=t_num;i++)
-            printf(ASSOCIATES, PQgetvalue(res, i, 1));
+        for(i=0; i<t_num;i++)
+            printf(ASSOCIATES, PQgetvalue(res, i, 0));
     }
     
     PQclear(res);
@@ -639,8 +639,8 @@ void* moneyLaundering() {
      
      if(!t_num) printf(EMPTY);
      else{
-     for(i=1; i<=t_num;i++)
-     printf("%d\n", PQgetvalue(res, i, 1));
+     for(i=0; i<t_num;i++)
+     printf("%d\n", PQgetvalue(res, i, 0));
      }
      
      PQclear(res); */
