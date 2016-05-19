@@ -26,6 +26,8 @@ int main(int argc, char** argv) {
     
     parseInput();
     
+    char cmd[CMD_SIZE];
+    
     sprintf(cmd, "DROP TABLE Account;""CREATE TABLE tableName AS SELECT * FROM course_Account;");
     
     res = PQexec(conn, cmd);
