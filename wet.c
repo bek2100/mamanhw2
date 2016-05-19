@@ -23,7 +23,35 @@ int main(int argc, char** argv) {
         PQfinish(conn);
         return 1;
     }
+    
     parseInput();
+    
+    sprintf(cmd, "DROP TABLE Account;""CREATE TABLE tableName AS SELECT * FROM course_Account;");
+    
+    res = PQexec(conn, cmd);
+    
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    sprintf(cmd, "DROP TABLE OwnsAcc;""CREATE TABLE tableName AS SELECT * FROM course_OwnsAcc;");
+    
+    res = PQexec(conn, cmd);
+    
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    sprintf(cmd, "DROP TABLE Withdrawal;""CREATE TABLE tableName AS SELECT * FROM course_Withdrawal;");
+    
+    res = PQexec(conn, cmd);
+    
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    sprintf(cmd, "DROP TABLE tableName;""CREATE TABLE ManagesAcc AS SELECT * FROM course_ManagesAcc;");
+    
+    res = PQexec(conn, cmd);
+    
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    sprintf(cmd, "DROP TABLE Transfer;""CREATE TABLE tableName AS SELECT * FROM course_Transfer;");
+    
+    res = PQexec(conn, cmd);
+    
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    
     PQfinish(conn);
     return 0;
 }
@@ -52,10 +80,10 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     printf(ADD_ACCOUNT, ANumber, ID, BrNumber);
     
-    char cmd[200];
+    char cmd[CMD_SIZE];
 
     
-   sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
+    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
     
     res = PQexec(conn, cmd);
     
@@ -157,7 +185,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     printf(WITHDRAWAL, ANumber, ID, BrNumber);
     
-    char cmd[200];
+    char cmd[CMD_SIZE];
     
     if (WAmount <= 0) {
         printf(ILL_PARAMS);
@@ -295,7 +323,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
 
 void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
-    char cmd[200];
+    char cmd[CMD_SIZE];
     
     printf(TRANSFER, IDF, ANumberF, IDT,ANumberT);
     
@@ -437,7 +465,7 @@ void* balances(int ID, int ANumber) {
     
     printf(BALANCES, ID, ANumber);
     
-    char cmd[200];
+    char cmd[CMD_SIZE];
     
     
     sprintf(cmd, "SELECT * FROM Customer WHERE ID=%d", ID);
@@ -536,7 +564,7 @@ void* associates(int ID) {
     
     printf(ASSOCIATES, ID);
     
- /*   char cmd[200];
+    char cmd[CMD_SIZE];
     
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
     
@@ -564,7 +592,8 @@ void* associates(int ID) {
             printf(ASSOCIATES, PQgetvalue(res, i, 1));
     }
     
-    PQclear(res); */return NULL;
+    PQclear(res);
+    return NULL;
 }
 
 /*
@@ -595,7 +624,7 @@ void* moneyLaundering() {
     
     printf(MONEY_LAUNDERING);
     
-    char cmd[200];
+    char cmd[CMD_SIZE];
     
    /* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer "" UNION "" SELECT T.IDT, T1.IDF FROM Transfer T1"" JOIN CTE T "" ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) "" SELECT IDF FROM CDE R WHERE R.IDF = R.IDT "" ORDER BY IDF");
     
