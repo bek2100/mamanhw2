@@ -233,7 +233,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
         res = PQexec(conn, cmd);
         if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-        if(atoi(PQgetvalue(res, 1, 0)) == BrNumber) WCommission = 3.8;
+        if(atoi(PQgetvalue(res, 0, 0)) == BrNumber) WCommission = 3.8;
         else WCommission = 5.65;
     }
     
