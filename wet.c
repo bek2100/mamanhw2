@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
     
     
     
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
 
     
     parseInput();
