@@ -110,7 +110,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account VALUES(%d,0,%d);", ANumber, -1000);
+    sprintf(cmd, "INSERT INTO Account VALUES(%d,%u,%d);", ANumber, 0,-1000);
     
     res = PQexec(conn, cmd);
     
