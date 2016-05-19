@@ -247,7 +247,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double Balance = 0;
     
-    if((Balance = (atof(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 0, 2))){
+    if((Balance = (atof(PQgetvalue(res, 1, 1)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 0, 2))){
         printf("2\n");
         printf(NOT_APPLICABLE);
         PQclear(res);
