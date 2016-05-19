@@ -375,13 +375,13 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT Family, COUNT(ID) FROM (SPLIT_PART(Name,' ',2) AS Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d)) GROUP BY FAMILY" , IDT, IDF);
+    sprintf(cmd, "SELECT COUNT(Family) FROM (SPLIT_PART(Name,' ',2) AS Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d) GROUP BY Family" , IDT, IDF);
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    if(PQntuples(res) != 1) TCommission = 10.3;
+    if(PQgetvalue(res, 1, 2) != 1) TCommission = 10.3;
     
     if(TCommission>10000) TCommission+= 0.15*TAmount;
     
