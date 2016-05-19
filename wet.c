@@ -111,29 +111,29 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
         PQclear(res); return NULL;
     }
     
-    //PQclear(res);
+    PQclear(res);
     
     sprintf(cmd, "INSERT INTO Account VALUES(%d,%d,%d);", ANumber, 0, -1000);
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    //PQclear(res);
+    PQclear(res);
     
     sprintf(cmd, "INSERT INTO OwnsAcc VALUES(%d,%d);", ID, ANumber);
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    //PQclear(res);
+    PQclear(res);
     
     sprintf(cmd, "INSERT INTO ManagesAcc VALUES(%d,%d);", BrNumber, ANumber);
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     printf(SUCCESSFUL);
     
