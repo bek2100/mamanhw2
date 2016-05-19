@@ -369,13 +369,13 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
         printf(NOT_APPLICABLE);
         PQclear(res); return NULL;
     }
-        
+    
     double TCommission = 0;
     
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT Family, COUNT(ID) FROM (SPLIT_PART(Name,' ',2) as Family from (SELECT *  FROM Customer WHERE ID=%d OR ID=%d) GROUP BY FAMILY" , IDT, IDF);
+    sprintf(cmd, "SELECT Family, COUNT(ID) FROM (SPLIT_PART(Name,' ',2) as Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d) GROUP BY FAMILY" , IDT, IDF);
     
     res = PQexec(conn, cmd);
     
