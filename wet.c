@@ -229,7 +229,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double WCommission = 0;
     
-    if (WAmount > 10000) WCommission = 0.15 * WAmount;
+    if (WAmount >= 10000) WCommission = 0.15 * WAmount;
     else {
         PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
         res = PQexec(conn, cmd);
@@ -248,7 +248,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double Balance = 0;
     
-    if((Balance = (atoi(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atoi(PQgetvalue(res, 0, 2))){
+    if((Balance = (atof(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atoi(PQgetvalue(res, 0, 2))){
         printf("2, %lf, %lf\n", Balance, atof(PQgetvalue(res, 0, 2)));
         printf(NOT_APPLICABLE);
         PQclear(res);
