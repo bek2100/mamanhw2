@@ -110,7 +110,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account VALUES(%d,%u,%d);", ANumber, 0,-1000);
+    sprintf(cmd, "INSERT INTO Account VALUES(%d,%d,%d);", ANumber, 0, -1000);
     
     res = PQexec(conn, cmd);
     
@@ -268,7 +268,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d);", WID, WAmount, WCommission, BrNumber, ANumber, ID);
+    sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %lf, %lf, %d, %d, %d);", WID, WAmount, WCommission, BrNumber, ANumber, ID);
     
     res = PQexec(conn, cmd);
     
@@ -276,7 +276,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d;", Balance, ANumber);
+    sprintf(cmd, "UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d;", Balance, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -401,7 +401,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
         return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d""UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
+    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d""UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
     
     res = PQexec(conn, cmd);
     
@@ -418,7 +418,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     else TID = atof(PQgetvalue(res, 0, 0)) + 1;
     
     PQclear(res);
-    sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
+    sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %lf, %lf, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
     
     res = PQexec(conn, cmd);
     
