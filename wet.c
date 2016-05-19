@@ -213,7 +213,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID=%d;", ANumber);
+    sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID=%d;", ANumber, ID);
     
     res = PQexec(conn, cmd);
     
