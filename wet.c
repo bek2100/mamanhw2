@@ -117,7 +117,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     res = PQexec(conn, cmd);
     
-    if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     PQclear(res);
     
@@ -125,7 +125,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     res = PQexec(conn, cmd);
     
-    if(!res) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     PQclear(res);
     
@@ -133,7 +133,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     res = PQexec(conn, cmd);
     
-    if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     printf(SUCCESSFUL);
     
@@ -183,7 +183,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
+    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d;", ID);
     
     res = PQexec(conn, cmd);
     
@@ -193,7 +193,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM Branch WHERE BrNumber=%d", BrNumber);
+    PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM Branch WHERE BrNumber=%d;", BrNumber);
     
     res = PQexec(conn, cmd);
     
@@ -204,7 +204,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     }
     
     PQclear(res);
-    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d", ANumber);
+    sprintf(cmd, "SELECT ANumber FROM Account WHERE ANumber=%d;", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -214,7 +214,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID=%d", ANumber);
+    PQclear(res);  sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID=%d;", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -229,14 +229,14 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     if (WAmount > 10000) WCommission = 0.15 * WAmount;
     else {
-        PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d", ANumber);
+        PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
         res = PQexec(conn, cmd);
         if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         if(atoi(PQgetvalue(res, 1, 1)) == BrNumber) WCommission = 3.8;
         else WCommission = 5.65;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d", ANumber);
+    PQclear(res);  sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d;", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -250,7 +250,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT MAX(WID) FROM Withdrawal");
+    PQclear(res);  sprintf(cmd, "SELECT MAX(WID) FROM Withdrawal;");
     
     res = PQexec(conn, cmd);
     
@@ -261,17 +261,21 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     if ( PQntuples(res) == 0 ) WID = 0;
     else WID = atoi(PQgetvalue(res, 1, 1)) + 1;
     
-    PQclear(res);  sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d)", WID, WAmount, WCommission, BrNumber, ANumber, ID);
+    PQclear(res);
+    
+    sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d);", WID, WAmount, WCommission, BrNumber, ANumber, ID);
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d", Balance, ANumber);
+    PQclear(res);
+    
+    sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d;", Balance, ANumber);
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     
     printf(WITHDRAWAL_SUCCESS, WID, WAmount, WCommission, Balance);
@@ -392,27 +396,28 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
         return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d""UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d", BalanceT, ANumberT, BalanceF, ANumberF);
+    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d""UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     PQclear(res);  sprintf(cmd, "SELECT MAX(TID) FROM Withdrawal");
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     int TID =0;
     if ( PQntuples(res) == 0 ) TID = 0;
     else TID = atof(PQgetvalue(res, 1, 1)) + 1;
     
-    PQclear(res);  sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d, %d)", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
+    PQclear(res);
+    sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %f, %f, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     printf(TRANSFER_SUCCESS, TAmount, TCommission, BalanceT, BalanceF);
     PQclear(res); return NULL;
