@@ -26,27 +26,27 @@ int main(int argc, char** argv) {
     
     char cmd[CMD_SIZE];
     
-    sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account;");
+    sprintf(cmd, "DROP TABLE Accounts; ""CREATE TABLE Account AS SELECT * FROM course_Account;");
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "CREATE TABLE OwnsAcc AS SELECT * FROM course_OwnsAcc;");
+    sprintf(cmd, "DROP TABLE OwnsAcc; ""CREATE TABLE OwnsAcc AS SELECT * FROM course_OwnsAcc;");
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "CREATE TABLE Withdrawal AS SELECT * FROM course_Withdrawal;");
+    sprintf(cmd, "DROP TABLE Withdrawal; ""CREATE TABLE Withdrawal AS SELECT * FROM course_Withdrawal;");
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "CREATE TABLE ManagesAcc AS SELECT * FROM course_ManagesAcc;");
+    sprintf(cmd, "DROP TABLE ManagesAcc; ""CREATE TABLE ManagesAcc AS SELECT * FROM course_ManagesAcc;");
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "CREATE TABLE Transfer AS SELECT * FROM course_Transfer;");
+    sprintf(cmd, "DROP TABLE Transfer; ""CREATE TABLE Transfer AS SELECT * FROM course_Transfer;");
     
     res = PQexec(conn, cmd);
     
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
     
     parseInput();
     
-    sprintf(cmd, "DROP TABLE Account;");
+    /*sprintf(cmd, "DROP TABLE Account;");
     
     res = PQexec(conn, cmd);
     
@@ -64,21 +64,21 @@ int main(int argc, char** argv) {
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "DROP TABLE Withdrawal;");
+    sprintf(cmd, "DROP TABLE Withdrawal; ");
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "DROP TABLE ManagesAcc;");
+    sprintf(cmd, "DROP TABLE ManagesAcc; ");
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    sprintf(cmd, "DROP TABLE Transfer;");
+    sprintf(cmd, "DROP TABLE Transfer; ");
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; } */
     
     PQfinish(conn);
     return 0;
