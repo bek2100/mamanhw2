@@ -267,7 +267,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d";, Balance, ANumber);
+    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %f WHERE ANumber = %d;", Balance, ANumber);
     
     res = PQexec(conn, cmd);
     
