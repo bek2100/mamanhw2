@@ -23,9 +23,6 @@ int main(int argc, char** argv) {
         PQfinish(conn);
         return 1;
     }
-    char cmd[200];
-    sprintf(cmd, "DROP TABLE Account; CREATE TABLE Account AS SELECT * FROM course_Account;");
-    res = PQexec(conn, cmd);
     parseInput();
     PQfinish(conn);
     return 0;
@@ -97,7 +94,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO Account "" VALUES(%d, %d, %d)", ANumber, 0, -1000);
+    sprintf(cmd, "INSERT INTO Account VALUES(%d, %d, %d)", ANumber, 0, -1000);
     
     res = PQexec(conn, cmd);
     
@@ -105,7 +102,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO OwnsAcc "" VALUES(%d, %d)", ID, ANumber);
+    sprintf(cmd, "INSERT INTO OwnsAcc VALUES(%d, %d)", ID, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -113,7 +110,7 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO ManagesAcc "" VALUES(%d, %d)", BrNumber, ANumber);
+    sprintf(cmd, "INSERT INTO ManagesAcc VALUES(%d, %d)", BrNumber, ANumber);
     
     res = PQexec(conn, cmd);
     
