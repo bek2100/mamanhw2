@@ -375,7 +375,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT Family, COUNT(ID) FROM (SPLIT_PART(Name,' ',2) as Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d) GROUP BY FAMILY" , IDT, IDF);
+    sprintf(cmd, "SELECT Family, COUNT(ID) FROM (SPLIT_PART(Name,' ',2) AS Family FROM (SELECT *  FROM Customer WHERE ID=%d OR ID=%d)) GROUP BY FAMILY" , IDT, IDF);
     
     res = PQexec(conn, cmd);
     
