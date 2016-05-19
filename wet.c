@@ -249,7 +249,6 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     double Balance = 0;
     
     if((Balance = (atof(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atoi(PQgetvalue(res, 0, 2))){
-        printf("2, %lf, %lf\n", Balance, atof(PQgetvalue(res, 0, 2)));
         printf(NOT_APPLICABLE);
         PQclear(res);
         return NULL;
@@ -380,7 +379,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    if(atoi(PQgetvalue(res, 0, 1)) != 2) TCommission = 10.3;
+    if(atoi(PQgetvalue(res, 0, 0)) != 2) TCommission = 10.3;
     
     if(TCommission>10000) TCommission+= 0.15*TAmount;
     
