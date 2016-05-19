@@ -31,11 +31,6 @@ int main(int argc, char** argv) {
     res = PQexec(conn, cmd);
 
     
-    sprintf(cmd, "DROP TABLE Account;");
-    
-    res = PQexec(conn, cmd);
-    
-    
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
     
     sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account;");
