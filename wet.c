@@ -218,7 +218,8 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    if(PQntuples(res) != 1) {
+    
+    if(!PQntuples(res)) {
         printf("1\n");
         printf(NOT_APPLICABLE);
         PQclear(res); return NULL;
