@@ -27,11 +27,11 @@ int main(int argc, char** argv) {
     char cmd[CMD_SIZE];
 
     
-    sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account;");
+   /* sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account;");
     
     res = PQexec(conn, cmd);
     
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }*/
 
     
     sprintf(cmd, "DROP TABLE OwnsAcc; ""CREATE TABLE OwnsAcc AS SELECT * FROM course_OwnsAcc;");
