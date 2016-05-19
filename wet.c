@@ -539,7 +539,7 @@ void* associates(int ID) {
     
     printf(ASSOCIATES, ID);
     
-    char cmd[200];
+ /*   char cmd[200];
     
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", ID);
     
@@ -567,7 +567,7 @@ void* associates(int ID) {
             printf(ASSOCIATES, PQgetvalue(res, i, 1));
     }
     
-    PQclear(res); return NULL;
+    PQclear(res); */return NULL;
 }
 
 /*
