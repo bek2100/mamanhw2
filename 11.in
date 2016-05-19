@@ -2,3 +2,6 @@ add_account 1000 100 10
 add_account 1001 101 11
 add_account 1002 102 12
 add_account 1003 220 12
+withdrawal 100 10 100 1000
+withdrawal 996 10 100 1000
+withdrawal 10000 10 109 1111

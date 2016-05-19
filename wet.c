@@ -81,7 +81,6 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     if(PQntuples(res) == 0) {
-        printf("1\n");
         printf(ILL_PARAMS);
         PQclear(res); return NULL;
     }
@@ -94,7 +93,6 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
-        printf("2\n");
         printf(ILL_PARAMS);
         PQclear(res); return NULL;
     }
@@ -106,7 +104,6 @@ void* addAccount(int ANumber, int ID, int BrNumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) != 0) {
-        printf("3\n");
         printf(ILL_PARAMS);
         PQclear(res); return NULL;
     }
@@ -214,12 +211,15 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         PQclear(res); return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID=%d;", ANumber);
+    PQclear(res);
+    
+    sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d AND ID=%d;", ANumber);
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) != 1) {
+        printf("1\n");
         printf(NOT_APPLICABLE);
         PQclear(res); return NULL;
     }
@@ -236,7 +236,9 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
         else WCommission = 5.65;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d;", ANumber);
+    PQclear(res);
+    
+    sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d;", ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -245,12 +247,14 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     double Balance = 0;
     
     if((Balance = (atof(PQgetvalue(res, 1, 2)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 1, 3))){
+        printf("2\n");
         printf(NOT_APPLICABLE);
         PQclear(res);
         return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT MAX(WID) FROM Withdrawal;");
+    PQclear(res);
+    sprintf(cmd, "SELECT MAX(WID) FROM Withdrawal;");
     
     res = PQexec(conn, cmd);
     
