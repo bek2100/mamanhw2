@@ -247,7 +247,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double Balance = 0;
     
-    if((Balance = (atof(PQgetvalue(res, 1, 2)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 1, 3))){
+    if((Balance = (atof(PQgetvalue(res, 0, 1)) - (WCommission + WAmount))) <= atof(PQgetvalue(res, 0, 2))){
         printf("2\n");
         printf(NOT_APPLICABLE);
         PQclear(res);
@@ -264,7 +264,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     int WID =0;
     
     if ( PQntuples(res) == 0 ) WID = 0;
-    else WID = atoi(PQgetvalue(res, 1, 1)) + 1;
+    else WID = atoi(PQgetvalue(res, 0, 0)) + 1;
     
     PQclear(res);
     
