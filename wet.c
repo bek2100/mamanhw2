@@ -652,6 +652,10 @@ void* moneyLaundering() {
     char cmd[CMD_SIZE];
     
    int i=0;
+    sprintf(cmd, "DROP Money");
+    res = PQexec(conn, cmd);
+    
+    if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     sprintf(cmd, "CREATE TABLE Money AS SELECT IDF, IDT, TAmount FROM Transfer");
     res = PQexec(conn, cmd);
