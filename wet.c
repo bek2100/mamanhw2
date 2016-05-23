@@ -229,7 +229,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double WCommission = 0;
     
-    if (WAmount >= 10000) WCommission = (15 * WAmount)\100;
+    if (WAmount >= 10000) WCommission = (15 * WAmount)/100;
     PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
@@ -530,7 +530,8 @@ void* balances(int ID, int ANumber) {
             if(atof(PQgetvalue(res, i, 4)))
                 printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), Diff);
             else printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), Diff);
-            Diff-=PQgetvalue(res, i, 5);
+            
+            Diff-=atof(PQgetvalue(res, i, 5));
             
         }
     }
