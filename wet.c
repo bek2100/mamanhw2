@@ -233,8 +233,8 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    if(atoi(PQgetvalue(res, 0, 0)) == BrNumber) WCommission = 3.8;
-    else WCommission = 5.65;
+    if(atoi(PQgetvalue(res, 0, 0)) == BrNumber) WCommission += 3.8;
+    else WCommission += 5.65;
     
     PQclear(res);
     
@@ -506,12 +506,10 @@ void* balances(int ID, int ANumber) {
     }
     
     
-    printf(BALANCES_HEADER);
-    
     PQclear(res);
     
     
-    sprintf(cmd, "SELECT WID, WAmout, WCommision, WTime,  0 AS type, WComission + WAmount AS diff FROM Withdrawal WHERE ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  0 AS type, WComission + WAmount AS diff FROM Transfer Where ANumberT = %d "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  1 AS type, WComission - WAmount AS diff Transfer Where ANumberT = %d ""ORDER BY WID D ORDER BY WID ", ANumber, ANumber, ANumber);
+    sprintf(cmd, "SELECT WID, WAmout, WCommision, WTime,  0 AS type, WComission + WAmount AS diff FROM Withdrawal WHERE ANumberF = %d AS A "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  0 AS type, WComission + WAmount AS diff FROM Transfer Where ANumberT = %d AS B "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  1 AS type, WComission - WAmount AS diff FROM Transfer Where ANumberT = %d ""ORDER BY WID D ORDER BY WID ", ANumber, ANumber, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -526,6 +524,7 @@ void* balances(int ID, int ANumber) {
     if(t_num == 0)
         printf(EMPTY);
     else {
+        printf(BALANCES_HEADER);
         for(i = t_num-1; i<t_num; i--){
             if(atof(PQgetvalue(res, i, 4)))
                 printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), Diff);
