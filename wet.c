@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     
     char cmd[CMD_SIZE];
     
-    sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
+    sprintf(cmd, "DROP TABLE Money; DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
     
     res = PQexec(conn, cmd);
     
@@ -652,7 +652,7 @@ void* moneyLaundering() {
     /*char cmd[CMD_SIZE];
     
    int i=0;
-    sprintf(cmd, "DROP Money");
+    sprintf(cmd, "DROP TABLE Money");
     res = PQexec(conn, cmd);
     
     if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
@@ -699,7 +699,7 @@ void* moneyLaundering() {
     
     PQclear(res);
     
-    sprintf(cmd, "DROP Money");
+    sprintf(cmd, "DROP TABLE Money");
     res = PQexec(conn, cmd);
     
     if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
