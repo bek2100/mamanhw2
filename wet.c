@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     
     char cmd[CMD_SIZE];
     
-    sprintf(cmd, "DROP VIEW Money; DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
+    sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
     
     res = PQexec(conn, cmd);
     
