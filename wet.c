@@ -654,7 +654,7 @@ void* moneyLaundering() {
     
     int i=0;
     
-    sprintf(cmd, "CREATE VIEW Money%d AS SELECT IDF, IDT, TAmount FROM Transfer",i);
+    sprintf(cmd, "CREATE TABLE Money%d AS SELECT IDF, IDT, TAmount FROM Transfer",i);
     res = PQexec(conn, cmd);
     if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
@@ -662,13 +662,15 @@ void* moneyLaundering() {
     
     while (num_id){
         i++;
-     sprintf(cmd, "CREATE VIEW Money%d AS (SELECT * FROM MONEY%d "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount)", i, i-1, i-1);
+     sprintf(cmd, "CREATE TABLE Money%d AS (SELECT * FROM MONEY%d "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount)", i, i-1, i-1);
      
      res = PQexec(conn, cmd);
      
      if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
+        sprintf(cmd, "DROP Money%d",i-1);
         res = PQexec(conn, cmd);
+
         if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         num_id--;
     }
@@ -679,13 +681,6 @@ void* moneyLaundering() {
 
     res = PQexec(conn, cmd);
     
-    while(i+1){
-        sprintf(cmd, "DROP VIEW Money%d",i);
-        res = PQexec(conn, cmd);
-        if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-        i--;
-    }
-    
      int t_num = PQntuples(res);
     
      if(!t_num) printf(EMPTY);
@@ -694,6 +689,11 @@ void* moneyLaundering() {
      printf("%d\n", PQgetvalue(res, i, 0));
      }
     
+    sprintf(cmd, "DROP Money%d",i);
+    res = PQexec(conn, cmd);
+    
+    if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+
     PQclear(res);
     return NULL;
 }
