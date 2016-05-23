@@ -653,7 +653,7 @@ void* moneyLaundering() {
     char cmd[CMD_SIZE];
     
     int i=0;
-        
+    
     sprintf(cmd, "CREATE TABLE Money%d AS SELECT IDF, IDT, TAmount FROM Transfer",i);
     res = PQexec(conn, cmd);
     if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
@@ -665,7 +665,7 @@ void* moneyLaundering() {
         
         PQclear(res);
         
-     sprintf(cmd, "CREATE TABLE Money%d AS (SELECT * FROM MONEY%d "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount)", i, i-1, i-1);
+     sprintf(cmd, "CREATE TABLE Money%d AS (SELECT * FROM MONEY%d "" UNION ALL "" (SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T INNER JOIN Money%d T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount))", i, i-1, i-1);
      
      res = PQexec(conn, cmd);
      
