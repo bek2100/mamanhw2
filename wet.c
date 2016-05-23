@@ -407,7 +407,9 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    PQclear(res);  sprintf(cmd, "SELECT MAX(TID) FROM Withdrawal");
+    PQclear(res);
+    
+    sprintf(cmd, "SELECT MAX(TID),COUNT(TID) FROM Transfer;");
     
     res = PQexec(conn, cmd);
     
