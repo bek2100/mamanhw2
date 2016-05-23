@@ -525,7 +525,7 @@ void* balances(int ID, int ANumber) {
         printf(EMPTY);
     else {
         printf(BALANCES_HEADER);
-        for(i = t_num-1; i<t_num; i--){
+        for(i = t_num-1; i==0; i--){
             if(atof(PQgetvalue(res, i, 4)))
                 printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), Diff);
             else printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), Diff);
