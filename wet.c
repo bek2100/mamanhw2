@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-    /*char cmd[CMD_SIZE];
+    char cmd[CMD_SIZE];
     
     sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
     
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    */
+    
     
     parseInput();
     
@@ -229,14 +229,12 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double WCommission = 0;
     
-    if (WAmount >= 10000) WCommission = 0.15 * WAmount;
-    else {
-        PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
-        res = PQexec(conn, cmd);
-        if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-        if(atoi(PQgetvalue(res, 0, 0)) == BrNumber) WCommission = 3.8;
-        else WCommission = 5.65;
-    }
+    if (WAmount >= 10000) WCommission = (15 * WAmount)\100;
+    PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
+    res = PQexec(conn, cmd);
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(atoi(PQgetvalue(res, 0, 0)) == BrNumber) WCommission = 3.8;
+    else WCommission = 5.65;
     
     PQclear(res);
     
@@ -513,7 +511,7 @@ void* balances(int ID, int ANumber) {
     PQclear(res);
     
     
-    sprintf(cmd, "SET b := 0; "" SELECT WID, WAmout, WCommision, WTime, type, diff, b := b - diff AS Balance FROM (((SELECT WID, WAmout, WCommision, WTime, 0 AS type, SUM(WComission + WAmount) AS diff, FROM Withdrawal WHERE ANumberF = %d) AS A "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  0 AS type, SUM(WComission + WAmount) AS diff, FROM Transfer Where ANumberT = %d) AS B) "" UNION "" (SELECT TID, TAmount, Tcomission, TTime,  1 AS type, SUM(WComission - WAmount) AS diff, Transfer Where ANumberT = %d) AS C "" ORDER BY WID) AS D "" ORDER BY WID ", ANumber, ANumber, ANumber);
+    sprintf(cmd, "SELECT WID, WAmout, WCommision, WTime,  0 AS type, WComission + WAmount AS diff FROM Withdrawal WHERE ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  0 AS type, WComission + WAmount AS diff FROM Transfer Where ANumberT = %d "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  1 AS type, WComission - WAmount AS diff Transfer Where ANumberT = %d ""ORDER BY WID D ORDER BY WID ", ANumber, ANumber, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -523,20 +521,22 @@ void* balances(int ID, int ANumber) {
     
     int i;
     
-    if(t_num == 0) {
+    int Diff= CBalance;
+    
+    if(t_num == 0)
         printf(EMPTY);
-    } else {
-        
-        int Diff = CBalance - atof(PQgetvalue(res, t_num, 6));
-        
-        for(i = 0; i<t_num; i++)
-            if(atof(PQgetvalue(res, i, 4))){
-                printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 6))+Diff);
-            }
-            else{
-                printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), atof(PQgetvalue(res, i, 6))+Diff);
-            }
+    else {
+        for(i = t_num-1; i<t_num; i--){
+            if(atof(PQgetvalue(res, i, 4)))
+                printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), Diff);
+            else printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), Diff);
+            Diff-=PQgetvalue(res, i, 5);
+            
+        }
     }
+    
+    
+    
     
     PQclear(res); return NULL;
     
@@ -577,7 +577,7 @@ void* associates(int ID) {
         PQclear(res); return NULL;
     }
     
-    sprintf(cmd, "(SELECT IDF FROM Transfer WHERE (IDT = (SELECT IDT WHERE IDF =%d) OR IDT = (SELECT IDF WHERE IDT =%d) OR IDT = %d)) "" UNION "" (SELECT IDT FROM Transfer WHERE (IDF = (SELECT IDF WHERE IDT =%d) OR IDF = (SELECT IDT WHERE IDF =%d) OR (IDF = %d))) "" ORDER BY IDF", ID, ID, ID, ID, ID, ID);
+    sprintf(cmd, "SELECT IDF FROM Transfer WHERE IDT = (SELECT IDT WHERE IDF =%d OR IDT =%d) OR IDT = %d "" UNION "" SELECT IDT FROM Transfer WHERE IDF = (SELECT IDF WHERE IDT =%d OR IDF =%d) OR IDF = %d "" ORDER BY IDF", ID, ID, ID, ID, ID, ID);
     
     res = PQexec(conn, cmd);
     
