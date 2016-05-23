@@ -393,15 +393,19 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    double BalanceF = atof(PQgetvalue(res, 1, 1)) + TAmount;
     
-    if((BalanceT = (atof(PQgetvalue(res, 0, 1)) - (TCommission + TAmount))) <= atof(PQgetvalue(res, 0, 2))){
+    if((BalanceF = (atof(PQgetvalue(res, 1, 1)) - (TCommission + TAmount))) <= atof(PQgetvalue(res, 1, 2))){
         printf(NOT_APPLICABLE);
         PQclear(res);
         return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d""UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
+    double BalanceT = atof(PQgetvalue(res, 0, 1)) + TAmount;
+
+    
+    PQclear(res);
+    
+    sprintf(cmd, "UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d""UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
     
     res = PQexec(conn, cmd);
     
