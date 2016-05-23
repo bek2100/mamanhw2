@@ -583,6 +583,8 @@ void* associates(int ID) {
         PQclear(res); return NULL;
     }
     
+    PQclear(res);
+    
     sprintf(cmd, "SELECT IDF FROM Transfer WHERE IDT = (SELECT IDT WHERE IDF =%d OR IDT =%d) OR IDT = %d "" UNION "" SELECT IDT FROM Transfer WHERE IDF = (SELECT IDF WHERE IDT =%d OR IDF =%d) OR IDF = %d "" ORDER BY IDF", ID, ID, ID, ID, ID, ID);
     
     res = PQexec(conn, cmd);
@@ -596,7 +598,7 @@ void* associates(int ID) {
     if(!t_num) printf(EMPTY);
     else{
         for(i=0; i<t_num;i++)
-            printf(ASSOCIATES, PQgetvalue(res, i, 0));
+            printf("%d", atoi(PQgetvalue(res, i, 0)));
     }
     
     PQclear(res);
