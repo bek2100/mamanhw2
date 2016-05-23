@@ -542,7 +542,7 @@ void* balances(int ID, int ANumber) {
     if(!sum || PQresultStatus(sum) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(sum)); return NULL; }
 
     
-    double Diff= CBalance - atof(PQgetvalue(sum, 0, 0));
+    double Diff= CBalance + atof(PQgetvalue(sum, 0, 0));
     printf("DIFF is: %lf\n", atof(PQgetvalue(sum, 0, 0)));
     PQclear(sum);
     
@@ -552,7 +552,7 @@ void* balances(int ID, int ANumber) {
     else {
         printf(BALANCES_HEADER);
         for(i = 0; i < t_num; i++){
-            Diff+=atof(PQgetvalue(res, i, 5));
+            Diff-=atof(PQgetvalue(res, i, 5));
             if(atof(PQgetvalue(res, i, 4)))
                 printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), Diff);
             else printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), Diff);
