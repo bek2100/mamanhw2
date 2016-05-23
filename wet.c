@@ -543,7 +543,6 @@ void* balances(int ID, int ANumber) {
 
     
     double Diff= CBalance + atof(PQgetvalue(sum, 0, 0));
-    printf("DIFF is: %lf\n", atof(PQgetvalue(sum, 0, 0)));
     PQclear(sum);
     
     
@@ -653,12 +652,29 @@ void* moneyLaundering() {
     
     char cmd[CMD_SIZE];
     
-    /* sprintf(cmd, "WITH CTE AS (SELECT T.IDT,T.IDF, TAmount,Cycle AS 0 FROM Transfer "" UNION "" SELECT T.IDT, T1.IDF FROM Transfer T1"" JOIN CTE T "" ON T.IDF=T1.IDT AND T.TAmount >= T1.TAmount AND T1.IDF<>T1.IDT AND T.IDF<>T.IDT) "" SELECT IDF FROM CDE R WHERE R.IDF = R.IDT "" ORDER BY IDF");
+    sprintf(cmd, "CREATE VIEW Money AS SELECT IDF, IDT, TAmount FROM Transfer");
+    res = PQexec(conn, cmd);
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    
+    int num_id = PQntuples(res)
+    
+    while (num_id){
+     sprintf(cmd, "CREATE VIEW Money AS SELECT * FROM MONEY "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount");
      
      res = PQexec(conn, cmd);
      
      if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-     
+        
+        num_id--;
+    }
+    
+    sprintf(cmd, "SELECT IDF FROM Money WHERE IDT=IDF ORDER BY IDF");
+    res = PQexec(conn, cmd);
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+
+    sprintf(cmd, "DROP VIEW Money");
+    res = PQexec(conn, cmd);
+    
      int t_num = PQntuples(res);
      
      int i;
@@ -669,7 +685,7 @@ void* moneyLaundering() {
      printf("%d\n", PQgetvalue(res, i, 0));
      }
      
-     PQclear(res); */
+     PQclear(res);
     return NULL;
 }
 
