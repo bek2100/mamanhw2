@@ -392,7 +392,8 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int  i = (ANumberF>ANumberT)? 1 : 0;
+    int  i = 0;
+    if (ANumberF>ANumberT) i=1;
     int j = 1 -i;
     
     double BalanceF = atof(PQgetvalue(res, i, 1)) - (TCommission + TAmount);
