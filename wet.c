@@ -652,7 +652,7 @@ void* moneyLaundering() {
     
     char cmd[CMD_SIZE];
     
-    int i=0;
+   /* int i=0;
     
     sprintf(cmd, "CREATE TABLE Money%d AS SELECT IDF, IDT, TAmount FROM Transfer",i);
     res = PQexec(conn, cmd);
@@ -703,7 +703,7 @@ void* moneyLaundering() {
     
     if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
-    PQclear(res);
+    PQclear(res);*/
     return NULL;
 }
 
