@@ -653,18 +653,18 @@ void* moneyLaundering() {
     
    int i=0;
     
-    sprintf(cmd, "CREATE TABLE Money%d AS SELECT IDF, IDT, TAmount FROM Transfer",i);
+    sprintf(cmd, "CREATE TABLE Money AS SELECT IDF, IDT, TAmount FROM Transfer");
     res = PQexec(conn, cmd);
     if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     int num_id = PQntuples(res);
     
     while (num_id){
-        i++;
+      //  i++;
         
         PQclear(res);
         
-     sprintf(cmd, "CREATE TABLE Money%d AS (SELECT * FROM MONEY%d "" UNION ALL "" (SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T INNER JOIN Money%d T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount))", i, i-1, i-1);
+     sprintf(cmd, "INSERT INTO Money (SELECT * FROM MONEY%d "" UNION ALL "" (SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount))", i, i-1, i-1);
      
      res = PQexec(conn, cmd);
      
@@ -672,16 +672,16 @@ void* moneyLaundering() {
         
         PQclear(res);
     
-        sprintf(cmd, "DROP Money%d",i-1);
+      /*  sprintf(cmd, "DROP Money%d",i-1);
         res = PQexec(conn, cmd);
 
-        if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+        if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }*/
         num_id--;
     }
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT IDF FROM Money%d WHERE IDT=IDF ORDER BY IDF", i);
+    sprintf(cmd, "SELECT IDF FROM Money WHERE IDT=IDF ORDER BY IDF");
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "4Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
@@ -697,7 +697,7 @@ void* moneyLaundering() {
     
     PQclear(res);
     
-    sprintf(cmd, "DROP Money%d",i);
+    sprintf(cmd, "DROP Money");
     res = PQexec(conn, cmd);
     
     if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
