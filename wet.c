@@ -551,10 +551,10 @@ void* balances(int ID, int ANumber) {
     else {
         printf(BALANCES_HEADER);
         for(i = 0; i < t_num; i++){
+            Diff+=atof(PQgetvalue(res, i, 5));
             if(atof(PQgetvalue(res, i, 4)))
                 printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), Diff);
             else printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), Diff);
-            Diff+=atof(PQgetvalue(res, i, 5));
         }
     }
     
