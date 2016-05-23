@@ -542,7 +542,7 @@ void* balances(int ID, int ANumber) {
     if(!sum || PQresultStatus(sum) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(sum)); return NULL; }
 
     
-    int Diff= CBalance - atof(PQgetvalue(sum, 0, 0));
+    double Diff= CBalance - atof(PQgetvalue(sum, 0, 0));
     PQclear(sum);
     
     
