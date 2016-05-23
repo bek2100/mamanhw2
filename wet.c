@@ -509,7 +509,7 @@ void* balances(int ID, int ANumber) {
     PQclear(res);
     
     
-    sprintf(cmd, "SELECT WID, WAmout, WCommision, WTime,  0 AS type, WComission + WAmount AS diff FROM Withdrawal WHERE ANumberF = %d AS A "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  0 AS type, WComission + WAmount AS diff FROM Transfer Where ANumberT = %d AS B "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  1 AS type, WComission - WAmount AS diff FROM Transfer Where ANumberT = %d ""ORDER BY WID D ORDER BY WID ", ANumber, ANumber, ANumber);
+    sprintf(cmd, "SELECT WID, WAmout, WCommision, WTime,  0 AS type, WComission + WAmount AS diff FROM Withdrawal WHERE ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  0 AS type, WComission + WAmount AS diff FROM Transfer Where ANumberT = %d "" UNION ALL "" SELECT TID, TAmount, Tcomission, TTime,  1 AS type, WComission - WAmount AS diff FROM Transfer Where ANumberT = %d ""ORDER BY WID ", ANumber, ANumber, ANumber);
     
     res = PQexec(conn, cmd);
     
