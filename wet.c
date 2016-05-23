@@ -652,14 +652,16 @@ void* moneyLaundering() {
     
     char cmd[CMD_SIZE];
     
-    sprintf(cmd, "CREATE VIEW Money0 AS SELECT IDF, IDT, TAmount FROM Transfer");
+    int i=0;
+    
+    sprintf(cmd, "CREATE VIEW Money%d AS SELECT IDF, IDT, TAmount FROM Transfer",i);
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     int num_id = PQntuples(res);
-    int i=1;
     
     while (num_id){
+        i++;
      sprintf(cmd, "CREATE VIEW Money%d AS SELECT * FROM MONEY "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount", i, i-1);
      
      res = PQexec(conn, cmd);
@@ -669,7 +671,6 @@ void* moneyLaundering() {
         sprintf(cmd, "DROP VIEW Money%d",i-1);
         res = PQexec(conn, cmd);
         if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-        i++;
         num_id--;
     }
     
