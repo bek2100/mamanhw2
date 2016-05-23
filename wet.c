@@ -664,7 +664,7 @@ void* moneyLaundering() {
         
         PQclear(res);
         
-     sprintf(cmd, "INSERT INTO Money (SELECT * FROM MONEY "" UNION ALL "" (SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount))");
+     sprintf(cmd, "INSERT INTO Money SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount");
      
      res = PQexec(conn, cmd);
      
