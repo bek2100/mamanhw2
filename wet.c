@@ -656,7 +656,7 @@ void* moneyLaundering() {
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int num_id = PQntuples(res)
+    int num_id = PQntuples(res);
     
     while (num_id){
      sprintf(cmd, "CREATE VIEW Money AS SELECT * FROM MONEY "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount");
