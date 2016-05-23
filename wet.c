@@ -276,7 +276,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     PQclear(res);
     
-    sprintf(cmd, "UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d;", Balance, ANumber);
+    sprintf(cmd, "UPDATE Account SET Balance = %lf WHERE ANumber = %d;", Balance, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -406,7 +406,8 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "UPDATE Account SET Balance = %lf WHERE ANumber = %d""UPDATE Account SET Balance = %lf WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
+    
+    sprintf(cmd, "UPDATE Account SET Balance = %lf WHERE ANumber = %d; UPDATE Account SET Balance = %lf WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
     
     res = PQexec(conn, cmd);
     
@@ -426,7 +427,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     else TID = atoi(PQgetvalue(res, 0, 0)) + 1;
     
     PQclear(res);
-    sprintf(cmd, "INSERT INTO Transfer VALUES (%d, %lf, %lf, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
+    sprintf(cmd, "INSERT INTO Transfer VALUES(%d, %lf, %lf, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
     
     res = PQexec(conn, cmd);
     
