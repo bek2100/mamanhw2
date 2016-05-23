@@ -381,7 +381,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(atoi(PQgetvalue(res, 0, 0)) != 2) TCommission = 10.3;
     
-    if(TAmount>10000) TCommission+= 15*TAmount/100;
+    if(TAmount>=10000) TCommission+= 15*TAmount/100;
     
     double BalanceT = 0;
     
