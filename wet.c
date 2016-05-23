@@ -660,8 +660,6 @@ void* moneyLaundering() {
     int num_id = PQntuples(res);
     
     while (num_id){
-      //  i++;
-        
         PQclear(res);
         
      sprintf(cmd, "INSERT INTO Money SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount");
@@ -670,7 +668,6 @@ void* moneyLaundering() {
      
      if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         
-        PQclear(res);
         num_id--;
     }
     
