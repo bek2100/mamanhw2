@@ -523,7 +523,7 @@ void* balances(int ID, int ANumber) {
     PQclear(res);
     
     
-    sprintf(cmd, "SELECT WID, WAmount, WCommission, WTime,  0 AS type, WCommission + WAmount AS diff FROM Withdrawal WHERE ANumber = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  0 AS type, TCommission + TAmount AS diff FROM Transfer Where ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  1 AS type,  - TAmount AS diff FROM Transfer Where ANumberT = %d ""ORDER BY WID ", ANumber, ANumber, ANumber);
+    sprintf(cmd, "SELECT WID, WAmount, WCommission, WTime, 0 AS type, WCommission + WAmount AS diff FROM Withdrawal WHERE ANumber = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  0 AS type, TCommission + TAmount AS diff FROM Transfer Where ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  1 AS type,  - TAmount AS diff FROM Transfer Where ANumberT = %d ""ORDER BY WID ", ANumber, ANumber, ANumber);
     
     res = PQexec(conn, cmd);
     
@@ -533,18 +533,28 @@ void* balances(int ID, int ANumber) {
     
     int i;
     
-    int Diff= CBalance;
+    PGresult *sum;
+    
+    sprintf(cmd, "SELECT SUM(diff) FROM (SELECT WID, WAmount, WCommission, WTime, 0 AS type, WCommission + WAmount AS diff FROM Withdrawal WHERE ANumber = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  0 AS type, TCommission + TAmount AS diff FROM Transfer Where ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  1 AS type,  - TAmount AS diff FROM Transfer Where ANumberT = %d)", ANumber, ANumber, ANumber);
+    
+    sum = PQexec(conn, cmd);
+    
+    if(!sum || PQresultStatus(sum) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(sum)); return NULL; }
+
+    
+    int Diff= CBalance - atof(PQgetvalue(sum, i, 1));
+    PQclear(sum);
+    
     
     if(t_num == 0)
         printf(EMPTY);
     else {
         printf(BALANCES_HEADER);
-        for(i = t_num-1; i==0; i--){
+        for(i = 0; i < t_num; i--){
+            Diff+=atof(PQgetvalue(res, i, 5));
             if(atof(PQgetvalue(res, i, 4)))
                 printf(CREDIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), Diff);
             else printf(DEBIT_RESULT, PQgetvalue(res, i, 0), atof(PQgetvalue(res, i, 1)), atof(PQgetvalue(res, i, 2)), Diff);
-            
-            Diff-=atof(PQgetvalue(res, i, 5));
             
         }
     }
