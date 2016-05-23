@@ -681,8 +681,6 @@ void* moneyLaundering() {
     
      int t_num = PQntuples(res);
      
-     int i;
-     
      if(!t_num) printf(EMPTY);
      else{
      for(i=0; i<t_num;i++)
