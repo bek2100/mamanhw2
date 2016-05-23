@@ -392,7 +392,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    int i = (ANumberT>ANumberF)? 0:1;
+    int i = (ANumberT>ANumberF)? 1:0;
     int j = 1-i;
     
 
