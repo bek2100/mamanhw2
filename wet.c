@@ -383,7 +383,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(TAmount>=10000) TCommission+= 0.0015*TAmount;
     
-    double BalanceT = 0;
+    double BalanceF = 0;
     
     PQclear(res);
     
