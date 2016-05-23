@@ -387,20 +387,21 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d OR ANumber=%d", ANumberT, ANumberF);
+    sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d OR ANumber=%d ORDER BY ID", ANumberT, ANumberF);
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    int  i = (IDF>IDT)? 1 : 0;
+    int j = 1 -i;
     
-    
-    if((BalanceF = (atof(PQgetvalue(res, 1, 1)) - (TCommission + TAmount))) <= atof(PQgetvalue(res, 1, 2))){
+    if((BalanceF = (atof(PQgetvalue(res, i, 1)) - (TCommission + TAmount))) <= atof(PQgetvalue(res, 1, 2))){
         printf(NOT_APPLICABLE);
         PQclear(res);
         return NULL;
     }
     
-    double BalanceT = atof(PQgetvalue(res, 0, 1)) + TAmount;
+    double BalanceT = atof(PQgetvalue(res, j, 1)) + TAmount;
 
     
     PQclear(res);
