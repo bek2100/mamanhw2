@@ -406,7 +406,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d""UPDATE ACCOUNT SET Balance = %lf WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
+    sprintf(cmd, "UPDATE Account SET Balance = %lf WHERE ANumber = %d""UPDATE Account SET Balance = %lf WHERE ANumber = %d;", BalanceT, ANumberT, BalanceF, ANumberF);
     
     res = PQexec(conn, cmd);
     
