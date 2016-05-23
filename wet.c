@@ -422,7 +422,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     
     PQclear(res);
-    sprintf(cmd, "INSERT INTO Withdrawal VALUES (%d, %lf, %lf, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
+    sprintf(cmd, "INSERT INTO Transfer VALUES (%d, %lf, %lf, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
     
     res = PQexec(conn, cmd);
     
