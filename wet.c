@@ -421,13 +421,12 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     res = PQexec(conn, cmd);
     
-    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     int TID =0;
     
     if (atoi(PQgetvalue(res, 0, 1)) == 0 ) TID = 0;
     else TID = atoi(PQgetvalue(res, 0, 0)) + 1;
-    
     
     PQclear(res);
     sprintf(cmd, "INSERT INTO Transfer VALUES (%d, %lf, %lf, %d, %d, %d, %d);", TID, TAmount, TCommission, ANumberF, IDF, ANumberT, IDT);
