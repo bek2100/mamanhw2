@@ -668,7 +668,6 @@ void* moneyLaundering() {
      
      if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-        sprintf(cmd, "DROP VIEW Money%d",i-1);
         res = PQexec(conn, cmd);
         if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         num_id--;
@@ -680,6 +679,13 @@ void* moneyLaundering() {
 
     res = PQexec(conn, cmd);
     
+    while(i+1){
+        sprintf(cmd, "DROP VIEW Money%d",i);
+        res = PQexec(conn, cmd);
+        if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+        i--;
+    }
+    
      int t_num = PQntuples(res);
     
      if(!t_num) printf(EMPTY);
@@ -689,10 +695,6 @@ void* moneyLaundering() {
      }
     
     PQclear(res);
-    sprintf(cmd, "DROP VIEW Money%d",i);
-    res = PQexec(conn, cmd);
-    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-
     return NULL;
 }
 
