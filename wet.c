@@ -383,7 +383,6 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(TAmount>=10000) TCommission+= 0.0015*TAmount;
     
-    double BalanceF = 0;
     
     PQclear(res);
     
@@ -396,7 +395,9 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     int  i = (ANumberF>ANumberT)? 1 : 0;
     int j = 1 -i;
     
-    if((BalanceF = (atof(PQgetvalue(res, i, 1)) - (TCommission + TAmount))) <= atof(PQgetvalue(res, i, 2))){
+    double BalanceF = atof(PQgetvalue(res, i, 1)) - (TCommission + TAmount);
+    
+    if(BalanceF <= atof(PQgetvalue(res, i, 2))){
         printf(NOT_APPLICABLE);
         PQclear(res);
         return NULL;
