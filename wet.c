@@ -650,7 +650,7 @@ void* moneyLaundering() {
     
     printf(MONEY_LAUNDERING);
     
-    char cmd[CMD_SIZE];
+    /*char cmd[CMD_SIZE];
     
     int i=0;
     
@@ -694,7 +694,7 @@ void* moneyLaundering() {
     
     if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
-    PQclear(res);
+    PQclear(res);*/
     return NULL;
 }
 
