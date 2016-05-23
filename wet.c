@@ -662,7 +662,7 @@ void* moneyLaundering() {
     
     while (num_id){
         i++;
-     sprintf(cmd, "CREATE VIEW Money%d AS SELECT * FROM MONEY%d "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount", i, i-1, i-1);
+     sprintf(cmd, "CREATE VIEW Money%d AS (SELECT * FROM MONEY%d "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount)", i, i-1, i-1);
      
      res = PQexec(conn, cmd);
      
