@@ -229,7 +229,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     double WCommission = 0;
     
-    if (WAmount >= 10000) WCommission = (15 * WAmount)/100;
+    if (WAmount >= 10000) WCommission = ((15 * WAmount) / 100);
     else{
         PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM ManagesAcc WHERE ANumber=%d;", ANumber);
         res = PQexec(conn, cmd);
@@ -381,7 +381,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(atoi(PQgetvalue(res, 0, 0)) != 2) TCommission = 10.3;
     
-    if(TAmount>=10000) TCommission+= 15*TAmount/100;
+    if(TAmount>=10000) TCommission+= ((15*TAmount) / 100);
     
     double BalanceT = 0;
     
