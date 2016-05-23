@@ -654,6 +654,10 @@ void* moneyLaundering() {
     
     int i=0;
     
+    sprintf(cmd, "DROP VIEW Money%d",i);
+    res = PQexec(conn, cmd);
+    if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    
     sprintf(cmd, "CREATE VIEW Money%d AS SELECT IDF, IDT, TAmount FROM Transfer",i);
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
