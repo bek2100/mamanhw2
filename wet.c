@@ -648,9 +648,9 @@ void* associates(int ID) {
 
 void* moneyLaundering() {
     
-    printf(MONEY_LAUNDERING);
+    /*printf(MONEY_LAUNDERING);
     
-    /*char cmd[CMD_SIZE];
+    char cmd[CMD_SIZE];
     
     int i=0;
     
