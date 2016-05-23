@@ -435,7 +435,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    printf(TRANSFER_SUCCESS, TAmount, TCommission, BalanceT, BalanceF);
+    printf(TRANSFER_SUCCESS, TID, TAmount, TCommission, BalanceT, BalanceF);
     PQclear(res); return NULL;
 }
 
