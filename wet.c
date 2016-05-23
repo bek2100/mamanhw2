@@ -25,6 +25,9 @@ int main(int argc, char** argv) {
         return 1;
     }
     
+    
+    parseInput();
+    
     char cmd[CMD_SIZE];
     
     sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
@@ -39,9 +42,7 @@ int main(int argc, char** argv) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
     
-    
-    parseInput();
-    
+
     
     PQfinish(conn);
     
