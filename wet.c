@@ -396,7 +396,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     int  i = (ANumberF>ANumberT)? 1 : 0;
     int j = 1 -i;
     
-    if((BalanceF = (atof(PQgetvalue(res, i, 1)) - (TCommission + TAmount))) <= atof(PQgetvalue(res, 1, 2))){
+    if((BalanceF = (atof(PQgetvalue(res, i, 1)) - (TCommission + TAmount))) <= atof(PQgetvalue(res, i, 2))){
         printf(NOT_APPLICABLE);
         PQclear(res);
         return NULL;
