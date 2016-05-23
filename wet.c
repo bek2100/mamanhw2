@@ -543,7 +543,7 @@ void* balances(int ID, int ANumber) {
 
     
     double Diff= CBalance - atof(PQgetvalue(sum, 0, 0));
-    printf("DIFF is: %lf\n", Diff);
+    printf("DIFF is: %lf\n", atof(PQgetvalue(sum, 0, 0));
     PQclear(sum);
     
     
