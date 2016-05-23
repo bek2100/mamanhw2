@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     
     char cmd[CMD_SIZE];
     
-    sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
+    sprintf(cmd, "DROP VIEW Money; DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
     
     res = PQexec(conn, cmd);
     
@@ -41,20 +41,7 @@ int main(int argc, char** argv) {
     
     
     parseInput();
-    
-    sprintf(cmd, "DROP TABLE Account; DROP TABLE OwnsAcc; DROP TABLE Withdrawal; DROP TABLE ManagesAcc; DROP TABLE Transfer; DROP TABLE Branch;");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
-    
-    sprintf(cmd, "CREATE TABLE Account AS SELECT * FROM course_Account; CREATE TABLE OwnsAcc AS SELECT * FROM course_OwnsAcc; CREATE TABLE Withdrawal AS SELECT * FROM course_Withdrawal; CREATE TABLE ManagesAcc AS SELECT * FROM course_ManagesAcc; CREATE TABLE Transfer AS SELECT * FROM course_Transfer; CREATE TABLE Branch AS SELECT * FROM course_Branch;");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
 
-    
     PQfinish(conn);
     
     return 0;
