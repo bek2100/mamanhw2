@@ -660,7 +660,7 @@ void* moneyLaundering() {
     int i=1;
     
     while (num_id){
-     sprintf(cmd, "CREATE VIEW Money%d AS SELECT * FROM MONEY "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount", i);
+     sprintf(cmd, "CREATE VIEW Money%d AS SELECT * FROM MONEY "" UNION ALL "" SELECT T.IDF, T1.IDT, T1.TAmount FROM Money%d T, T1 WHERE T.IDT=T1.IDF AND T.TAmount>=T1.TAmount", i, i-1);
      
      res = PQexec(conn, cmd);
      
@@ -669,7 +669,7 @@ void* moneyLaundering() {
         sprintf(cmd, "DROP VIEW Money%d",i-1);
         res = PQexec(conn, cmd);
         if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-        
+        i++;
         num_id--;
     }
     
@@ -680,7 +680,7 @@ void* moneyLaundering() {
     res = PQexec(conn, cmd);
     
      int t_num = PQntuples(res);
-     
+    
      if(!t_num) printf(EMPTY);
      else{
      for(i=0; i<t_num;i++)
