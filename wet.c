@@ -664,18 +664,13 @@ void* moneyLaundering() {
         
         PQclear(res);
         
-     sprintf(cmd, "INSERT INTO Money (SELECT * FROM MONEY%d "" UNION ALL "" (SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount))", i, i-1, i-1);
+     sprintf(cmd, "INSERT INTO Money (SELECT * FROM MONEY "" UNION ALL "" (SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount))");
      
      res = PQexec(conn, cmd);
      
      if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         
         PQclear(res);
-    
-      /*  sprintf(cmd, "DROP Money%d",i-1);
-        res = PQexec(conn, cmd);
-
-        if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }*/
         num_id--;
     }
     
