@@ -181,7 +181,7 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     if (WAmount <= 0) {
         printf(ILL_PARAMS);
-        PQclear(res); return NULL;
+        return NULL;
     }
     
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d;", ID);
