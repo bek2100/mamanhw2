@@ -687,7 +687,7 @@ void* moneyLaundering() {
    while (num_id){
     PQclear(res);
         
-       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID AND NOT T.IDF=T.IDT AND NOT T1.IDT=T1.IDF AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT)");
+       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT)");
        
      res = PQexec(conn, cmd);
      
@@ -696,7 +696,7 @@ void* moneyLaundering() {
         num_id--;
     }
     
-    sprintf(cmd, "SELECT DISTINCT IDF FROM money WHERE IDT=IDF ORDER BY IDF");
+    sprintf(cmd, "SELECT DISTINCT IDF,TID FROM money WHERE IDT=IDF ORDER BY IDF");
     
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "4Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
@@ -708,7 +708,7 @@ void* moneyLaundering() {
      if(!t_num) printf(EMPTY);
      else{
      for(i=0; i<t_num;i++)
-     printf("%d\n", atoi(PQgetvalue(res, i, 0)));
+     printf("%d, %d\n", atoi(PQgetvalue(res, i, 0)),atoi(PQgetvalue(res, i, 1)));
      }
      
     sprintf(cmd, "DROP TABLE money");
