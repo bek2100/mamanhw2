@@ -392,7 +392,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d OR ANumber=%d", ANumberT, ANumberF);
+    sprintf(cmd, "SELECT * FROM Account WHERE ANumber=%d OR ANumber=%d ORDER BY ANnumber", ANumberT, ANumberF);
     
     res = PQexec(conn, cmd);
     
