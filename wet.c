@@ -718,7 +718,108 @@ void* moneyLaundering() {
 
 
 
+/*FOR TEST*/
 
+bool Execute(char * command, ExecStatusType type) {
+    res = PQexec(conn, command);
+    if (!res || PQresultStatus(res) != type) {
+        fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res));
+        PQclear(res);
+        exit(1);
+    }
+    return true;
+}
+
+void InitSystem() {
+    /* DROPPING */
+    Execute("DROP TABLE customer", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("DROP TABLE account", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("DROP TABLE ownsacc", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("DROP TABLE branch", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("DROP TABLE managesacc", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("DROP TABLE withdrawal", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("DROP TABLE transfer", PGRES_COMMAND_OK);
+    PQclear(res);
+    /* INITING */
+    Execute("CREATE TABLE customer (LIKE course_customer INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES)", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("INSERT INTO customer SELECT * FROM course_customer", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("CREATE TABLE account (LIKE course_account INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES)", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("INSERT INTO account SELECT * FROM course_account", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("CREATE TABLE ownsacc (LIKE course_ownsacc INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES)", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("INSERT INTO ownsacc SELECT * FROM course_ownsacc", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("CREATE TABLE branch (LIKE course_branch INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES)", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("INSERT INTO branch SELECT * FROM course_branch", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("CREATE TABLE managesacc (LIKE course_managesacc INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES)", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("INSERT INTO managesacc SELECT * FROM course_managesacc", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("CREATE TABLE withdrawal (LIKE course_withdrawal INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES)", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("INSERT INTO withdrawal SELECT * FROM course_withdrawal", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("CREATE TABLE transfer (LIKE course_transfer INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES)", PGRES_COMMAND_OK);
+    PQclear(res);
+    Execute("INSERT INTO transfer SELECT * FROM course_transfer", PGRES_COMMAND_OK);
+    PQclear(res);
+}
+
+void Prepare_Aux(int x, char * name, char * address) {
+    char cmd[512];
+    sprintf(cmd, "INSERT INTO customer VALUES (%d, '%s', '%s')",x,name,address);
+    Execute(cmd, PGRES_COMMAND_OK);
+    PQclear(res);
+    addAccount(x + 100, x, (x % 5) + 10);
+}
+
+void PrepareForTest1() {
+    InitSystem();
+    char cmd[512];
+    Prepare_Aux(1, "Jon Snow", "Castle Black");
+    Prepare_Aux(2, "Ned Stark", "Winterfell");
+    Prepare_Aux(3, "Tyrion Lannister", "Kings Landing");
+    Prepare_Aux(4, "Sansa Stark", "Winterfell");
+    Prepare_Aux(5, "Arya Stark", "Winterfell");
+    Prepare_Aux(6, "Theon Greyjoy", "Pike");
+    Prepare_Aux(7, "Jaime Lannister", "Kings Landing");
+    Prepare_Aux(8, "Cersei Lannister", "Kings Landing");
+    Prepare_Aux(9, "Daenerys Targaryen_The_Unburnt_Queen_of_the_Andals_the_Rhoynar_and_of_the_First_Men_Queen_of_Meereen_Khaleesi_of_the_Great_Grass_Sea_Breaker_of_Chains_Mother_of_Dragons", "Meereen");
+    Prepare_Aux(10, "Viserys Targaryen", "Heaven or Hell");
+    Prepare_Aux(11, "Joffrey Baratheon", "Hell for sure");
+    Prepare_Aux(12, "Robert Baratheon", "Heaven probably");
+    Prepare_Aux(13, "Robb Stark", "Winterfell");
+    Prepare_Aux(14, "Ramsay Bolton", "We dont know");
+    Prepare_Aux(15, "Jorah Mormont", "Meereen");
+    sprintf(cmd, "UPDATE account SET Balance = 100, Overdraft = -1000 WHERE anumber = 100");
+    Execute(cmd, PGRES_COMMAND_OK);
+    PQclear(res);
+    sprintf(cmd, "UPDATE account SET Balance = 10000,Overdraft = -100000 WHERE ANumber = 102");
+    Execute(cmd, PGRES_COMMAND_OK);
+    PQclear(res);
+    sprintf(cmd, "UPDATE account SET Balance = 21000,Overdraft = -123456 WHERE ANumber = 103");
+    Execute(cmd, PGRES_COMMAND_OK);
+    PQclear(res);
+    sprintf(cmd, "UPDATE account SET Balance = 31000,Overdraft = -22356 WHERE ANumber = 107");
+    Execute(cmd, PGRES_COMMAND_OK);
+    PQclear(res);
+    sprintf(cmd, "UPDATE account SET Balance = 39900,Overdraft = -22456 WHERE ANumber = 108");
+    Execute(cmd, PGRES_COMMAND_OK);
+    PQclear(res);
+    printf("INIT DONE!\n");
+}
 
 
 
