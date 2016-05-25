@@ -654,7 +654,7 @@ void* moneyLaundering() {
    int i=0;
     
     
-    sprintf(cmd, "CREATE TABLE money AS SELECT IDF,IDT,TAmount, 0 AS cycle FROM Transfer");
+    sprintf(cmd, "CREATE TABLE money AS SELECT IDF,IDT,TAmount, FROM Transfer");
     res = PQexec(conn, cmd);
     if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
@@ -666,7 +666,7 @@ void* moneyLaundering() {
     
     PQclear(res);
     
-    sprintf(cmd, "INSERT INTO money (IDF, IDT, TAmount) SELECT T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND NOT cycle; UPDATE money cycle=%d WHERE IDF=IDT",1);
+    sprintf(cmd, "INSERT INTO money (IDF, IDT, TAmount) SELECT T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount");
     
     res = PQexec(conn, cmd);
     
