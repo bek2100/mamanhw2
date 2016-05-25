@@ -653,13 +653,13 @@ void* moneyLaundering() {
     
    int i=0;
     
-    sprintf(cmd, "CREATE TABLE Money AS SELECT IDF, IDT, TAmount FROM Transfer");
+    sprintf(cmd, "CREATE TABLE Money (IDF int, IDT int, Amount double); INSERT INTO Money (IDF, IDT, Amount) SELECT IDF, IDT, TAmount FROM Transfer");
     res = PQexec(conn, cmd);
     if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     int num_id = PQntuples(res);
     
-    sprintf(cmd, "SLECT INTO Money SELECT T.IDF, T1.IDT, T1.TAmount FROM "" SELECT T.IDF, T.IDT, T.TAmount FROM Money T ""INNER JOIN Money T1 "" ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount");
+    sprintf(cmd, "SLECT INTO Money (IDF, IDT, Amount) SELECT T.IDF, T1.IDT, T1.Amount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.Amount>=T1.Amount)");
     
     res = PQexec(conn, cmd);
     
@@ -668,7 +668,7 @@ void* moneyLaundering() {
    /*while (num_id){
         PQclear(res);
         
-     sprintf(cmd, "INSERT INTO Money SELECT T.IDF, T1.IDT, T1.TAmount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount");
+     sprintf(cmd, "INSERT INTO Money SELECT T.IDF, T1.IDT, T1.Amount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.Amount>=T1.Amount");
      
      res = PQexec(conn, cmd);
      
