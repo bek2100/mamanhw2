@@ -696,7 +696,7 @@ void* moneyLaundering() {
      if(!t_num) printf(EMPTY);
      else{
      for(i=0; i<t_num;i++)
-     printf("%d\n", PQgetvalue(res, i, 0));
+     printf("%d\n", atoi(PQgetvalue(res, i, 0)));
      }
      
     sprintf(cmd, "DROP TABLE money");
