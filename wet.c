@@ -666,7 +666,7 @@ void* moneyLaundering() {
     if(!res) { fprintf(stderr, "5Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     
-    sprintf(cmd, "CREATE TABLE money AS SELECT TID, IDF,IDT,TAmount FROM Transfer WHERE IDT<>IDF; SELECT * FROM money");
+    sprintf(cmd, "CREATE TABLE money AS SELECT TID, IDF,IDT,TAmount FROM Transfer; SELECT * FROM money");
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
@@ -687,7 +687,7 @@ void* moneyLaundering() {
    while (num_id){
     PQclear(res);
         
-       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT AND T1.TAmount=M.TAmount)");
+       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT)");
        
      res = PQexec(conn, cmd);
      
