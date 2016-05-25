@@ -663,6 +663,8 @@ void* moneyLaundering() {
     
     int num_id = PQntuples(res);
     
+    PQclear(res);
+    
     sprintf(cmd, "SLECT INTO money (IDF, IDT, Amount) SELECT T.IDF, T1.IDT, T1.Amount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.Amount>=T1.Amount)");
     
     res = PQexec(conn, cmd);
