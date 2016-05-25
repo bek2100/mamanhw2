@@ -663,12 +663,12 @@ void* moneyLaundering() {
     sprintf(cmd, "DROP TABLE money");
     res = PQexec(conn, cmd);
     
-    if(!res) { fprintf(stderr, "5Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     
     sprintf(cmd, "CREATE TABLE money AS SELECT TID, IDF,IDT,TAmount FROM Transfer; SELECT * FROM money");
     res = PQexec(conn, cmd);
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     /*sprintf(cmd, "INSERT INTO money (IDF, IDT, Amount) SELECT IDF, IDT, TAmount FROM Transfer");
     res = PQexec(conn, cmd);
@@ -691,7 +691,7 @@ void* moneyLaundering() {
        
      res = PQexec(conn, cmd);
      
-     if(!res) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+     if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         
         num_id--;
     }
@@ -699,7 +699,7 @@ void* moneyLaundering() {
     sprintf(cmd, "SELECT IDF,TID FROM money WHERE IDT=IDF ORDER BY IDF");
     
     res = PQexec(conn, cmd);
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "4Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
     res = PQexec(conn, cmd);
     
@@ -708,13 +708,13 @@ void* moneyLaundering() {
      if(!t_num) printf(EMPTY);
      else{
      for(i=0; i<t_num;i++)
-     printf("%d\n", atoi(PQgetvalue(res, i, 0)),atoi(PQgetvalue(res, i, 0)));
+     printf("%d, %d\n", atoi(PQgetvalue(res, i, 0)),atoi(PQgetvalue(res, i, 0)));
      }
      
     sprintf(cmd, "DROP TABLE money");
     res = PQexec(conn, cmd);
     
-    if(!res) { fprintf(stderr, "5Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
     PQclear(res);
     return NULL;
