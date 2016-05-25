@@ -666,7 +666,7 @@ void* moneyLaundering() {
     if(!res) { fprintf(stderr, "5Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     
-    sprintf(cmd, "CREATE TABLE money AS SELECT TID, IDF,IDT,TAmount FROM Transfer; SELECT * FROM money");
+    sprintf(cmd, "CREATE TABLE money AS SELECT TID, IDF,IDT,TAmount FROM Transfer WHERE IDT<>IDF; SELECT * FROM money");
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
