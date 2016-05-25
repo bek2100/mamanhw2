@@ -657,6 +657,10 @@ void* moneyLaundering() {
     res = PQexec(conn, cmd);
     if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
+    sprintf(cmd, "INSERT INTO Money (IDF, IDT, Amount) SELECT IDF, IDT, TAmount FROM Transfer");
+    res = PQexec(conn, cmd);
+    if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    
     int num_id = PQntuples(res);
     
     sprintf(cmd, "SLECT INTO Money (IDF, IDT, Amount) SELECT T.IDF, T1.IDT, T1.Amount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.Amount>=T1.Amount)");
