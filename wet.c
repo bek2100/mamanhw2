@@ -786,7 +786,7 @@ void Prepare_Aux(int x, char * name, char * address) {
 }
 
 void PrepareForTest1() {
-    //InitSystem();
+    InitSystem();
     char cmd[512];
     Prepare_Aux(1, "Jon Snow", "Castle Black");
     Prepare_Aux(2, "Ned Stark", "Winterfell");
