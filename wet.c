@@ -191,7 +191,6 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
         printf(ILL_PARAMS);
-        printf("1\n");
         PQclear(res);
         return NULL;
     }
@@ -203,7 +202,6 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
-        printf("2\n");
         printf(ILL_PARAMS);
         PQclear(res);
         return NULL;
@@ -216,7 +214,6 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
-        printf("3\n");
         printf(ILL_PARAMS);
         PQclear(res);
         return NULL;
@@ -338,9 +335,8 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if (TAmount <= 0 || IDF == IDT) {
         printf(ILL_PARAMS);
-        PQclear(res); return NULL;
+        return NULL;
     }
-    
     
     
     sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", IDF);
@@ -350,7 +346,8 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
         printf(ILL_PARAMS);
-        PQclear(res); return NULL;
+        PQclear(res);
+        return NULL;
     }
     
     PQclear(res);
