@@ -1,0 +1,100 @@
+transfer 367 15 115 15 115
+transfer 1624 19 119 17 117
+transfer 364 6 106 11 111
+transfer 727 2 102 13 113
+transfer 1842 8 108 4 104
+transfer 504 3 103 16 116
+transfer 282 2 102 18 118
+balances 16 116
+transfer 1626 12 112 10 110
+balances 13 113
+withdrawal 435 10 20 120
+transfer 603 12 112 14 114
+transfer 1573 5 105 6 106
+transfer 153 9 109 16 116
+transfer 562 18 118 15 115
+transfer 623 2 102 11 111
+withdrawal -65 12 17 117
+transfer 1742 9 109 15 115
+transfer 842 5 105 13 113
+transfer 1705 11 111 20 120
+balances 11 111
+withdrawal 293 12 2 102
+money_laundering
+transfer 523 5 105 19 119
+withdrawal 366 11 1 101
+withdrawal 708 12 12 112
+transfer 339 7 107 10 110
+transfer 1438 19 119 1 101
+transfer 441 14 114 9 109
+transfer 1558 5 105 15 115
+withdrawal 73 12 7 107
+transfer 921 6 106 10 110
+withdrawal 1229 11 11 111
+balances 14 114
+transfer 412 7 107 17 117
+withdrawal 1255 12 17 117
+withdrawal 474 11 16 116
+transfer -48 11 111 1 101
+transfer 1624 7 107 17 117
+transfer 91 8 108 5 105
+withdrawal 653 13 8 108
+transfer 845 10 110 19 119
+withdrawal 488 12 2 102
+transfer 846 7 107 17 117
+transfer 1068 1 101 12 112
+withdrawal 810 11 16 116
+transfer 1524 18 118 6 106
+transfer 1495 2 102 4 104
+transfer 191 17 117 11 111
+balances 17 117
+withdrawal 599 14 9 109
+withdrawal 681 10 5 105
+balances 14 114
+transfer 318 19 119 19 119
+transfer 27 8 108 16 116
+transfer 548 4 104 11 111
+withdrawal 517 11 11 111
+withdrawal 709 10 15 115
+transfer 835 12 112 12 112
+transfer 419 17 117 15 115
+withdrawal 408 10 5 105
+transfer 509 10 110 12 112
+transfer 385 14 114 17 117
+balances 8 108
+transfer 1403 9 109 9 109
+transfer 518 1 101 17 117
+money_laundering
+transfer 1489 19 119 8 108
+withdrawal 1022 13 13 113
+associates 13
+transfer 79 11 111 8 108
+withdrawal 215 12 12 112
+associates 17
+transfer 102 15 115 7 107
+transfer 228 7 107 9 109
+associates 16
+balances 10 110
+transfer 1744 17 117 18 118
+transfer 222 12 112 13 113
+transfer 1457 17 117 9 109
+associates 16
+transfer 500 11 111 14 114
+withdrawal 1088 12 2 102
+transfer 1689 16 116 19 119
+transfer 485 3 103 8 108
+associates 7
+transfer 1657 13 113 5 105
+transfer 54 2 102 11 111
+withdrawal 768 10 10 110
+transfer 1325 16 116 10 110
+transfer 1341 13 113 18 118
+transfer 1618 14 114 13 113
+transfer 179 17 117 4 104
+balances 10 110
+transfer 1766 10 110 3 103
+money_laundering
+transfer 316 7 107 12 112
+transfer 182 16 116 10 110
+transfer 1601 17 117 8 108
+associates 4
