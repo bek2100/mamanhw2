@@ -680,7 +680,7 @@ void* moneyLaundering() {
    while (num_id){
     PQclear(res);
         
-       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID");
+       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT T1.TAmount=T1.TAmount);
        
      res = PQexec(conn, cmd);
      
