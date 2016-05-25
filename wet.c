@@ -12,6 +12,8 @@ PGresult    *res;
 
 /*************************************************************************************/
 
+void PrepareForTest1();
+
 int main(int argc, char** argv) {
     /* Make a connection to the DB. If parameters omitted, default values are used */
     char connect_param[CMD_SIZE + 2];
