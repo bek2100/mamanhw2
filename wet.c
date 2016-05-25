@@ -681,8 +681,6 @@ void* moneyLaundering() {
         num_id--;
     }*/
     
-    PQclear(res);
-    
     sprintf(cmd, "SELECT IDF FROM Money WHERE IDT=IDF ORDER BY IDF");
     
     res = PQexec(conn, cmd);
