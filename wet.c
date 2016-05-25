@@ -191,17 +191,22 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
         printf(ILL_PARAMS);
-        PQclear(res); return NULL;
+        printf("1\n");
+        PQclear(res);
+        return NULL;
     }
     
-    PQclear(res);  sprintf(cmd, "SELECT BrNumber FROM Branch WHERE BrNumber=%d;", BrNumber);
+    PQclear(res);
+    sprintf(cmd, "SELECT BrNumber FROM Branch WHERE BrNumber=%d;", BrNumber);
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
+        printf("2\n");
         printf(ILL_PARAMS);
-        PQclear(res); return NULL;
+        PQclear(res);
+        return NULL;
     }
     
     PQclear(res);
@@ -211,8 +216,10 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) == 0) {
+        printf("3\n");
         printf(ILL_PARAMS);
-        PQclear(res); return NULL;
+        PQclear(res);
+        return NULL;
     }
     
     PQclear(res);
@@ -224,7 +231,6 @@ void* withdraw(double WAmount, int BrNumber, int ID, int ANumber) {
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     if(!PQntuples(res)) {
-        printf("1\n");
         printf(NOT_APPLICABLE);
         PQclear(res); return NULL;
     }
