@@ -682,7 +682,7 @@ void* moneyLaundering() {
     sprintf(cmd, "SELECT IDF FROM Money WHERE IDT=IDF ORDER BY IDF");
     
     res = PQexec(conn, cmd);
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "4Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
     res = PQexec(conn, cmd);
     
@@ -699,7 +699,7 @@ void* moneyLaundering() {
     sprintf(cmd, "DROP TABLE Money");
     res = PQexec(conn, cmd);
     
-    if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res) { fprintf(stderr, "4Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
 
     PQclear(res);
     return NULL;
