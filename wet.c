@@ -658,31 +658,19 @@ void* moneyLaundering() {
     res = PQexec(conn, cmd);
     if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
-    /*sprintf(cmd, "INSERT INTO money (IDF, IDT, Amount) SELECT IDF, IDT, TAmount FROM Transfer");
-    res = PQexec(conn, cmd);
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }*/
-    
     int num_id = PQntuples(res);
     
-    PQclear(res);
-    
-    sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID");
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    
-   /*while (num_id){
-        PQclear(res);
-        
-     sprintf(cmd, "INSERT INTO Money SELECT T.IDF, T1.IDT, T1.Amount FROM Money T INNER JOIN Money T1 ON T.IDT=T1.IDF AND T.Amount>=T1.Amount");
-     
-     res = PQexec(conn, cmd);
-     
-     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-        
-        num_id--;
-    }*/
+   while (num_id){
+       PQclear(res);
+       
+       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID");
+       
+       res = PQexec(conn, cmd);
+       
+       if(!res) { fprintf(stderr, "3Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+
+       num_id--;
+    }
     
     sprintf(cmd, "SELECT IDF FROM money WHERE IDT=IDF ORDER BY IDF");
     
