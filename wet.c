@@ -608,7 +608,7 @@ void* associates(int ID) {
     
     PQclear(res);
     
-    sprintf(cmd, "SELECT IDF FROM Transfer WHERE IDT = (SELECT IDT FROM Transfer WHERE IDF =%d OR IDT =%d) OR IDT = %d "" UNION "" SELECT IDT FROM Transfer WHERE IDF = (SELECT IDF FROM Transfer WHERE IDT =%d OR IDF =%d) OR IDF = %d "" ORDER BY IDF", ID, ID, ID, ID, ID, ID);
+    sprintf(cmd, "SELECT IDF FROM Transfer T WHERE T.IDT = (SELECT IDT FROM Transfer WHERE IDF =%d OR IDT =%d) OR IDT = %d "" UNION "" SELECT IDT FROM Transfer F WHERE F.IDF = (SELECT IDF FROM Transfer WHERE IDT =%d OR IDF =%d) OR IDF = %d "" ORDER BY IDF", ID, ID, ID, ID, ID, ID);
     
     res = PQexec(conn, cmd);
     
