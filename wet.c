@@ -653,7 +653,7 @@ void* moneyLaundering() {
     
    int i=0;
     
-    sprintf(cmd, "CREATE TABLE money AS SELECT IDF,IDT,TAmount FROM Transfer)");
+    sprintf(cmd, "CREATE TABLE money AS SELECT IDF,IDT,TAmount FROM Transfer");
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
