@@ -676,7 +676,7 @@ void* moneyLaundering() {
    while (num_id){
     PQclear(res);
         
-       sprintf(cmd, "INSERT INTO money (TID, TAmount, IDF, IDT) SELECT T1.TID, T1.TAmount, T.IDF, T1.IDT, CONTACT(T.PATH, ' ' ,T1.PATH) FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T1.TAmount<=T.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT AND T1.TAmount=M.TAmount);");
+       sprintf(cmd, "INSERT INTO money (TID, TAmount, IDF, IDT) SELECT T1.TID, T1.TAmount, T.IDF, T1.IDT, CONCAT(T.PATH, ' ' ,T1.PATH) FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T1.TAmount<=T.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT AND T1.TAmount=M.TAmount)");
        
      res = PQexec(conn, cmd);
      
@@ -685,7 +685,7 @@ void* moneyLaundering() {
         num_id--;
     }
     
-    sprintf(cmd, "SELECT IDF,PATH FROM money WHERE IDT=IDF ORDER BY IDF");
+    sprintf(cmd, "SELECT DISTINCT IDF,PATH FROM money WHERE IDT=IDF ORDER BY IDF");
     
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
