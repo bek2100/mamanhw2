@@ -659,13 +659,13 @@ void* moneyLaundering() {
     
     sprintf(cmd, "INSERT INTO money (IDF, IDT, Amount) SELECT IDF, IDT, TAmount FROM Transfer");
     res = PQexec(conn, cmd);
-    if(!res) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     int num_id = PQntuples(res);
     
     PQclear(res);
     
-    sprintf(cmd, "SLECT INTO money (IDF, IDT, Amount) SELECT T.IDF, T1.IDT, T1.Amount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.Amount>=T1.Amount)");
+    sprintf(cmd, "SELECT INTO money (IDF, IDT, Amount) SELECT T.IDF, T1.IDT, T1.Amount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.Amount>=T1.Amount)");
     
     res = PQexec(conn, cmd);
     
