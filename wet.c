@@ -655,7 +655,7 @@ void* moneyLaundering() {
     if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
     
-    sprintf(cmd, "CREATE TABLE money AS SELECT TID,TAmount,IDF,IDT FROM Transfer; SELECT * FROM money");
+    sprintf(cmd, "CREATE TABLE money AS SELECT TID,TAmount,IDF,IDT, TAmount AS PATH FROM Transfer; SELECT * FROM money");
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     
@@ -676,7 +676,7 @@ void* moneyLaundering() {
    while (num_id){
     PQclear(res);
         
-       sprintf(cmd, "INSERT INTO money (TID, TAmount, IDF, IDT) SELECT T1.TID, T.TAmount, T.IDF, T1.IDT FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T1.TAmount<=T.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT AND T1.TAmount=M.TAmount);");
+       sprintf(cmd, "INSERT INTO money (TID, TAmount, IDF, IDT) SELECT T1.TID, T1.TAmount, T.IDF, T1.IDT, CONTACT(T.PATH, ' ' ,T1.PATH) FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T1.TAmount<=T.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT AND T1.TAmount=M.TAmount);");
        
      res = PQexec(conn, cmd);
      
@@ -685,7 +685,7 @@ void* moneyLaundering() {
         num_id--;
     }
     
-    sprintf(cmd, "SELECT DISTINCT IDF FROM money WHERE IDT=IDF ORDER BY IDF");
+    sprintf(cmd, "SELECT DISTINCT IDF,PATH FROM money WHERE IDT=IDF ORDER BY IDF");
     
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
@@ -697,7 +697,7 @@ void* moneyLaundering() {
      if(!t_num) printf(EMPTY);
      else{
      for(i=0; i<t_num;i++)
-     printf("%d\n", atoi(PQgetvalue(res, i, 0)));
+     printf("%d %s\n", atoi(PQgetvalue(res, i, 0)), atoi(PQgetvalue(res, i, 1)));
      }
      
     sprintf(cmd, "DROP TABLE money");
