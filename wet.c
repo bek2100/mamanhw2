@@ -339,28 +339,17 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     }
     
     
-    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", IDF);
+    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d OR ID=%d", IDF, IDT);
     
     res = PQexec(conn, cmd);
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    if(PQntuples(res) == 0) {
+    if(PQntuples(res) != 2) {
         printf(ILL_PARAMS);
         PQclear(res);
         return NULL;
     }
     
-    PQclear(res);
-    
-    sprintf(cmd, "SELECT ID FROM Customer WHERE ID=%d", IDT);
-    
-    res = PQexec(conn, cmd);
-    
-    if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
-    if(PQntuples(res) == 0) {
-        printf(ILL_PARAMS);
-        PQclear(res); return NULL;
-    }
     
     PQclear(res);
     
@@ -687,7 +676,7 @@ void* moneyLaundering() {
    while (num_id){
     PQclear(res);
         
-       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT)");
+       sprintf(cmd, "INSERT INTO money (TID, IDF, IDT, TAmount) SELECT T1.TID, T.IDF, T1.IDT, T1.TAmount FROM money T INNER JOIN money T1 ON (T.IDT=T1.IDF AND T.TAmount>=T1.TAmount AND T.TID<T1.TID AND NOT EXISTS(SELECT * FROM money M WHERE T1.TID=M.TID AND T.IDF=M.IDF AND T1.IDT=M.IDT))");
        
      res = PQexec(conn, cmd);
      
@@ -696,7 +685,7 @@ void* moneyLaundering() {
         num_id--;
     }
     
-    sprintf(cmd, "SELECT IDF,TID FROM money WHERE IDT=IDF ORDER BY IDF");
+    sprintf(cmd, "SELECT DISTINCT IDF,TID FROM money WHERE IDT=IDF ORDER BY IDF");
     
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
