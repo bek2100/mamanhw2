@@ -684,7 +684,7 @@ void* moneyLaundering() {
        
      res = PQexec(conn, cmd);
      
-     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+     if(!res) { fprintf(stderr, "2Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
         
         num_id--;
     }
