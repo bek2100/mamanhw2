@@ -653,6 +653,12 @@ void* moneyLaundering() {
     
    int i=0;
     
+    sprintf(cmd, "DROP TABLE money");
+    res = PQexec(conn, cmd);
+    
+    if(!res) { fprintf(stderr, "5Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
+
+    
     sprintf(cmd, "CREATE TABLE money AS SELECT IDF,IDT,TAmount FROM Transfer");
     res = PQexec(conn, cmd);
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "1Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
