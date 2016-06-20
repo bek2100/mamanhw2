@@ -1,0 +1,52 @@
+ADD ACCOUNT ANumber:1100 ID:100 BrNumber:10
+Successful
+ADD ACCOUNT ANumber:1101 ID:100 BrNumber:11
+Successful
+ADD ACCOUNT ANumber:1102 ID:100 BrNumber:12
+Successful
+ADD ACCOUNT ANumber:1001 ID:101 BrNumber:11
+Successful
+ADD ACCOUNT ANumber:1002 ID:102 BrNumber:12
+Successful
+ADD ACCOUNT ANumber:1003 ID:103 BrNumber:13
+Successful
+ADD ACCOUNT ANumber:1004 ID:104 BrNumber:14
+Successful
+ADD ACCOUNT ANumber:1044 ID:104 BrNumber:14
+Successful
+ADD ACCOUNT ANumber:1005 ID:105 BrNumber:15
+Successful
+ADD ACCOUNT ANumber:1006 ID:106 BrNumber:16
+Successful
+ADD ACCOUNT ANumber:1007 ID:107 BrNumber:17
+Successful
+TRANSFER IDF:1010 ANumberF:1100 IDT:101 ANumberT:1001
+Illegal parameters
+TRANSFER IDF:101 ANumberF:1001 IDT:100 ANumberT:1100
+TID:2 Amount:101.00 Commission:10.30 BalanceT:101.00 BalanceF:-111.30
+MONEY LAUNDERING
+Empty
+TRANSFER IDF:102 ANumberF:1002 IDT:100 ANumberT:1101
+TID:3 Amount:90.00 Commission:10.30 BalanceT:90.00 BalanceF:-100.30
+TRANSFER IDF:101 ANumberF:1001 IDT:102 ANumberT:1002
+TID:4 Amount:80.00 Commission:10.30 BalanceT:-20.30 BalanceF:-201.60
+MONEY LAUNDERING
+Empty
+TRANSFER IDF:108 ANumberF:1112 IDT:101 ANumberT:1001
+TID:5 Amount:20000.00 Commission:40.30 BalanceT:19798.40 BalanceF:-40.30
+TRANSFER IDF:101 ANumberF:1001 IDT:102 ANumberT:1002
+TID:6 Amount:100.00 Commission:10.30 BalanceT:79.70 BalanceF:19688.10
+TRANSFER IDF:102 ANumberF:1002 IDT:103 ANumberT:1003
+TID:7 Amount:100.00 Commission:10.30 BalanceT:100.00 BalanceF:-30.60
+TRANSFER IDF:103 ANumberF:1003 IDT:102 ANumberT:1002
+TID:8 Amount:100.00 Commission:10.30 BalanceT:69.40 BalanceF:-10.30
+TRANSFER IDF:103 ANumberF:1003 IDT:101 ANumberT:1001
+TID:9 Amount:100.00 Commission:10.30 BalanceT:19788.10 BalanceF:-120.60
+TRANSFER IDF:102 ANumberF:1002 IDT:103 ANumberT:1003
+TID:10 Amount:100.00 Commission:10.30 BalanceT:-20.60 BalanceF:-40.90
+TRANSFER IDF:103 ANumberF:1003 IDT:104 ANumberT:1004
+TID:11 Amount:100.00 Commission:10.30 BalanceT:100.00 BalanceF:-130.90
+MONEY LAUNDERING
+101
+102
+103

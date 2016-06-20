@@ -1,0 +1,21 @@
+add_account 1101 100 11
+add_account 1102 100 12
+add_account 1001 101 11
+add_account 1002 102 12
+add_account 1003 103 13
+add_account 1004 104 14
+add_account 1005 105 15
+add_account 1006 106 16
+add_account 1007 107 17
+transfer 5 100 1100 102 1002
+transfer 5 102 1002 100 1101
+transfer 5 100 1101 103 1003
+transfer 5 103 1003 100 1100
+transfer 5 100 1101 101 1001
+transfer 5 101 1001 100 1102
+transfer 5 103 1003 104 1004
+transfer 5 104 1004 105 1005
+transfer 5 104 1004 106 1006
+associates 100
+associates 106
+associates 107

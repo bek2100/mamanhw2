@@ -1,0 +1,25 @@
+add_account 1100 100 10
+add_account 1101 100 11
+add_account 1102 100 12
+add_account 1001 101 11
+add_account 1002 102 12
+add_account 1003 103 13
+add_account 1004 104 14
+add_account 1044 104 14
+add_account 1005 105 15
+add_account 1006 106 16
+add_account 1007 107 17
+transfer 100 1010 1100 101 1001
+transfer 101 101 1001 100 1100
+money_laundering
+transfer 90 102 1002 100 1101
+transfer 80 101 1001 102 1002
+money_laundering
+transfer 20000 108 1112 101 1001
+transfer 100 101 1001 102 1002
+transfer 100 102 1002 103 1003
+transfer 100 103 1003 102 1002
+transfer 100 103 1003 101 1001
+transfer 100 102 1002 103 1003
+transfer 100 103 1003 104 1004
+money_laundering

@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     if(!res) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return 1; }
     */
     
-    PrepareForTest1();
+    //PrepareForTest1();
     
     parseInput();
 
