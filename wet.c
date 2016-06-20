@@ -359,7 +359,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     if(!res || PQresultStatus(res) != PGRES_TUPLES_OK) { fprintf(stderr, "Error executing query: %s\n", PQresultErrorMessage(res)); return NULL; }
     if(PQntuples(res) != 2) {
-        printf(NOT_APPLICABLE);
+        printf(ILL_PARAMS);
         PQclear(res); return NULL;
     }
     
@@ -530,7 +530,7 @@ void* balances(int ID, int ANumber) {
     
     PGresult *sum;
     
-    sprintf(cmd, "SELECT SUM(diff) FROM (SELECT WID, WAmount, WCommission, WTime, 0 AS type, WCommission + WAmount AS diff FROM Withdrawal WHERE ANumber = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  0 AS type, TCommission + TAmount AS diff FROM Transfer Where ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  1 AS type, 0-TAmount AS diff FROM Transfer Where ANumberT = %d) AS A", ANumber, ANumber, ANumber);
+    sprintf(cmd, "SELECT SUM(diff) FROM (SELECT WID, WAmount, WCommission, WTime, 0 AS type, WCommission + WAmount AS diff FROM Withdrawal WHERE ANumber = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  0 AS type, TCommission + TAmount AS diff FROM Transfer Where ANumberF = %d "" UNION ALL "" SELECT TID, TAmount, TCommission, TTime,  1 AS type, 0-TAmount AS diff FROM Transfer Where ANumberT = %d) AS AORDER BY TID", ANumber, ANumber, ANumber);
     
     sum = PQexec(conn, cmd);
     
