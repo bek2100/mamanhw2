@@ -352,7 +352,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     
     PQclear(res);
 
-    /*sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d OR ANumber=%d", ANumberT, ANumberF);
+    sprintf(cmd, "SELECT * FROM OwnsAcc WHERE ANumber=%d OR ANumber=%d", ANumberT, ANumberF);
     
     res = PQexec(conn, cmd);
     
@@ -363,7 +363,7 @@ void* transfer(double TAmount, int IDF, int ANumberF, int IDT, int ANumberT) {
     }
     
     
-    PQclear(res);*/
+    PQclear(res);
     
     sprintf(cmd, "SELECT * FROM OwnsAcc WHERE (ANumber=%d AND ID = %d) OR (ANumber=%d AND ID = %d)", ANumberT, IDT, ANumberF, IDF);
     
