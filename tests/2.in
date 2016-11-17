@@ -1,0 +1,16 @@
+add_account 1000 100 10
+add_account 1001 100 10
+add_account 1002 100 11
+add_account 1003 103 13
+withdrawal 2000 10 100 1000
+withdrawal 100 20 100 1000
+withdrawal 100 10 200 1000
+withdrawal 100 10 100 1003
+withdrawal 100 10 100 1000
+withdrawal 890.55 11 100 1000
+withdrawal 0 10 100 1000
+withdrawal 100 10 100 1000
+balances 100 1000
+withdrawal 10000 17 109 1111
+withdrawal 20000 15 108 1112
+balances 109 1111

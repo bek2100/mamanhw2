@@ -1,0 +1,49 @@
+ADD ACCOUNT ANumber:1101 ID:100 BrNumber:11
+Successful
+ADD ACCOUNT ANumber:1102 ID:100 BrNumber:12
+Successful
+ADD ACCOUNT ANumber:1001 ID:101 BrNumber:11
+Successful
+ADD ACCOUNT ANumber:1002 ID:102 BrNumber:12
+Successful
+ADD ACCOUNT ANumber:1003 ID:103 BrNumber:13
+Successful
+ADD ACCOUNT ANumber:1004 ID:104 BrNumber:14
+Successful
+ADD ACCOUNT ANumber:1005 ID:105 BrNumber:15
+Successful
+ADD ACCOUNT ANumber:1006 ID:106 BrNumber:16
+Successful
+ADD ACCOUNT ANumber:1007 ID:107 BrNumber:17
+Successful
+TRANSFER IDF:100 ANumberF:1100 IDT:102 ANumberT:1002
+Illegal parameters
+TRANSFER IDF:102 ANumberF:1002 IDT:100 ANumberT:1101
+TID:2 Amount:5.00 Commission:10.30 BalanceT:5.00 BalanceF:-15.30
+TRANSFER IDF:100 ANumberF:1101 IDT:103 ANumberT:1003
+TID:3 Amount:5.00 Commission:10.30 BalanceT:5.00 BalanceF:-10.30
+TRANSFER IDF:103 ANumberF:1003 IDT:100 ANumberT:1100
+Illegal parameters
+TRANSFER IDF:100 ANumberF:1101 IDT:101 ANumberT:1001
+TID:4 Amount:5.00 Commission:10.30 BalanceT:5.00 BalanceF:-25.60
+TRANSFER IDF:101 ANumberF:1001 IDT:100 ANumberT:1102
+TID:5 Amount:5.00 Commission:10.30 BalanceT:5.00 BalanceF:-10.30
+TRANSFER IDF:103 ANumberF:1003 IDT:104 ANumberT:1004
+TID:6 Amount:5.00 Commission:10.30 BalanceT:5.00 BalanceF:-10.30
+TRANSFER IDF:104 ANumberF:1004 IDT:105 ANumberT:1005
+TID:7 Amount:5.00 Commission:10.30 BalanceT:5.00 BalanceF:-10.30
+TRANSFER IDF:104 ANumberF:1004 IDT:106 ANumberT:1006
+TID:8 Amount:5.00 Commission:10.30 BalanceT:5.00 BalanceF:-25.60
+ASSOCIATES 100
+100
+101
+102
+103
+104
+ASSOCIATES 106
+103
+104
+105
+106
+ASSOCIATES 107
+Empty

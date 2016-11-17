@@ -1,0 +1,1963 @@
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "customer_pkey" for table "customer"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "account_pkey" for table "account"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "ownsacc_pkey" for table "ownsacc"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "branch_pkey" for table "branch"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "managesacc_pkey" for table "managesacc"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "withdrawal_pkey" for table "withdrawal"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "transfer_pkey" for table "transfer"
+ADD ACCOUNT ANumber:101 ID:1 BrNumber:11
+Successful
+ADD ACCOUNT ANumber:102 ID:2 BrNumber:12
+Successful
+ADD ACCOUNT ANumber:103 ID:3 BrNumber:13
+Successful
+ADD ACCOUNT ANumber:104 ID:4 BrNumber:14
+Successful
+ADD ACCOUNT ANumber:105 ID:5 BrNumber:10
+Successful
+ADD ACCOUNT ANumber:106 ID:6 BrNumber:11
+Successful
+ADD ACCOUNT ANumber:107 ID:7 BrNumber:12
+Successful
+ADD ACCOUNT ANumber:108 ID:8 BrNumber:13
+Successful
+ADD ACCOUNT ANumber:109 ID:9 BrNumber:14
+Successful
+ADD ACCOUNT ANumber:110 ID:10 BrNumber:10
+Successful
+ADD ACCOUNT ANumber:111 ID:11 BrNumber:11
+Successful
+ADD ACCOUNT ANumber:112 ID:12 BrNumber:12
+Successful
+ADD ACCOUNT ANumber:113 ID:13 BrNumber:13
+Successful
+ADD ACCOUNT ANumber:114 ID:14 BrNumber:14
+Successful
+ADD ACCOUNT ANumber:115 ID:15 BrNumber:10
+Successful
+INIT DONE!
+TRANSFER IDF:15 ANumberF:115 IDT:15 ANumberT:115
+Illegal parameters
+TRANSFER IDF:19 ANumberF:119 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:6 ANumberF:106 IDT:11 ANumberT:111
+TID:0 Amount:364.00 Commission:10.30 BalanceT:364.00 BalanceF:-374.30
+TRANSFER IDF:2 ANumberF:102 IDT:13 ANumberT:113
+TID:1 Amount:727.00 Commission:0.00 BalanceT:727.00 BalanceF:9273.00
+TRANSFER IDF:8 ANumberF:108 IDT:4 ANumberT:104
+TID:2 Amount:1842.00 Commission:10.30 BalanceT:1842.00 BalanceF:38047.70
+TRANSFER IDF:3 ANumberF:103 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:2 ANumberF:102 IDT:18 ANumberT:118
+Illegal parameters
+BALANCES ID:16 ANumber:116
+Illegal parameters
+TRANSFER IDF:12 ANumberF:112 IDT:10 ANumberT:110
+Not applicable
+BALANCES ID:13 ANumber:113
+Current Balance: 727.00
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | CREDIT | 727.00    |            | 727.00      |
+WITHDRAWAL ANumber:120 ID:20 BrNumber:10
+Illegal parameters
+TRANSFER IDF:12 ANumberF:112 IDT:14 ANumberT:114
+TID:3 Amount:603.00 Commission:10.30 BalanceT:603.00 BalanceF:-613.30
+TRANSFER IDF:5 ANumberF:105 IDT:6 ANumberT:106
+Not applicable
+TRANSFER IDF:9 ANumberF:109 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:18 ANumberF:118 IDT:15 ANumberT:115
+Illegal parameters
+TRANSFER IDF:2 ANumberF:102 IDT:11 ANumberT:111
+TID:4 Amount:623.00 Commission:10.30 BalanceT:987.00 BalanceF:8639.70
+WITHDRAWAL ANumber:117 ID:17 BrNumber:12
+Illegal parameters
+TRANSFER IDF:9 ANumberF:109 IDT:15 ANumberT:115
+Not applicable
+TRANSFER IDF:5 ANumberF:105 IDT:13 ANumberT:113
+TID:5 Amount:842.00 Commission:0.00 BalanceT:1569.00 BalanceF:-842.00
+TRANSFER IDF:11 ANumberF:111 IDT:20 ANumberT:120
+Illegal parameters
+BALANCES ID:11 ANumber:111
+Current Balance: 987.00
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | CREDIT | 364.00    |            | 364.00      |
+ 4   | CREDIT | 623.00    |            | 987.00      |
+WITHDRAWAL ANumber:102 ID:2 BrNumber:12
+WID:0 Amount:293.00 Commission:3.80 Balance:8342.90
+MONEY LAUNDERING
+Empty
+TRANSFER IDF:5 ANumberF:105 IDT:19 ANumberT:119
+Illegal parameters
+WITHDRAWAL ANumber:101 ID:1 BrNumber:11
+WID:1 Amount:366.00 Commission:3.80 Balance:-369.80
+WITHDRAWAL ANumber:112 ID:12 BrNumber:12
+Not applicable
+TRANSFER IDF:7 ANumberF:107 IDT:10 ANumberT:110
+TID:6 Amount:339.00 Commission:10.30 BalanceT:339.00 BalanceF:30650.70
+TRANSFER IDF:19 ANumberF:119 IDT:1 ANumberT:101
+Illegal parameters
+TRANSFER IDF:14 ANumberF:114 IDT:9 ANumberT:109
+TID:7 Amount:441.00 Commission:10.30 BalanceT:441.00 BalanceF:151.70
+TRANSFER IDF:5 ANumberF:105 IDT:15 ANumberT:115
+Not applicable
+WITHDRAWAL ANumber:107 ID:7 BrNumber:12
+WID:2 Amount:73.00 Commission:3.80 Balance:30573.90
+TRANSFER IDF:6 ANumberF:106 IDT:10 ANumberT:110
+Not applicable
+WITHDRAWAL ANumber:111 ID:11 BrNumber:11
+WID:3 Amount:1229.00 Commission:3.80 Balance:-245.80
+BALANCES ID:14 ANumber:114
+Current Balance: 151.70
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | CREDIT | 603.00    |            | 603.00      |
+ 7   | DEBIT  | 441.00    | 10.30      | 151.70      |
+TRANSFER IDF:7 ANumberF:107 IDT:17 ANumberT:117
+Illegal parameters
+WITHDRAWAL ANumber:117 ID:17 BrNumber:12
+Illegal parameters
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+TRANSFER IDF:11 ANumberF:111 IDT:1 ANumberT:101
+Illegal parameters
+TRANSFER IDF:7 ANumberF:107 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:5 ANumberT:105
+TID:8 Amount:91.00 Commission:10.30 BalanceT:-751.00 BalanceF:37946.40
+WITHDRAWAL ANumber:108 ID:8 BrNumber:13
+WID:4 Amount:653.00 Commission:3.80 Balance:37289.60
+TRANSFER IDF:10 ANumberF:110 IDT:19 ANumberT:119
+Illegal parameters
+WITHDRAWAL ANumber:102 ID:2 BrNumber:12
+WID:5 Amount:488.00 Commission:3.80 Balance:7851.10
+TRANSFER IDF:7 ANumberF:107 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:1 ANumberF:101 IDT:12 ANumberT:112
+Not applicable
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+TRANSFER IDF:18 ANumberF:118 IDT:6 ANumberT:106
+Illegal parameters
+TRANSFER IDF:2 ANumberF:102 IDT:4 ANumberT:104
+TID:9 Amount:1495.00 Commission:0.00 BalanceT:3337.00 BalanceF:6356.10
+TRANSFER IDF:17 ANumberF:117 IDT:11 ANumberT:111
+Illegal parameters
+BALANCES ID:17 ANumber:117
+Illegal parameters
+WITHDRAWAL ANumber:109 ID:9 BrNumber:14
+WID:6 Amount:599.00 Commission:3.80 Balance:-161.80
+WITHDRAWAL ANumber:105 ID:5 BrNumber:10
+Not applicable
+BALANCES ID:14 ANumber:114
+Current Balance: 151.70
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | CREDIT | 603.00    |            | 603.00      |
+ 7   | DEBIT  | 441.00    | 10.30      | 151.70      |
+TRANSFER IDF:19 ANumberF:119 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:4 ANumberF:104 IDT:11 ANumberT:111
+TID:10 Amount:548.00 Commission:10.30 BalanceT:302.20 BalanceF:2778.70
+WITHDRAWAL ANumber:111 ID:11 BrNumber:11
+WID:7 Amount:517.00 Commission:3.80 Balance:-218.60
+WITHDRAWAL ANumber:115 ID:15 BrNumber:10
+WID:8 Amount:709.00 Commission:3.80 Balance:-712.80
+TRANSFER IDF:12 ANumberF:112 IDT:12 ANumberT:112
+Illegal parameters
+TRANSFER IDF:17 ANumberF:117 IDT:15 ANumberT:115
+Illegal parameters
+WITHDRAWAL ANumber:105 ID:5 BrNumber:10
+Not applicable
+TRANSFER IDF:10 ANumberF:110 IDT:12 ANumberT:112
+TID:11 Amount:509.00 Commission:10.30 BalanceT:-104.30 BalanceF:-180.30
+TRANSFER IDF:14 ANumberF:114 IDT:17 ANumberT:117
+Illegal parameters
+BALANCES ID:8 ANumber:108
+Current Balance: 37289.60
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | DEBIT  | 1842.00   | 10.30      | 38047.70    |
+ 8   | DEBIT  | 91.00     | 10.30      | 37946.40    |
+ 4   | DEBIT  | 653.00    | 3.80       | 37289.60    |
+TRANSFER IDF:9 ANumberF:109 IDT:9 ANumberT:109
+Illegal parameters
+TRANSFER IDF:1 ANumberF:101 IDT:17 ANumberT:117
+Illegal parameters
+MONEY LAUNDERING
+Empty
+TRANSFER IDF:19 ANumberF:119 IDT:8 ANumberT:108
+Illegal parameters
+WITHDRAWAL ANumber:113 ID:13 BrNumber:13
+WID:9 Amount:1022.00 Commission:3.80 Balance:543.20
+ASSOCIATES 13
+2
+4
+5
+8
+11
+13
+TRANSFER IDF:11 ANumberF:111 IDT:8 ANumberT:108
+TID:12 Amount:79.00 Commission:10.30 BalanceT:37368.60 BalanceF:-307.90
+WITHDRAWAL ANumber:112 ID:12 BrNumber:12
+WID:10 Amount:215.00 Commission:3.80 Balance:-323.10
+ASSOCIATES 17
+Illegal parameters
+TRANSFER IDF:15 ANumberF:115 IDT:7 ANumberT:107
+TID:13 Amount:102.00 Commission:10.30 BalanceT:30675.90 BalanceF:-825.10
+TRANSFER IDF:7 ANumberF:107 IDT:9 ANumberT:109
+TID:14 Amount:228.00 Commission:10.30 BalanceT:66.20 BalanceF:30437.60
+ASSOCIATES 16
+Illegal parameters
+BALANCES ID:10 ANumber:110
+Current Balance: -180.30
+ TID | Source | Amount    | Commission | Balance     |
+ 6   | CREDIT | 339.00    |            | 339.00      |
+ 11  | DEBIT  | 509.00    | 10.30      | -180.30     |
+TRANSFER IDF:17 ANumberF:117 IDT:18 ANumberT:118
+Illegal parameters
+TRANSFER IDF:12 ANumberF:112 IDT:13 ANumberT:113
+TID:15 Amount:222.00 Commission:10.30 BalanceT:765.20 BalanceF:-555.40
+TRANSFER IDF:17 ANumberF:117 IDT:9 ANumberT:109
+Illegal parameters
+ASSOCIATES 16
+Illegal parameters
+TRANSFER IDF:11 ANumberF:111 IDT:14 ANumberT:114
+TID:16 Amount:500.00 Commission:10.30 BalanceT:651.70 BalanceF:-818.20
+WITHDRAWAL ANumber:102 ID:2 BrNumber:12
+WID:11 Amount:1088.00 Commission:3.80 Balance:5264.30
+TRANSFER IDF:16 ANumberF:116 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:3 ANumberF:103 IDT:8 ANumberT:108
+TID:17 Amount:485.00 Commission:0.00 BalanceT:37853.60 BalanceF:20515.00
+ASSOCIATES 7
+7
+9
+10
+12
+14
+15
+TRANSFER IDF:13 ANumberF:113 IDT:5 ANumberT:105
+TID:18 Amount:1657.00 Commission:0.00 BalanceT:906.00 BalanceF:-891.80
+TRANSFER IDF:2 ANumberF:102 IDT:11 ANumberT:111
+TID:19 Amount:54.00 Commission:10.30 BalanceT:-764.20 BalanceF:5200.00
+WITHDRAWAL ANumber:110 ID:10 BrNumber:10
+WID:12 Amount:768.00 Commission:3.80 Balance:-952.10
+TRANSFER IDF:16 ANumberF:116 IDT:10 ANumberT:110
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:18 ANumberT:118
+Illegal parameters
+TRANSFER IDF:14 ANumberF:114 IDT:13 ANumberT:113
+TID:20 Amount:1618.00 Commission:10.30 BalanceT:726.20 BalanceF:-976.60
+TRANSFER IDF:17 ANumberF:117 IDT:4 ANumberT:104
+Illegal parameters
+BALANCES ID:10 ANumber:110
+Current Balance: -952.10
+ TID | Source | Amount    | Commission | Balance     |
+ 6   | CREDIT | 339.00    |            | 339.00      |
+ 11  | DEBIT  | 509.00    | 10.30      | -180.30     |
+ 12  | DEBIT  | 768.00    | 3.80       | -952.10     |
+TRANSFER IDF:10 ANumberF:110 IDT:3 ANumberT:103
+Not applicable
+MONEY LAUNDERING
+8
+TRANSFER IDF:7 ANumberF:107 IDT:12 ANumberT:112
+TID:21 Amount:316.00 Commission:10.30 BalanceT:-239.40 BalanceF:30111.30
+TRANSFER IDF:16 ANumberF:116 IDT:10 ANumberT:110
+Illegal parameters
+TRANSFER IDF:17 ANumberF:117 IDT:8 ANumberT:108
+Illegal parameters
+ASSOCIATES 4
+2
+3
+4
+5
+6
+8
+11
+13
+14
+TRANSFER IDF:6 ANumberF:106 IDT:19 ANumberT:119
+Illegal parameters
+WITHDRAWAL ANumber:109 ID:9 BrNumber:14
+WID:13 Amount:232.00 Commission:3.80 Balance:-169.60
+MONEY LAUNDERING
+8
+TRANSFER IDF:2 ANumberF:102 IDT:20 ANumberT:120
+Illegal parameters
+MONEY LAUNDERING
+8
+BALANCES ID:2 ANumber:102
+Current Balance: 5200.00
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 727.00    | 0.00       | 9273.00     |
+ 4   | DEBIT  | 623.00    | 10.30      | 8639.70     |
+ 0   | DEBIT  | 293.00    | 3.80       | 8342.90     |
+ 5   | DEBIT  | 488.00    | 3.80       | 7851.10     |
+ 9   | DEBIT  | 1495.00   | 0.00       | 6356.10     |
+ 11  | DEBIT  | 1088.00   | 3.80       | 5264.30     |
+ 19  | DEBIT  | 54.00     | 10.30      | 5200.00     |
+ASSOCIATES 17
+Illegal parameters
+TRANSFER IDF:2 ANumberF:102 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:7 ANumberF:107 IDT:11 ANumberT:111
+TID:22 Amount:1073.00 Commission:10.30 BalanceT:308.80 BalanceF:29028.00
+TRANSFER IDF:20 ANumberF:120 IDT:13 ANumberT:113
+Illegal parameters
+BALANCES ID:15 ANumber:115
+Current Balance: -825.10
+ TID | Source | Amount    | Commission | Balance     |
+ 8   | DEBIT  | 709.00    | 3.80       | -712.80     |
+ 13  | DEBIT  | 102.00    | 10.30      | -825.10     |
+TRANSFER IDF:10 ANumberF:110 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:3 ANumberF:103 IDT:11 ANumberT:111
+TID:23 Amount:374.00 Commission:10.30 BalanceT:682.80 BalanceF:20130.70
+BALANCES ID:8 ANumber:108
+Current Balance: 37853.60
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | DEBIT  | 1842.00   | 10.30      | 38047.70    |
+ 8   | DEBIT  | 91.00     | 10.30      | 37946.40    |
+ 4   | DEBIT  | 653.00    | 3.80       | 37289.60    |
+ 12  | CREDIT | 79.00     |            | 37368.60    |
+ 17  | CREDIT | 485.00    |            | 37853.60    |
+WITHDRAWAL ANumber:119 ID:19 BrNumber:14
+Illegal parameters
+WITHDRAWAL ANumber:106 ID:6 BrNumber:11
+Not applicable
+TRANSFER IDF:5 ANumberF:105 IDT:19 ANumberT:119
+Illegal parameters
+BALANCES ID:13 ANumber:113
+Current Balance: 726.20
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | CREDIT | 727.00    |            | 727.00      |
+ 5   | CREDIT | 842.00    |            | 1569.00     |
+ 9   | DEBIT  | 1022.00   | 3.80       | 543.20      |
+ 15  | CREDIT | 222.00    |            | 765.20      |
+ 18  | DEBIT  | 1657.00   | 0.00       | -891.80     |
+ 20  | CREDIT | 1618.00   |            | 726.20      |
+TRANSFER IDF:11 ANumberF:111 IDT:18 ANumberT:118
+Illegal parameters
+MONEY LAUNDERING
+8
+WITHDRAWAL ANumber:118 ID:18 BrNumber:13
+Illegal parameters
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+WID:14 Amount:1068.00 Commission:3.80 Balance:1706.90
+ASSOCIATES 6
+2
+3
+4
+6
+7
+8
+11
+14
+TRANSFER IDF:14 ANumberF:114 IDT:1 ANumberT:101
+Not applicable
+WITHDRAWAL ANumber:120 ID:20 BrNumber:10
+Illegal parameters
+BALANCES ID:4 ANumber:104
+Current Balance: 1706.90
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | CREDIT | 1842.00   |            | 1842.00     |
+ 9   | CREDIT | 1495.00   |            | 3337.00     |
+ 10  | DEBIT  | 548.00    | 10.30      | 2778.70     |
+ 14  | DEBIT  | 1068.00   | 3.80       | 1706.90     |
+TRANSFER IDF:13 ANumberF:113 IDT:14 ANumberT:114
+TID:24 Amount:923.00 Commission:10.30 BalanceT:-53.60 BalanceF:-207.10
+BALANCES ID:4 ANumber:104
+Current Balance: 1706.90
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | CREDIT | 1842.00   |            | 1842.00     |
+ 9   | CREDIT | 1495.00   |            | 3337.00     |
+ 10  | DEBIT  | 548.00    | 10.30      | 2778.70     |
+ 14  | DEBIT  | 1068.00   | 3.80       | 1706.90     |
+TRANSFER IDF:14 ANumberF:114 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:3 ANumberF:103 IDT:5 ANumberT:105
+TID:25 Amount:392.00 Commission:10.30 BalanceT:1298.00 BalanceF:19728.40
+ASSOCIATES 5
+2
+3
+4
+5
+8
+11
+12
+13
+14
+MONEY LAUNDERING
+8
+14
+TRANSFER IDF:14 ANumberF:114 IDT:8 ANumberT:108
+TID:26 Amount:260.00 Commission:10.30 BalanceT:38113.60 BalanceF:-323.90
+WITHDRAWAL ANumber:111 ID:11 BrNumber:11
+WID:15 Amount:135.00 Commission:3.80 Balance:544.00
+BALANCES ID:12 ANumber:112
+Current Balance: -239.40
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | DEBIT  | 603.00    | 10.30      | -613.30     |
+ 11  | CREDIT | 509.00    |            | -104.30     |
+ 10  | DEBIT  | 215.00    | 3.80       | -323.10     |
+ 15  | DEBIT  | 222.00    | 10.30      | -555.40     |
+ 21  | CREDIT | 316.00    |            | -239.40     |
+TRANSFER IDF:8 ANumberF:108 IDT:13 ANumberT:113
+TID:27 Amount:796.00 Commission:10.30 BalanceT:588.90 BalanceF:37307.30
+MONEY LAUNDERING
+8
+14
+TRANSFER IDF:16 ANumberF:116 IDT:20 ANumberT:120
+Illegal parameters
+TRANSFER IDF:17 ANumberF:117 IDT:11 ANumberT:111
+Illegal parameters
+WITHDRAWAL ANumber:103 ID:3 BrNumber:13
+WID:16 Amount:771.00 Commission:3.80 Balance:18953.60
+TRANSFER IDF:14 ANumberF:114 IDT:5 ANumberT:105
+TID:28 Amount:578.00 Commission:10.30 BalanceT:1876.00 BalanceF:-912.20
+TRANSFER IDF:5 ANumberF:105 IDT:4 ANumberT:104
+TID:29 Amount:918.00 Commission:0.00 BalanceT:2624.90 BalanceF:958.00
+TRANSFER IDF:8 ANumberF:108 IDT:8 ANumberT:108
+Illegal parameters
+TRANSFER IDF:18 ANumberF:118 IDT:8 ANumberT:108
+Illegal parameters
+BALANCES ID:17 ANumber:117
+Illegal parameters
+BALANCES ID:4 ANumber:104
+Current Balance: 2624.90
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | CREDIT | 1842.00   |            | 1842.00     |
+ 9   | CREDIT | 1495.00   |            | 3337.00     |
+ 10  | DEBIT  | 548.00    | 10.30      | 2778.70     |
+ 14  | DEBIT  | 1068.00   | 3.80       | 1706.90     |
+ 29  | CREDIT | 918.00    |            | 2624.90     |
+TRANSFER IDF:10 ANumberF:110 IDT:12 ANumberT:112
+Not applicable
+TRANSFER IDF:8 ANumberF:108 IDT:5 ANumberT:105
+TID:30 Amount:1465.00 Commission:10.30 BalanceT:2423.00 BalanceF:35832.00
+BALANCES ID:6 ANumber:106
+Current Balance: -374.30
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | DEBIT  | 364.00    | 10.30      | -374.30     |
+TRANSFER IDF:9 ANumberF:109 IDT:12 ANumberT:112
+Not applicable
+WITHDRAWAL ANumber:103 ID:3 BrNumber:13
+WID:17 Amount:1362.00 Commission:3.80 Balance:17587.80
+TRANSFER IDF:18 ANumberF:118 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:5 ANumberF:105 IDT:5 ANumberT:105
+Illegal parameters
+TRANSFER IDF:11 ANumberF:111 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:12 ANumberF:112 IDT:19 ANumberT:119
+Illegal parameters
+WITHDRAWAL ANumber:101 ID:1 BrNumber:11
+Not applicable
+BALANCES ID:9 ANumber:109
+Current Balance: -169.60
+ TID | Source | Amount    | Commission | Balance     |
+ 7   | CREDIT | 441.00    |            | 441.00      |
+ 6   | DEBIT  | 599.00    | 3.80       | -161.80     |
+ 14  | CREDIT | 228.00    |            | 66.20       |
+ 13  | DEBIT  | 232.00    | 3.80       | -169.60     |
+WITHDRAWAL ANumber:101 ID:1 BrNumber:11
+Not applicable
+TRANSFER IDF:1 ANumberF:101 IDT:14 ANumberT:114
+Not applicable
+TRANSFER IDF:6 ANumberF:106 IDT:13 ANumberT:113
+Not applicable
+BALANCES ID:1 ANumber:101
+Current Balance: -369.80
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 366.00    | 3.80       | -369.80     |
+TRANSFER IDF:4 ANumberF:104 IDT:4 ANumberT:104
+Illegal parameters
+WITHDRAWAL ANumber:105 ID:5 BrNumber:10
+WID:18 Amount:377.00 Commission:3.80 Balance:2042.20
+WITHDRAWAL ANumber:114 ID:14 BrNumber:14
+Not applicable
+WITHDRAWAL ANumber:111 ID:11 BrNumber:11
+WID:19 Amount:860.00 Commission:3.80 Balance:-319.80
+BALANCES ID:14 ANumber:114
+Current Balance: -912.20
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | CREDIT | 603.00    |            | 603.00      |
+ 7   | DEBIT  | 441.00    | 10.30      | 151.70      |
+ 16  | CREDIT | 500.00    |            | 651.70      |
+ 20  | DEBIT  | 1618.00   | 10.30      | -976.60     |
+ 24  | CREDIT | 923.00    |            | -53.60      |
+ 26  | DEBIT  | 260.00    | 10.30      | -323.90     |
+ 28  | DEBIT  | 578.00    | 10.30      | -912.20     |
+BALANCES ID:6 ANumber:106
+Current Balance: -374.30
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | DEBIT  | 364.00    | 10.30      | -374.30     |
+ASSOCIATES 12
+2
+5
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:17 ANumberF:117 IDT:9 ANumberT:109
+Illegal parameters
+MONEY LAUNDERING
+8
+14
+BALANCES ID:6 ANumber:106
+Current Balance: -374.30
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | DEBIT  | 364.00    | 10.30      | -374.30     |
+WITHDRAWAL ANumber:117 ID:17 BrNumber:12
+Illegal parameters
+TRANSFER IDF:18 ANumberF:118 IDT:15 ANumberT:115
+Illegal parameters
+WITHDRAWAL ANumber:110 ID:10 BrNumber:10
+Not applicable
+TRANSFER IDF:18 ANumberF:118 IDT:10 ANumberT:110
+Illegal parameters
+TRANSFER IDF:6 ANumberF:106 IDT:7 ANumberT:107
+TID:31 Amount:596.00 Commission:10.30 BalanceT:29624.00 BalanceF:-980.60
+TRANSFER IDF:10 ANumberF:110 IDT:15 ANumberT:115
+TID:32 Amount:29.00 Commission:10.30 BalanceT:-796.10 BalanceF:-991.40
+TRANSFER IDF:17 ANumberF:117 IDT:12 ANumberT:112
+Illegal parameters
+TRANSFER IDF:5 ANumberF:105 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:18 ANumberF:118 IDT:7 ANumberT:107
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:11 ANumberT:111
+TID:33 Amount:863.00 Commission:10.30 BalanceT:543.20 BalanceF:34958.70
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+TRANSFER IDF:19 ANumberF:119 IDT:2 ANumberT:102
+Illegal parameters
+ASSOCIATES 15
+6
+7
+9
+10
+11
+12
+15
+TRANSFER IDF:16 ANumberF:116 IDT:15 ANumberT:115
+Illegal parameters
+TRANSFER IDF:11 ANumberF:111 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:4 ANumberF:104 IDT:14 ANumberT:114
+TID:34 Amount:1105.00 Commission:10.30 BalanceT:192.80 BalanceF:1509.60
+TRANSFER IDF:2 ANumberF:102 IDT:15 ANumberT:115
+TID:35 Amount:179.00 Commission:10.30 BalanceT:-617.10 BalanceF:5010.70
+TRANSFER IDF:15 ANumberF:115 IDT:11 ANumberT:111
+Not applicable
+TRANSFER IDF:6 ANumberF:106 IDT:8 ANumberT:108
+Not applicable
+TRANSFER IDF:1 ANumberF:101 IDT:14 ANumberT:114
+Not applicable
+TRANSFER IDF:16 ANumberF:116 IDT:18 ANumberT:118
+Illegal parameters
+TRANSFER IDF:18 ANumberF:118 IDT:2 ANumberT:102
+Illegal parameters
+TRANSFER IDF:4 ANumberF:104 IDT:20 ANumberT:120
+Illegal parameters
+BALANCES ID:1 ANumber:101
+Current Balance: -369.80
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 366.00    | 3.80       | -369.80     |
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+BALANCES ID:11 ANumber:111
+Current Balance: 543.20
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | CREDIT | 364.00    |            | 364.00      |
+ 4   | CREDIT | 623.00    |            | 987.00      |
+ 3   | DEBIT  | 1229.00   | 3.80       | -245.80     |
+ 10  | CREDIT | 548.00    |            | 302.20      |
+ 7   | DEBIT  | 517.00    | 3.80       | -218.60     |
+ 12  | DEBIT  | 79.00     | 10.30      | -307.90     |
+ 16  | DEBIT  | 500.00    | 10.30      | -818.20     |
+ 19  | CREDIT | 54.00     |            | -764.20     |
+ 22  | CREDIT | 1073.00   |            | 308.80      |
+ 23  | CREDIT | 374.00    |            | 682.80      |
+ 15  | DEBIT  | 135.00    | 3.80       | 544.00      |
+ 19  | DEBIT  | 860.00    | 3.80       | -319.80     |
+ 33  | CREDIT | 863.00    |            | 543.20      |
+TRANSFER IDF:13 ANumberF:113 IDT:8 ANumberT:108
+TID:36 Amount:832.00 Commission:10.30 BalanceT:35790.70 BalanceF:-253.40
+TRANSFER IDF:1 ANumberF:101 IDT:9 ANumberT:109
+Not applicable
+TRANSFER IDF:18 ANumberF:118 IDT:7 ANumberT:107
+Illegal parameters
+TRANSFER IDF:14 ANumberF:114 IDT:8 ANumberT:108
+TID:37 Amount:1045.00 Commission:10.30 BalanceT:36835.70 BalanceF:-862.50
+TRANSFER IDF:5 ANumberF:105 IDT:3 ANumberT:103
+TID:38 Amount:640.00 Commission:10.30 BalanceT:18227.80 BalanceF:1391.90
+TRANSFER IDF:13 ANumberF:113 IDT:18 ANumberT:118
+Illegal parameters
+TRANSFER IDF:4 ANumberF:104 IDT:13 ANumberT:113
+TID:39 Amount:81.00 Commission:0.00 BalanceT:-172.40 BalanceF:1428.60
+BALANCES ID:9 ANumber:109
+Current Balance: -169.60
+ TID | Source | Amount    | Commission | Balance     |
+ 7   | CREDIT | 441.00    |            | 441.00      |
+ 6   | DEBIT  | 599.00    | 3.80       | -161.80     |
+ 14  | CREDIT | 228.00    |            | 66.20       |
+ 13  | DEBIT  | 232.00    | 3.80       | -169.60     |
+TRANSFER IDF:10 ANumberF:110 IDT:6 ANumberT:106
+Not applicable
+TRANSFER IDF:8 ANumberF:108 IDT:9 ANumberT:109
+TID:40 Amount:1527.00 Commission:10.30 BalanceT:1357.40 BalanceF:35298.40
+WITHDRAWAL ANumber:101 ID:1 BrNumber:11
+Not applicable
+BALANCES ID:2 ANumber:102
+Current Balance: 5010.70
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 727.00    | 0.00       | 9273.00     |
+ 4   | DEBIT  | 623.00    | 10.30      | 8639.70     |
+ 0   | DEBIT  | 293.00    | 3.80       | 8342.90     |
+ 5   | DEBIT  | 488.00    | 3.80       | 7851.10     |
+ 9   | DEBIT  | 1495.00   | 0.00       | 6356.10     |
+ 11  | DEBIT  | 1088.00   | 3.80       | 5264.30     |
+ 19  | DEBIT  | 54.00     | 10.30      | 5200.00     |
+ 35  | DEBIT  | 179.00    | 10.30      | 5010.70     |
+BALANCES ID:16 ANumber:116
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:20 ANumberF:120 IDT:10 ANumberT:110
+Illegal parameters
+WITHDRAWAL ANumber:108 ID:8 BrNumber:13
+WID:20 Amount:984.00 Commission:3.80 Balance:34310.60
+WITHDRAWAL ANumber:107 ID:7 BrNumber:12
+WID:21 Amount:398.00 Commission:3.80 Balance:29222.20
+BALANCES ID:8 ANumber:108
+Current Balance: 34310.60
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | DEBIT  | 1842.00   | 10.30      | 38047.70    |
+ 8   | DEBIT  | 91.00     | 10.30      | 37946.40    |
+ 4   | DEBIT  | 653.00    | 3.80       | 37289.60    |
+ 12  | CREDIT | 79.00     |            | 37368.60    |
+ 17  | CREDIT | 485.00    |            | 37853.60    |
+ 26  | CREDIT | 260.00    |            | 38113.60    |
+ 27  | DEBIT  | 796.00    | 10.30      | 37307.30    |
+ 30  | DEBIT  | 1465.00   | 10.30      | 35832.00    |
+ 33  | DEBIT  | 863.00    | 10.30      | 34958.70    |
+ 36  | CREDIT | 832.00    |            | 35790.70    |
+ 37  | CREDIT | 1045.00   |            | 36835.70    |
+ 40  | DEBIT  | 1527.00   | 10.30      | 35298.40    |
+ 20  | DEBIT  | 984.00    | 3.80       | 34310.60    |
+TRANSFER IDF:4 ANumberF:104 IDT:5 ANumberT:105
+TID:41 Amount:504.00 Commission:0.00 BalanceT:1895.90 BalanceF:924.60
+WITHDRAWAL ANumber:107 ID:7 BrNumber:12
+WID:22 Amount:763.00 Commission:3.80 Balance:28455.40
+WITHDRAWAL ANumber:112 ID:12 BrNumber:12
+WID:23 Amount:389.00 Commission:3.80 Balance:-632.20
+ASSOCIATES 5
+2
+3
+4
+5
+8
+9
+11
+12
+13
+14
+TRANSFER IDF:14 ANumberF:114 IDT:5 ANumberT:105
+Not applicable
+TRANSFER IDF:13 ANumberF:113 IDT:3 ANumberT:103
+Not applicable
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+WITHDRAWAL ANumber:103 ID:3 BrNumber:13
+Illegal parameters
+TRANSFER IDF:9 ANumberF:109 IDT:20 ANumberT:120
+Illegal parameters
+WITHDRAWAL ANumber:114 ID:14 BrNumber:14
+Not applicable
+MONEY LAUNDERING
+5
+8
+13
+14
+TRANSFER IDF:19 ANumberF:119 IDT:8 ANumberT:108
+Illegal parameters
+TRANSFER IDF:6 ANumberF:106 IDT:15 ANumberT:115
+Not applicable
+TRANSFER IDF:1 ANumberF:101 IDT:6 ANumberT:106
+Not applicable
+WITHDRAWAL ANumber:119 ID:19 BrNumber:14
+Illegal parameters
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+WID:24 Amount:32.00 Commission:3.80 Balance:888.80
+WITHDRAWAL ANumber:113 ID:13 BrNumber:13
+Not applicable
+BALANCES ID:4 ANumber:104
+Current Balance: 888.80
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | CREDIT | 1842.00   |            | 1842.00     |
+ 9   | CREDIT | 1495.00   |            | 3337.00     |
+ 10  | DEBIT  | 548.00    | 10.30      | 2778.70     |
+ 14  | DEBIT  | 1068.00   | 3.80       | 1706.90     |
+ 29  | CREDIT | 918.00    |            | 2624.90     |
+ 34  | DEBIT  | 1105.00   | 10.30      | 1509.60     |
+ 39  | DEBIT  | 81.00     | 0.00       | 1428.60     |
+ 41  | DEBIT  | 504.00    | 0.00       | 924.60      |
+ 24  | DEBIT  | 32.00     | 3.80       | 888.80      |
+TRANSFER IDF:4 ANumberF:104 IDT:11 ANumberT:111
+TID:42 Amount:1003.00 Commission:10.30 BalanceT:1546.20 BalanceF:-124.50
+TRANSFER IDF:16 ANumberF:116 IDT:1 ANumberT:101
+Illegal parameters
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+Not applicable
+TRANSFER IDF:18 ANumberF:118 IDT:7 ANumberT:107
+Illegal parameters
+TRANSFER IDF:2 ANumberF:102 IDT:10 ANumberT:110
+TID:43 Amount:949.00 Commission:10.30 BalanceT:-42.40 BalanceF:4051.40
+ASSOCIATES 9
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:19 ANumberF:119 IDT:13 ANumberT:113
+Illegal parameters
+TRANSFER IDF:11 ANumberF:111 IDT:20 ANumberT:120
+Illegal parameters
+ASSOCIATES 11
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:8 ANumberF:108 IDT:4 ANumberT:104
+TID:44 Amount:648.00 Commission:10.30 BalanceT:523.50 BalanceF:33652.30
+BALANCES ID:16 ANumber:116
+Illegal parameters
+TRANSFER IDF:19 ANumberF:119 IDT:12 ANumberT:112
+Illegal parameters
+TRANSFER IDF:9 ANumberF:109 IDT:12 ANumberT:112
+TID:45 Amount:1124.00 Commission:10.30 BalanceT:491.80 BalanceF:223.10
+TRANSFER IDF:7 ANumberF:107 IDT:11 ANumberT:111
+TID:46 Amount:157.00 Commission:10.30 BalanceT:1703.20 BalanceF:28288.10
+TRANSFER IDF:7 ANumberF:107 IDT:18 ANumberT:118
+Illegal parameters
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+TRANSFER IDF:5 ANumberF:105 IDT:20 ANumberT:120
+Illegal parameters
+TRANSFER IDF:16 ANumberF:116 IDT:9 ANumberT:109
+Illegal parameters
+ASSOCIATES 17
+Illegal parameters
+TRANSFER IDF:7 ANumberF:107 IDT:13 ANumberT:113
+TID:47 Amount:972.00 Commission:10.30 BalanceT:799.60 BalanceF:27305.80
+BALANCES ID:10 ANumber:110
+Current Balance: -42.40
+ TID | Source | Amount    | Commission | Balance     |
+ 6   | CREDIT | 339.00    |            | 339.00      |
+ 11  | DEBIT  | 509.00    | 10.30      | -180.30     |
+ 12  | DEBIT  | 768.00    | 3.80       | -952.10     |
+ 32  | DEBIT  | 29.00     | 10.30      | -991.40     |
+ 43  | CREDIT | 949.00    |            | -42.40      |
+WITHDRAWAL ANumber:106 ID:6 BrNumber:11
+Not applicable
+TRANSFER IDF:14 ANumberF:114 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:2 ANumberF:102 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:9 ANumberT:109
+TID:48 Amount:156.00 Commission:10.30 BalanceT:379.10 BalanceF:633.30
+ASSOCIATES 3
+2
+3
+4
+5
+6
+7
+8
+9
+11
+13
+14
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+BALANCES ID:2 ANumber:102
+Current Balance: 4051.40
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 727.00    | 0.00       | 9273.00     |
+ 4   | DEBIT  | 623.00    | 10.30      | 8639.70     |
+ 0   | DEBIT  | 293.00    | 3.80       | 8342.90     |
+ 5   | DEBIT  | 488.00    | 3.80       | 7851.10     |
+ 9   | DEBIT  | 1495.00   | 0.00       | 6356.10     |
+ 11  | DEBIT  | 1088.00   | 3.80       | 5264.30     |
+ 19  | DEBIT  | 54.00     | 10.30      | 5200.00     |
+ 35  | DEBIT  | 179.00    | 10.30      | 5010.70     |
+ 43  | DEBIT  | 949.00    | 10.30      | 4051.40     |
+BALANCES ID:12 ANumber:112
+Current Balance: 491.80
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | DEBIT  | 603.00    | 10.30      | -613.30     |
+ 11  | CREDIT | 509.00    |            | -104.30     |
+ 10  | DEBIT  | 215.00    | 3.80       | -323.10     |
+ 15  | DEBIT  | 222.00    | 10.30      | -555.40     |
+ 21  | CREDIT | 316.00    |            | -239.40     |
+ 23  | DEBIT  | 389.00    | 3.80       | -632.20     |
+ 45  | CREDIT | 1124.00   |            | 491.80      |
+ASSOCIATES 7
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:3 ANumberF:103 IDT:17 ANumberT:117
+Illegal parameters
+ASSOCIATES 14
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+TRANSFER IDF:9 ANumberF:109 IDT:11 ANumberT:111
+TID:49 Amount:1352.00 Commission:10.30 BalanceT:3055.20 BalanceF:-983.20
+TRANSFER IDF:4 ANumberF:104 IDT:18 ANumberT:118
+Illegal parameters
+TRANSFER IDF:9 ANumberF:109 IDT:13 ANumberT:113
+Not applicable
+WITHDRAWAL ANumber:114 ID:14 BrNumber:14
+WID:25 Amount:9.00 Commission:3.80 Balance:-875.30
+WITHDRAWAL ANumber:101 ID:1 BrNumber:11
+Illegal parameters
+WITHDRAWAL ANumber:119 ID:19 BrNumber:14
+Illegal parameters
+WITHDRAWAL ANumber:102 ID:2 BrNumber:12
+WID:26 Amount:164.00 Commission:3.80 Balance:3883.60
+TRANSFER IDF:4 ANumberF:104 IDT:13 ANumberT:113
+Not applicable
+TRANSFER IDF:10 ANumberF:110 IDT:18 ANumberT:118
+Illegal parameters
+BALANCES ID:14 ANumber:114
+Current Balance: -875.30
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | CREDIT | 603.00    |            | 603.00      |
+ 7   | DEBIT  | 441.00    | 10.30      | 151.70      |
+ 16  | CREDIT | 500.00    |            | 651.70      |
+ 20  | DEBIT  | 1618.00   | 10.30      | -976.60     |
+ 24  | CREDIT | 923.00    |            | -53.60      |
+ 26  | DEBIT  | 260.00    | 10.30      | -323.90     |
+ 28  | DEBIT  | 578.00    | 10.30      | -912.20     |
+ 34  | CREDIT | 1105.00   |            | 192.80      |
+ 37  | DEBIT  | 1045.00   | 10.30      | -862.50     |
+ 25  | DEBIT  | 9.00      | 3.80       | -875.30     |
+BALANCES ID:1 ANumber:101
+Current Balance: -369.80
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 366.00    | 3.80       | -369.80     |
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+WID:27 Amount:731.00 Commission:3.80 Balance:-211.30
+WITHDRAWAL ANumber:119 ID:19 BrNumber:14
+Illegal parameters
+TRANSFER IDF:12 ANumberF:112 IDT:15 ANumberT:115
+TID:50 Amount:519.00 Commission:10.30 BalanceT:-98.10 BalanceF:-37.50
+TRANSFER IDF:5 ANumberF:105 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:19 ANumberF:119 IDT:8 ANumberT:108
+Illegal parameters
+TRANSFER IDF:18 ANumberF:118 IDT:8 ANumberT:108
+Illegal parameters
+TRANSFER IDF:9 ANumberF:109 IDT:10 ANumberT:110
+Not applicable
+TRANSFER IDF:16 ANumberF:116 IDT:5 ANumberT:105
+Illegal parameters
+TRANSFER IDF:19 ANumberF:119 IDT:19 ANumberT:119
+Illegal parameters
+WITHDRAWAL ANumber:105 ID:5 BrNumber:10
+WID:28 Amount:17.00 Commission:3.80 Balance:1875.10
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:1 ANumberT:101
+TID:51 Amount:939.00 Commission:10.30 BalanceT:569.20 BalanceF:-316.00
+TRANSFER IDF:6 ANumberF:106 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:1 ANumberF:101 IDT:16 ANumberT:116
+Illegal parameters
+WITHDRAWAL ANumber:102 ID:2 BrNumber:12
+WID:29 Amount:15.00 Commission:3.80 Balance:3864.80
+WITHDRAWAL ANumber:111 ID:11 BrNumber:11
+WID:30 Amount:298.00 Commission:3.80 Balance:2753.40
+TRANSFER IDF:18 ANumberF:118 IDT:10 ANumberT:110
+Illegal parameters
+TRANSFER IDF:14 ANumberF:114 IDT:2 ANumberT:102
+Not applicable
+TRANSFER IDF:4 ANumberF:104 IDT:7 ANumberT:107
+Not applicable
+WITHDRAWAL ANumber:105 ID:5 BrNumber:10
+WID:31 Amount:678.00 Commission:3.80 Balance:1193.30
+WITHDRAWAL ANumber:112 ID:12 BrNumber:12
+WID:32 Amount:285.00 Commission:3.80 Balance:-326.30
+BALANCES ID:12 ANumber:112
+Current Balance: -326.30
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | DEBIT  | 603.00    | 10.30      | -613.30     |
+ 11  | CREDIT | 509.00    |            | -104.30     |
+ 10  | DEBIT  | 215.00    | 3.80       | -323.10     |
+ 15  | DEBIT  | 222.00    | 10.30      | -555.40     |
+ 21  | CREDIT | 316.00    |            | -239.40     |
+ 23  | DEBIT  | 389.00    | 3.80       | -632.20     |
+ 45  | CREDIT | 1124.00   |            | 491.80      |
+ 50  | DEBIT  | 519.00    | 10.30      | -37.50      |
+ 32  | DEBIT  | 285.00    | 3.80       | -326.30     |
+BALANCES ID:8 ANumber:108
+Current Balance: 33652.30
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | DEBIT  | 1842.00   | 10.30      | 38047.70    |
+ 8   | DEBIT  | 91.00     | 10.30      | 37946.40    |
+ 4   | DEBIT  | 653.00    | 3.80       | 37289.60    |
+ 12  | CREDIT | 79.00     |            | 37368.60    |
+ 17  | CREDIT | 485.00    |            | 37853.60    |
+ 26  | CREDIT | 260.00    |            | 38113.60    |
+ 27  | DEBIT  | 796.00    | 10.30      | 37307.30    |
+ 30  | DEBIT  | 1465.00   | 10.30      | 35832.00    |
+ 33  | DEBIT  | 863.00    | 10.30      | 34958.70    |
+ 36  | CREDIT | 832.00    |            | 35790.70    |
+ 37  | CREDIT | 1045.00   |            | 36835.70    |
+ 40  | DEBIT  | 1527.00   | 10.30      | 35298.40    |
+ 20  | DEBIT  | 984.00    | 3.80       | 34310.60    |
+ 44  | DEBIT  | 648.00    | 10.30      | 33652.30    |
+TRANSFER IDF:9 ANumberF:109 IDT:14 ANumberT:114
+Not applicable
+BALANCES ID:10 ANumber:110
+Current Balance: -42.40
+ TID | Source | Amount    | Commission | Balance     |
+ 6   | CREDIT | 339.00    |            | 339.00      |
+ 11  | DEBIT  | 509.00    | 10.30      | -180.30     |
+ 12  | DEBIT  | 768.00    | 3.80       | -952.10     |
+ 32  | DEBIT  | 29.00     | 10.30      | -991.40     |
+ 43  | CREDIT | 949.00    |            | -42.40      |
+WITHDRAWAL ANumber:119 ID:19 BrNumber:14
+Illegal parameters
+TRANSFER IDF:1 ANumberF:101 IDT:17 ANumberT:117
+Illegal parameters
+MONEY LAUNDERING
+4
+5
+8
+13
+14
+TRANSFER IDF:20 ANumberF:120 IDT:4 ANumberT:104
+Illegal parameters
+WITHDRAWAL ANumber:106 ID:6 BrNumber:11
+Not applicable
+BALANCES ID:17 ANumber:117
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:9 ANumberT:109
+TID:52 Amount:566.00 Commission:10.30 BalanceT:-417.20 BalanceF:33076.00
+WITHDRAWAL ANumber:101 ID:1 BrNumber:11
+WID:33 Amount:1086.00 Commission:3.80 Balance:-520.60
+WITHDRAWAL ANumber:103 ID:3 BrNumber:13
+WID:34 Amount:1121.00 Commission:3.80 Balance:17103.00
+TRANSFER IDF:16 ANumberF:116 IDT:18 ANumberT:118
+Illegal parameters
+WITHDRAWAL ANumber:105 ID:5 BrNumber:10
+WID:35 Amount:1341.00 Commission:3.80 Balance:-151.50
+TRANSFER IDF:4 ANumberF:104 IDT:15 ANumberT:115
+Not applicable
+WITHDRAWAL ANumber:109 ID:9 BrNumber:14
+WID:36 Amount:218.00 Commission:3.80 Balance:-639.00
+TRANSFER IDF:8 ANumberF:108 IDT:9 ANumberT:109
+TID:53 Amount:1807.00 Commission:10.30 BalanceT:1168.00 BalanceF:31258.70
+TRANSFER IDF:11 ANumberF:111 IDT:5 ANumberT:105
+TID:54 Amount:1036.00 Commission:10.30 BalanceT:884.50 BalanceF:1707.10
+TRANSFER IDF:17 ANumberF:117 IDT:7 ANumberT:107
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:7 ANumberT:107
+Not applicable
+TRANSFER IDF:9 ANumberF:109 IDT:20 ANumberT:120
+Illegal parameters
+TRANSFER IDF:15 ANumberF:115 IDT:14 ANumberT:114
+Not applicable
+WITHDRAWAL ANumber:103 ID:3 BrNumber:13
+WID:37 Amount:1104.00 Commission:3.80 Balance:15995.20
+MONEY LAUNDERING
+4
+5
+8
+13
+14
+WITHDRAWAL ANumber:110 ID:10 BrNumber:10
+Not applicable
+ASSOCIATES 4
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+WITHDRAWAL ANumber:107 ID:7 BrNumber:12
+WID:38 Amount:1059.00 Commission:3.80 Balance:26243.00
+MONEY LAUNDERING
+4
+5
+8
+13
+14
+TRANSFER IDF:3 ANumberF:103 IDT:16 ANumberT:116
+Illegal parameters
+WITHDRAWAL ANumber:103 ID:3 BrNumber:13
+WID:39 Amount:1046.00 Commission:3.80 Balance:14945.40
+ASSOCIATES 18
+Illegal parameters
+WITHDRAWAL ANumber:108 ID:8 BrNumber:13
+WID:40 Amount:858.00 Commission:3.80 Balance:30396.90
+WITHDRAWAL ANumber:108 ID:8 BrNumber:13
+WID:41 Amount:998.00 Commission:3.80 Balance:29395.10
+BALANCES ID:13 ANumber:113
+Current Balance: -316.00
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | CREDIT | 727.00    |            | 727.00      |
+ 5   | CREDIT | 842.00    |            | 1569.00     |
+ 9   | DEBIT  | 1022.00   | 3.80       | 543.20      |
+ 15  | CREDIT | 222.00    |            | 765.20      |
+ 18  | DEBIT  | 1657.00   | 0.00       | -891.80     |
+ 20  | CREDIT | 1618.00   |            | 726.20      |
+ 24  | DEBIT  | 923.00    | 10.30      | -207.10     |
+ 27  | CREDIT | 796.00    |            | 588.90      |
+ 36  | DEBIT  | 832.00    | 10.30      | -253.40     |
+ 39  | CREDIT | 81.00     |            | -172.40     |
+ 47  | CREDIT | 972.00    |            | 799.60      |
+ 48  | DEBIT  | 156.00    | 10.30      | 633.30      |
+ 51  | DEBIT  | 939.00    | 10.30      | -316.00     |
+TRANSFER IDF:20 ANumberF:120 IDT:12 ANumberT:112
+Illegal parameters
+TRANSFER IDF:1 ANumberF:101 IDT:16 ANumberT:116
+Illegal parameters
+BALANCES ID:3 ANumber:103
+Current Balance: 14945.40
+ TID | Source | Amount    | Commission | Balance     |
+ 17  | DEBIT  | 485.00    | 0.00       | 20515.00    |
+ 23  | DEBIT  | 374.00    | 10.30      | 20130.70    |
+ 25  | DEBIT  | 392.00    | 10.30      | 19728.40    |
+ 16  | DEBIT  | 771.00    | 3.80       | 18953.60    |
+ 17  | DEBIT  | 1362.00   | 3.80       | 17587.80    |
+ 38  | CREDIT | 640.00    |            | 18227.80    |
+ 34  | DEBIT  | 1121.00   | 3.80       | 17103.00    |
+ 37  | DEBIT  | 1104.00   | 3.80       | 15995.20    |
+ 39  | DEBIT  | 1046.00   | 3.80       | 14945.40    |
+TRANSFER IDF:18 ANumberF:118 IDT:16 ANumberT:116
+Illegal parameters
+MONEY LAUNDERING
+4
+5
+8
+13
+14
+WITHDRAWAL ANumber:112 ID:12 BrNumber:12
+Not applicable
+BALANCES ID:10 ANumber:110
+Current Balance: -42.40
+ TID | Source | Amount    | Commission | Balance     |
+ 6   | CREDIT | 339.00    |            | 339.00      |
+ 11  | DEBIT  | 509.00    | 10.30      | -180.30     |
+ 12  | DEBIT  | 768.00    | 3.80       | -952.10     |
+ 32  | DEBIT  | 29.00     | 10.30      | -991.40     |
+ 43  | CREDIT | 949.00    |            | -42.40      |
+TRANSFER IDF:10 ANumberF:110 IDT:10 ANumberT:110
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:10 ANumberT:110
+TID:55 Amount:1460.00 Commission:10.30 BalanceT:1417.60 BalanceF:27924.80
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+WITHDRAWAL ANumber:115 ID:15 BrNumber:10
+Not applicable
+TRANSFER IDF:7 ANumberF:107 IDT:15 ANumberT:115
+TID:56 Amount:614.00 Commission:10.30 BalanceT:515.90 BalanceF:25618.70
+BALANCES ID:19 ANumber:119
+Illegal parameters
+TRANSFER IDF:16 ANumberF:116 IDT:17 ANumberT:117
+Illegal parameters
+WITHDRAWAL ANumber:116 ID:16 BrNumber:11
+Illegal parameters
+TRANSFER IDF:6 ANumberF:106 IDT:10 ANumberT:110
+Not applicable
+TRANSFER IDF:2 ANumberF:102 IDT:6 ANumberT:106
+TID:57 Amount:862.00 Commission:10.30 BalanceT:-118.60 BalanceF:2992.50
+MONEY LAUNDERING
+4
+5
+8
+13
+14
+BALANCES ID:11 ANumber:111
+Current Balance: 1707.10
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | CREDIT | 364.00    |            | 364.00      |
+ 4   | CREDIT | 623.00    |            | 987.00      |
+ 3   | DEBIT  | 1229.00   | 3.80       | -245.80     |
+ 10  | CREDIT | 548.00    |            | 302.20      |
+ 7   | DEBIT  | 517.00    | 3.80       | -218.60     |
+ 12  | DEBIT  | 79.00     | 10.30      | -307.90     |
+ 16  | DEBIT  | 500.00    | 10.30      | -818.20     |
+ 19  | CREDIT | 54.00     |            | -764.20     |
+ 22  | CREDIT | 1073.00   |            | 308.80      |
+ 23  | CREDIT | 374.00    |            | 682.80      |
+ 15  | DEBIT  | 135.00    | 3.80       | 544.00      |
+ 19  | DEBIT  | 860.00    | 3.80       | -319.80     |
+ 33  | CREDIT | 863.00    |            | 543.20      |
+ 42  | CREDIT | 1003.00   |            | 1546.20     |
+ 46  | CREDIT | 157.00    |            | 1703.20     |
+ 49  | CREDIT | 1352.00   |            | 3055.20     |
+ 30  | DEBIT  | 298.00    | 3.80       | 2753.40     |
+ 54  | DEBIT  | 1036.00   | 10.30      | 1707.10     |
+TRANSFER IDF:14 ANumberF:114 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:17 ANumberF:117 IDT:14 ANumberT:114
+Illegal parameters
+BALANCES ID:14 ANumber:114
+Current Balance: -875.30
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | CREDIT | 603.00    |            | 603.00      |
+ 7   | DEBIT  | 441.00    | 10.30      | 151.70      |
+ 16  | CREDIT | 500.00    |            | 651.70      |
+ 20  | DEBIT  | 1618.00   | 10.30      | -976.60     |
+ 24  | CREDIT | 923.00    |            | -53.60      |
+ 26  | DEBIT  | 260.00    | 10.30      | -323.90     |
+ 28  | DEBIT  | 578.00    | 10.30      | -912.20     |
+ 34  | CREDIT | 1105.00   |            | 192.80      |
+ 37  | DEBIT  | 1045.00   | 10.30      | -862.50     |
+ 25  | DEBIT  | 9.00      | 3.80       | -875.30     |
+TRANSFER IDF:5 ANumberF:105 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:6 ANumberF:106 IDT:3 ANumberT:103
+Not applicable
+TRANSFER IDF:4 ANumberF:104 IDT:8 ANumberT:108
+TID:58 Amount:237.00 Commission:10.30 BalanceT:28161.80 BalanceF:-458.60
+BALANCES ID:9 ANumber:109
+Current Balance: 1168.00
+ TID | Source | Amount    | Commission | Balance     |
+ 7   | CREDIT | 441.00    |            | 441.00      |
+ 6   | DEBIT  | 599.00    | 3.80       | -161.80     |
+ 14  | CREDIT | 228.00    |            | 66.20       |
+ 13  | DEBIT  | 232.00    | 3.80       | -169.60     |
+ 40  | CREDIT | 1527.00   |            | 1357.40     |
+ 45  | DEBIT  | 1124.00   | 10.30      | 223.10      |
+ 48  | CREDIT | 156.00    |            | 379.10      |
+ 49  | DEBIT  | 1352.00   | 10.30      | -983.20     |
+ 52  | CREDIT | 566.00    |            | -417.20     |
+ 36  | DEBIT  | 218.00    | 3.80       | -639.00     |
+ 53  | CREDIT | 1807.00   |            | 1168.00     |
+TRANSFER IDF:6 ANumberF:106 IDT:18 ANumberT:118
+Illegal parameters
+BALANCES ID:13 ANumber:113
+Current Balance: -316.00
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | CREDIT | 727.00    |            | 727.00      |
+ 5   | CREDIT | 842.00    |            | 1569.00     |
+ 9   | DEBIT  | 1022.00   | 3.80       | 543.20      |
+ 15  | CREDIT | 222.00    |            | 765.20      |
+ 18  | DEBIT  | 1657.00   | 0.00       | -891.80     |
+ 20  | CREDIT | 1618.00   |            | 726.20      |
+ 24  | DEBIT  | 923.00    | 10.30      | -207.10     |
+ 27  | CREDIT | 796.00    |            | 588.90      |
+ 36  | DEBIT  | 832.00    | 10.30      | -253.40     |
+ 39  | CREDIT | 81.00     |            | -172.40     |
+ 47  | CREDIT | 972.00    |            | 799.60      |
+ 48  | DEBIT  | 156.00    | 10.30      | 633.30      |
+ 51  | DEBIT  | 939.00    | 10.30      | -316.00     |
+ASSOCIATES 17
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:2 ANumberT:102
+TID:59 Amount:296.00 Commission:0.00 BalanceT:3288.50 BalanceF:-612.00
+ASSOCIATES 15
+2
+4
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+BALANCES ID:4 ANumber:104
+Current Balance: -458.60
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | CREDIT | 1842.00   |            | 1842.00     |
+ 9   | CREDIT | 1495.00   |            | 3337.00     |
+ 10  | DEBIT  | 548.00    | 10.30      | 2778.70     |
+ 14  | DEBIT  | 1068.00   | 3.80       | 1706.90     |
+ 29  | CREDIT | 918.00    |            | 2624.90     |
+ 34  | DEBIT  | 1105.00   | 10.30      | 1509.60     |
+ 39  | DEBIT  | 81.00     | 0.00       | 1428.60     |
+ 41  | DEBIT  | 504.00    | 0.00       | 924.60      |
+ 24  | DEBIT  | 32.00     | 3.80       | 888.80      |
+ 42  | DEBIT  | 1003.00   | 10.30      | -124.50     |
+ 44  | CREDIT | 648.00    |            | 523.50      |
+ 27  | DEBIT  | 731.00    | 3.80       | -211.30     |
+ 58  | DEBIT  | 237.00    | 10.30      | -458.60     |
+TRANSFER IDF:10 ANumberF:110 IDT:9 ANumberT:109
+TID:60 Amount:1841.00 Commission:10.30 BalanceT:3009.00 BalanceF:-433.70
+WITHDRAWAL ANumber:106 ID:6 BrNumber:11
+Illegal parameters
+WITHDRAWAL ANumber:111 ID:11 BrNumber:11
+WID:42 Amount:15.00 Commission:3.80 Balance:1688.30
+TRANSFER IDF:7 ANumberF:107 IDT:20 ANumberT:120
+Illegal parameters
+WITHDRAWAL ANumber:110 ID:10 BrNumber:10
+WID:43 Amount:200.00 Commission:3.80 Balance:-637.50
+TRANSFER IDF:10 ANumberF:110 IDT:11 ANumberT:111
+Not applicable
+TRANSFER IDF:19 ANumberF:119 IDT:10 ANumberT:110
+Illegal parameters
+WITHDRAWAL ANumber:107 ID:7 BrNumber:12
+Illegal parameters
+BALANCES ID:15 ANumber:115
+Current Balance: 515.90
+ TID | Source | Amount    | Commission | Balance     |
+ 8   | DEBIT  | 709.00    | 3.80       | -712.80     |
+ 13  | DEBIT  | 102.00    | 10.30      | -825.10     |
+ 32  | CREDIT | 29.00     |            | -796.10     |
+ 35  | CREDIT | 179.00    |            | -617.10     |
+ 50  | CREDIT | 519.00    |            | -98.10      |
+ 56  | CREDIT | 614.00    |            | 515.90      |
+BALANCES ID:11 ANumber:111
+Current Balance: 1688.30
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | CREDIT | 364.00    |            | 364.00      |
+ 4   | CREDIT | 623.00    |            | 987.00      |
+ 3   | DEBIT  | 1229.00   | 3.80       | -245.80     |
+ 10  | CREDIT | 548.00    |            | 302.20      |
+ 7   | DEBIT  | 517.00    | 3.80       | -218.60     |
+ 12  | DEBIT  | 79.00     | 10.30      | -307.90     |
+ 16  | DEBIT  | 500.00    | 10.30      | -818.20     |
+ 19  | CREDIT | 54.00     |            | -764.20     |
+ 22  | CREDIT | 1073.00   |            | 308.80      |
+ 23  | CREDIT | 374.00    |            | 682.80      |
+ 15  | DEBIT  | 135.00    | 3.80       | 544.00      |
+ 19  | DEBIT  | 860.00    | 3.80       | -319.80     |
+ 33  | CREDIT | 863.00    |            | 543.20      |
+ 42  | CREDIT | 1003.00   |            | 1546.20     |
+ 46  | CREDIT | 157.00    |            | 1703.20     |
+ 49  | CREDIT | 1352.00   |            | 3055.20     |
+ 30  | DEBIT  | 298.00    | 3.80       | 2753.40     |
+ 54  | DEBIT  | 1036.00   | 10.30      | 1707.10     |
+ 42  | DEBIT  | 15.00     | 3.80       | 1688.30     |
+WITHDRAWAL ANumber:103 ID:3 BrNumber:13
+WID:44 Amount:1291.00 Commission:3.80 Balance:13650.60
+TRANSFER IDF:15 ANumberF:115 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:1 ANumberF:101 IDT:15 ANumberT:115
+TID:61 Amount:155.00 Commission:10.30 BalanceT:670.90 BalanceF:-685.90
+BALANCES ID:2 ANumber:102
+Current Balance: 3288.50
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 727.00    | 0.00       | 9273.00     |
+ 4   | DEBIT  | 623.00    | 10.30      | 8639.70     |
+ 0   | DEBIT  | 293.00    | 3.80       | 8342.90     |
+ 5   | DEBIT  | 488.00    | 3.80       | 7851.10     |
+ 9   | DEBIT  | 1495.00   | 0.00       | 6356.10     |
+ 11  | DEBIT  | 1088.00   | 3.80       | 5264.30     |
+ 19  | DEBIT  | 54.00     | 10.30      | 5200.00     |
+ 35  | DEBIT  | 179.00    | 10.30      | 5010.70     |
+ 43  | DEBIT  | 949.00    | 10.30      | 4051.40     |
+ 26  | DEBIT  | 164.00    | 3.80       | 3883.60     |
+ 29  | DEBIT  | 15.00     | 3.80       | 3864.80     |
+ 57  | DEBIT  | 862.00    | 10.30      | 2992.50     |
+ 59  | CREDIT | 296.00    |            | 3288.50     |
+WITHDRAWAL ANumber:108 ID:8 BrNumber:13
+WID:45 Amount:477.00 Commission:3.80 Balance:27681.00
+TRANSFER IDF:16 ANumberF:116 IDT:10 ANumberT:110
+Illegal parameters
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+Not applicable
+BALANCES ID:13 ANumber:113
+Current Balance: -612.00
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | CREDIT | 727.00    |            | 727.00      |
+ 5   | CREDIT | 842.00    |            | 1569.00     |
+ 9   | DEBIT  | 1022.00   | 3.80       | 543.20      |
+ 15  | CREDIT | 222.00    |            | 765.20      |
+ 18  | DEBIT  | 1657.00   | 0.00       | -891.80     |
+ 20  | CREDIT | 1618.00   |            | 726.20      |
+ 24  | DEBIT  | 923.00    | 10.30      | -207.10     |
+ 27  | CREDIT | 796.00    |            | 588.90      |
+ 36  | DEBIT  | 832.00    | 10.30      | -253.40     |
+ 39  | CREDIT | 81.00     |            | -172.40     |
+ 47  | CREDIT | 972.00    |            | 799.60      |
+ 48  | DEBIT  | 156.00    | 10.30      | 633.30      |
+ 51  | DEBIT  | 939.00    | 10.30      | -316.00     |
+ 59  | DEBIT  | 296.00    | 0.00       | -612.00     |
+TRANSFER IDF:9 ANumberF:109 IDT:1 ANumberT:101
+TID:62 Amount:1339.00 Commission:10.30 BalanceT:653.10 BalanceF:1659.70
+WITHDRAWAL ANumber:108 ID:8 BrNumber:13
+WID:46 Amount:308.00 Commission:3.80 Balance:27369.20
+BALANCES ID:9 ANumber:109
+Current Balance: 1659.70
+ TID | Source | Amount    | Commission | Balance     |
+ 7   | CREDIT | 441.00    |            | 441.00      |
+ 6   | DEBIT  | 599.00    | 3.80       | -161.80     |
+ 14  | CREDIT | 228.00    |            | 66.20       |
+ 13  | DEBIT  | 232.00    | 3.80       | -169.60     |
+ 40  | CREDIT | 1527.00   |            | 1357.40     |
+ 45  | DEBIT  | 1124.00   | 10.30      | 223.10      |
+ 48  | CREDIT | 156.00    |            | 379.10      |
+ 49  | DEBIT  | 1352.00   | 10.30      | -983.20     |
+ 52  | CREDIT | 566.00    |            | -417.20     |
+ 36  | DEBIT  | 218.00    | 3.80       | -639.00     |
+ 53  | CREDIT | 1807.00   |            | 1168.00     |
+ 60  | CREDIT | 1841.00   |            | 3009.00     |
+ 62  | DEBIT  | 1339.00   | 10.30      | 1659.70     |
+TRANSFER IDF:15 ANumberF:115 IDT:19 ANumberT:119
+Illegal parameters
+ASSOCIATES 20
+Illegal parameters
+TRANSFER IDF:7 ANumberF:107 IDT:13 ANumberT:113
+TID:63 Amount:1845.00 Commission:10.30 BalanceT:1233.00 BalanceF:23763.40
+MONEY LAUNDERING
+2
+4
+5
+8
+13
+14
+TRANSFER IDF:8 ANumberF:108 IDT:20 ANumberT:120
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:9 ANumberT:109
+TID:64 Amount:874.00 Commission:10.30 BalanceT:2533.70 BalanceF:26484.90
+TRANSFER IDF:12 ANumberF:112 IDT:8 ANumberT:108
+TID:65 Amount:122.00 Commission:10.30 BalanceT:26606.90 BalanceF:-458.60
+BALANCES ID:9 ANumber:109
+Current Balance: 2533.70
+ TID | Source | Amount    | Commission | Balance     |
+ 7   | CREDIT | 441.00    |            | 441.00      |
+ 6   | DEBIT  | 599.00    | 3.80       | -161.80     |
+ 14  | CREDIT | 228.00    |            | 66.20       |
+ 13  | DEBIT  | 232.00    | 3.80       | -169.60     |
+ 40  | CREDIT | 1527.00   |            | 1357.40     |
+ 45  | DEBIT  | 1124.00   | 10.30      | 223.10      |
+ 48  | CREDIT | 156.00    |            | 379.10      |
+ 49  | DEBIT  | 1352.00   | 10.30      | -983.20     |
+ 52  | CREDIT | 566.00    |            | -417.20     |
+ 36  | DEBIT  | 218.00    | 3.80       | -639.00     |
+ 53  | CREDIT | 1807.00   |            | 1168.00     |
+ 60  | CREDIT | 1841.00   |            | 3009.00     |
+ 62  | DEBIT  | 1339.00   | 10.30      | 1659.70     |
+ 64  | CREDIT | 874.00    |            | 2533.70     |
+TRANSFER IDF:19 ANumberF:119 IDT:15 ANumberT:115
+Illegal parameters
+BALANCES ID:12 ANumber:112
+Current Balance: -458.60
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | DEBIT  | 603.00    | 10.30      | -613.30     |
+ 11  | CREDIT | 509.00    |            | -104.30     |
+ 10  | DEBIT  | 215.00    | 3.80       | -323.10     |
+ 15  | DEBIT  | 222.00    | 10.30      | -555.40     |
+ 21  | CREDIT | 316.00    |            | -239.40     |
+ 23  | DEBIT  | 389.00    | 3.80       | -632.20     |
+ 45  | CREDIT | 1124.00   |            | 491.80      |
+ 50  | DEBIT  | 519.00    | 10.30      | -37.50      |
+ 32  | DEBIT  | 285.00    | 3.80       | -326.30     |
+ 65  | DEBIT  | 122.00    | 10.30      | -458.60     |
+BALANCES ID:17 ANumber:117
+Illegal parameters
+TRANSFER IDF:5 ANumberF:105 IDT:11 ANumberT:111
+TID:66 Amount:825.00 Commission:10.30 BalanceT:2513.30 BalanceF:49.20
+WITHDRAWAL ANumber:110 ID:10 BrNumber:10
+Not applicable
+TRANSFER IDF:9 ANumberF:109 IDT:17 ANumberT:117
+Illegal parameters
+ASSOCIATES 17
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:14 ANumberT:114
+TID:67 Amount:728.00 Commission:10.30 BalanceT:-147.30 BalanceF:25868.60
+TRANSFER IDF:13 ANumberF:113 IDT:16 ANumberT:116
+Illegal parameters
+BALANCES ID:9 ANumber:109
+Current Balance: 2533.70
+ TID | Source | Amount    | Commission | Balance     |
+ 7   | CREDIT | 441.00    |            | 441.00      |
+ 6   | DEBIT  | 599.00    | 3.80       | -161.80     |
+ 14  | CREDIT | 228.00    |            | 66.20       |
+ 13  | DEBIT  | 232.00    | 3.80       | -169.60     |
+ 40  | CREDIT | 1527.00   |            | 1357.40     |
+ 45  | DEBIT  | 1124.00   | 10.30      | 223.10      |
+ 48  | CREDIT | 156.00    |            | 379.10      |
+ 49  | DEBIT  | 1352.00   | 10.30      | -983.20     |
+ 52  | CREDIT | 566.00    |            | -417.20     |
+ 36  | DEBIT  | 218.00    | 3.80       | -639.00     |
+ 53  | CREDIT | 1807.00   |            | 1168.00     |
+ 60  | CREDIT | 1841.00   |            | 3009.00     |
+ 62  | DEBIT  | 1339.00   | 10.30      | 1659.70     |
+ 64  | CREDIT | 874.00    |            | 2533.70     |
+TRANSFER IDF:6 ANumberF:106 IDT:4 ANumberT:104
+Not applicable
+ASSOCIATES 4
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+WITHDRAWAL ANumber:102 ID:2 BrNumber:12
+WID:47 Amount:1250.00 Commission:3.80 Balance:2034.70
+BALANCES ID:12 ANumber:112
+Current Balance: -458.60
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | DEBIT  | 603.00    | 10.30      | -613.30     |
+ 11  | CREDIT | 509.00    |            | -104.30     |
+ 10  | DEBIT  | 215.00    | 3.80       | -323.10     |
+ 15  | DEBIT  | 222.00    | 10.30      | -555.40     |
+ 21  | CREDIT | 316.00    |            | -239.40     |
+ 23  | DEBIT  | 389.00    | 3.80       | -632.20     |
+ 45  | CREDIT | 1124.00   |            | 491.80      |
+ 50  | DEBIT  | 519.00    | 10.30      | -37.50      |
+ 32  | DEBIT  | 285.00    | 3.80       | -326.30     |
+ 65  | DEBIT  | 122.00    | 10.30      | -458.60     |
+MONEY LAUNDERING
+2
+4
+5
+8
+11
+13
+14
+MONEY LAUNDERING
+2
+4
+5
+8
+11
+13
+14
+ASSOCIATES 15
+1
+2
+4
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:6 ANumberF:106 IDT:13 ANumberT:113
+TID:68 Amount:581.00 Commission:10.30 BalanceT:1814.00 BalanceF:-709.90
+WITHDRAWAL ANumber:114 ID:14 BrNumber:14
+WID:48 Amount:534.00 Commission:3.80 Balance:-685.10
+TRANSFER IDF:11 ANumberF:111 IDT:12 ANumberT:112
+TID:69 Amount:872.00 Commission:0.00 BalanceT:413.40 BalanceF:1641.30
+ASSOCIATES 18
+Illegal parameters
+BALANCES ID:11 ANumber:111
+Current Balance: 1641.30
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | CREDIT | 364.00    |            | 364.00      |
+ 4   | CREDIT | 623.00    |            | 987.00      |
+ 3   | DEBIT  | 1229.00   | 3.80       | -245.80     |
+ 10  | CREDIT | 548.00    |            | 302.20      |
+ 7   | DEBIT  | 517.00    | 3.80       | -218.60     |
+ 12  | DEBIT  | 79.00     | 10.30      | -307.90     |
+ 16  | DEBIT  | 500.00    | 10.30      | -818.20     |
+ 19  | CREDIT | 54.00     |            | -764.20     |
+ 22  | CREDIT | 1073.00   |            | 308.80      |
+ 23  | CREDIT | 374.00    |            | 682.80      |
+ 15  | DEBIT  | 135.00    | 3.80       | 544.00      |
+ 19  | DEBIT  | 860.00    | 3.80       | -319.80     |
+ 33  | CREDIT | 863.00    |            | 543.20      |
+ 42  | CREDIT | 1003.00   |            | 1546.20     |
+ 46  | CREDIT | 157.00    |            | 1703.20     |
+ 49  | CREDIT | 1352.00   |            | 3055.20     |
+ 30  | DEBIT  | 298.00    | 3.80       | 2753.40     |
+ 54  | DEBIT  | 1036.00   | 10.30      | 1707.10     |
+ 42  | DEBIT  | 15.00     | 3.80       | 1688.30     |
+ 66  | CREDIT | 825.00    |            | 2513.30     |
+ 69  | DEBIT  | 872.00    | 0.00       | 1641.30     |
+TRANSFER IDF:2 ANumberF:102 IDT:12 ANumberT:112
+TID:70 Amount:264.00 Commission:10.30 BalanceT:677.40 BalanceF:1760.40
+TRANSFER IDF:4 ANumberF:104 IDT:3 ANumberT:103
+TID:71 Amount:137.00 Commission:10.30 BalanceT:13787.60 BalanceF:-605.90
+MONEY LAUNDERING
+2
+4
+5
+8
+11
+13
+14
+BALANCES ID:8 ANumber:108
+Current Balance: 25868.60
+ TID | Source | Amount    | Commission | Balance     |
+ 2   | DEBIT  | 1842.00   | 10.30      | 38047.70    |
+ 8   | DEBIT  | 91.00     | 10.30      | 37946.40    |
+ 4   | DEBIT  | 653.00    | 3.80       | 37289.60    |
+ 12  | CREDIT | 79.00     |            | 37368.60    |
+ 17  | CREDIT | 485.00    |            | 37853.60    |
+ 26  | CREDIT | 260.00    |            | 38113.60    |
+ 27  | DEBIT  | 796.00    | 10.30      | 37307.30    |
+ 30  | DEBIT  | 1465.00   | 10.30      | 35832.00    |
+ 33  | DEBIT  | 863.00    | 10.30      | 34958.70    |
+ 36  | CREDIT | 832.00    |            | 35790.70    |
+ 37  | CREDIT | 1045.00   |            | 36835.70    |
+ 40  | DEBIT  | 1527.00   | 10.30      | 35298.40    |
+ 20  | DEBIT  | 984.00    | 3.80       | 34310.60    |
+ 44  | DEBIT  | 648.00    | 10.30      | 33652.30    |
+ 52  | DEBIT  | 566.00    | 10.30      | 33076.00    |
+ 53  | DEBIT  | 1807.00   | 10.30      | 31258.70    |
+ 40  | DEBIT  | 858.00    | 3.80       | 30396.90    |
+ 41  | DEBIT  | 998.00    | 3.80       | 29395.10    |
+ 55  | DEBIT  | 1460.00   | 10.30      | 27924.80    |
+ 58  | CREDIT | 237.00    |            | 28161.80    |
+ 45  | DEBIT  | 477.00    | 3.80       | 27681.00    |
+ 46  | DEBIT  | 308.00    | 3.80       | 27369.20    |
+ 64  | DEBIT  | 874.00    | 10.30      | 26484.90    |
+ 65  | CREDIT | 122.00    |            | 26606.90    |
+ 67  | DEBIT  | 728.00    | 10.30      | 25868.60    |
+TRANSFER IDF:3 ANumberF:103 IDT:1 ANumberT:101
+TID:72 Amount:1210.00 Commission:10.30 BalanceT:1863.10 BalanceF:12567.30
+TRANSFER IDF:11 ANumberF:111 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:14 ANumberF:114 IDT:14 ANumberT:114
+Illegal parameters
+TRANSFER IDF:3 ANumberF:103 IDT:13 ANumberT:113
+TID:73 Amount:1186.00 Commission:10.30 BalanceT:3000.00 BalanceF:11371.00
+TRANSFER IDF:15 ANumberF:115 IDT:16 ANumberT:116
+Illegal parameters
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+Not applicable
+TRANSFER IDF:2 ANumberF:102 IDT:19 ANumberT:119
+Illegal parameters
+MONEY LAUNDERING
+2
+4
+5
+8
+11
+13
+14
+TRANSFER IDF:19 ANumberF:119 IDT:20 ANumberT:120
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:6 ANumberT:106
+TID:74 Amount:656.00 Commission:10.30 BalanceT:-53.90 BalanceF:25202.30
+TRANSFER IDF:6 ANumberF:106 IDT:1 ANumberT:101
+Not applicable
+ASSOCIATES 7
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:11 ANumberF:111 IDT:19 ANumberT:119
+Illegal parameters
+BALANCES ID:13 ANumber:113
+Current Balance: 3000.00
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | CREDIT | 727.00    |            | 727.00      |
+ 5   | CREDIT | 842.00    |            | 1569.00     |
+ 9   | DEBIT  | 1022.00   | 3.80       | 543.20      |
+ 15  | CREDIT | 222.00    |            | 765.20      |
+ 18  | DEBIT  | 1657.00   | 0.00       | -891.80     |
+ 20  | CREDIT | 1618.00   |            | 726.20      |
+ 24  | DEBIT  | 923.00    | 10.30      | -207.10     |
+ 27  | CREDIT | 796.00    |            | 588.90      |
+ 36  | DEBIT  | 832.00    | 10.30      | -253.40     |
+ 39  | CREDIT | 81.00     |            | -172.40     |
+ 47  | CREDIT | 972.00    |            | 799.60      |
+ 48  | DEBIT  | 156.00    | 10.30      | 633.30      |
+ 51  | DEBIT  | 939.00    | 10.30      | -316.00     |
+ 59  | DEBIT  | 296.00    | 0.00       | -612.00     |
+ 63  | CREDIT | 1845.00   |            | 1233.00     |
+ 68  | CREDIT | 581.00    |            | 1814.00     |
+ 73  | CREDIT | 1186.00   |            | 3000.00     |
+TRANSFER IDF:7 ANumberF:107 IDT:2 ANumberT:102
+TID:75 Amount:1740.00 Commission:10.30 BalanceT:3500.40 BalanceF:22013.10
+WITHDRAWAL ANumber:120 ID:20 BrNumber:10
+Illegal parameters
+TRANSFER IDF:9 ANumberF:109 IDT:1 ANumberT:101
+TID:76 Amount:1882.00 Commission:10.30 BalanceT:3745.10 BalanceF:641.40
+TRANSFER IDF:15 ANumberF:115 IDT:3 ANumberT:103
+TID:77 Amount:1144.00 Commission:10.30 BalanceT:12515.00 BalanceF:-483.40
+TRANSFER IDF:13 ANumberF:113 IDT:8 ANumberT:108
+TID:78 Amount:1547.00 Commission:10.30 BalanceT:26749.30 BalanceF:1442.70
+WITHDRAWAL ANumber:105 ID:5 BrNumber:10
+WID:49 Amount:397.00 Commission:3.80 Balance:-351.60
+TRANSFER IDF:16 ANumberF:116 IDT:17 ANumberT:117
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:1 ANumberT:101
+Illegal parameters
+BALANCES ID:12 ANumber:112
+Current Balance: 677.40
+ TID | Source | Amount    | Commission | Balance     |
+ 3   | DEBIT  | 603.00    | 10.30      | -613.30     |
+ 11  | CREDIT | 509.00    |            | -104.30     |
+ 10  | DEBIT  | 215.00    | 3.80       | -323.10     |
+ 15  | DEBIT  | 222.00    | 10.30      | -555.40     |
+ 21  | CREDIT | 316.00    |            | -239.40     |
+ 23  | DEBIT  | 389.00    | 3.80       | -632.20     |
+ 45  | CREDIT | 1124.00   |            | 491.80      |
+ 50  | DEBIT  | 519.00    | 10.30      | -37.50      |
+ 32  | DEBIT  | 285.00    | 3.80       | -326.30     |
+ 65  | DEBIT  | 122.00    | 10.30      | -458.60     |
+ 69  | CREDIT | 872.00    |            | 413.40      |
+ 70  | CREDIT | 264.00    |            | 677.40      |
+WITHDRAWAL ANumber:114 ID:14 BrNumber:14
+Not applicable
+TRANSFER IDF:11 ANumberF:111 IDT:8 ANumberT:108
+TID:79 Amount:1754.00 Commission:10.30 BalanceT:28503.30 BalanceF:-123.00
+TRANSFER IDF:19 ANumberF:119 IDT:10 ANumberT:110
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:7 ANumberT:107
+TID:80 Amount:1240.00 Commission:0.00 BalanceT:23253.10 BalanceF:27263.30
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+Not applicable
+TRANSFER IDF:13 ANumberF:113 IDT:4 ANumberT:104
+TID:81 Amount:93.00 Commission:0.00 BalanceT:-512.90 BalanceF:1349.70
+TRANSFER IDF:1 ANumberF:101 IDT:18 ANumberT:118
+Illegal parameters
+ASSOCIATES 10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:12 ANumberF:112 IDT:4 ANumberT:104
+TID:82 Amount:705.00 Commission:10.30 BalanceT:192.10 BalanceF:-37.90
+WITHDRAWAL ANumber:110 ID:10 BrNumber:10
+Not applicable
+TRANSFER IDF:18 ANumberF:118 IDT:11 ANumberT:111
+Illegal parameters
+ASSOCIATES 1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:17 ANumberF:117 IDT:7 ANumberT:107
+Illegal parameters
+TRANSFER IDF:20 ANumberF:120 IDT:18 ANumberT:118
+Illegal parameters
+ASSOCIATES 20
+Illegal parameters
+TRANSFER IDF:13 ANumberF:113 IDT:13 ANumberT:113
+Illegal parameters
+WITHDRAWAL ANumber:108 ID:8 BrNumber:13
+WID:50 Amount:1108.00 Commission:3.80 Balance:26151.50
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+WID:51 Amount:270.00 Commission:3.80 Balance:-81.70
+TRANSFER IDF:15 ANumberF:115 IDT:17 ANumberT:117
+Illegal parameters
+WITHDRAWAL ANumber:120 ID:20 BrNumber:10
+Illegal parameters
+TRANSFER IDF:4 ANumberF:104 IDT:7 ANumberT:107
+TID:83 Amount:790.00 Commission:10.30 BalanceT:24043.10 BalanceF:-882.00
+BALANCES ID:13 ANumber:113
+Current Balance: 1349.70
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | CREDIT | 727.00    |            | 727.00      |
+ 5   | CREDIT | 842.00    |            | 1569.00     |
+ 9   | DEBIT  | 1022.00   | 3.80       | 543.20      |
+ 15  | CREDIT | 222.00    |            | 765.20      |
+ 18  | DEBIT  | 1657.00   | 0.00       | -891.80     |
+ 20  | CREDIT | 1618.00   |            | 726.20      |
+ 24  | DEBIT  | 923.00    | 10.30      | -207.10     |
+ 27  | CREDIT | 796.00    |            | 588.90      |
+ 36  | DEBIT  | 832.00    | 10.30      | -253.40     |
+ 39  | CREDIT | 81.00     |            | -172.40     |
+ 47  | CREDIT | 972.00    |            | 799.60      |
+ 48  | DEBIT  | 156.00    | 10.30      | 633.30      |
+ 51  | DEBIT  | 939.00    | 10.30      | -316.00     |
+ 59  | DEBIT  | 296.00    | 0.00       | -612.00     |
+ 63  | CREDIT | 1845.00   |            | 1233.00     |
+ 68  | CREDIT | 581.00    |            | 1814.00     |
+ 73  | CREDIT | 1186.00   |            | 3000.00     |
+ 78  | DEBIT  | 1547.00   | 10.30      | 1442.70     |
+ 81  | DEBIT  | 93.00     | 0.00       | 1349.70     |
+TRANSFER IDF:15 ANumberF:115 IDT:8 ANumberT:108
+Not applicable
+WITHDRAWAL ANumber:117 ID:17 BrNumber:12
+Illegal parameters
+BALANCES ID:5 ANumber:105
+Current Balance: -351.60
+ TID | Source | Amount    | Commission | Balance     |
+ 5   | DEBIT  | 842.00    | 0.00       | -842.00     |
+ 8   | CREDIT | 91.00     |            | -751.00     |
+ 18  | CREDIT | 1657.00   |            | 906.00      |
+ 25  | CREDIT | 392.00    |            | 1298.00     |
+ 28  | CREDIT | 578.00    |            | 1876.00     |
+ 29  | DEBIT  | 918.00    | 0.00       | 958.00      |
+ 30  | CREDIT | 1465.00   |            | 2423.00     |
+ 18  | DEBIT  | 377.00    | 3.80       | 2042.20     |
+ 38  | DEBIT  | 640.00    | 10.30      | 1391.90     |
+ 41  | CREDIT | 504.00    |            | 1895.90     |
+ 28  | DEBIT  | 17.00     | 3.80       | 1875.10     |
+ 31  | DEBIT  | 678.00    | 3.80       | 1193.30     |
+ 35  | DEBIT  | 1341.00   | 3.80       | -151.50     |
+ 54  | CREDIT | 1036.00   |            | 884.50      |
+ 66  | DEBIT  | 825.00    | 10.30      | 49.20       |
+ 49  | DEBIT  | 397.00    | 3.80       | -351.60     |
+TRANSFER IDF:1 ANumberF:101 IDT:19 ANumberT:119
+Illegal parameters
+TRANSFER IDF:5 ANumberF:105 IDT:5 ANumberT:105
+Illegal parameters
+BALANCES ID:7 ANumber:107
+Current Balance: 24043.10
+ TID | Source | Amount    | Commission | Balance     |
+ 6   | DEBIT  | 339.00    | 10.30      | 30650.70    |
+ 2   | DEBIT  | 73.00     | 3.80       | 30573.90    |
+ 13  | CREDIT | 102.00    |            | 30675.90    |
+ 14  | DEBIT  | 228.00    | 10.30      | 30437.60    |
+ 21  | DEBIT  | 316.00    | 10.30      | 30111.30    |
+ 22  | DEBIT  | 1073.00   | 10.30      | 29028.00    |
+ 31  | CREDIT | 596.00    |            | 29624.00    |
+ 21  | DEBIT  | 398.00    | 3.80       | 29222.20    |
+ 22  | DEBIT  | 763.00    | 3.80       | 28455.40    |
+ 46  | DEBIT  | 157.00    | 10.30      | 28288.10    |
+ 47  | DEBIT  | 972.00    | 10.30      | 27305.80    |
+ 38  | DEBIT  | 1059.00   | 3.80       | 26243.00    |
+ 56  | DEBIT  | 614.00    | 10.30      | 25618.70    |
+ 63  | DEBIT  | 1845.00   | 10.30      | 23763.40    |
+ 75  | DEBIT  | 1740.00   | 10.30      | 22013.10    |
+ 80  | CREDIT | 1240.00   |            | 23253.10    |
+ 83  | CREDIT | 790.00    |            | 24043.10    |
+TRANSFER IDF:3 ANumberF:103 IDT:12 ANumberT:112
+TID:84 Amount:141.00 Commission:10.30 BalanceT:103.10 BalanceF:12363.70
+BALANCES ID:19 ANumber:119
+Illegal parameters
+TRANSFER IDF:16 ANumberF:116 IDT:12 ANumberT:112
+Illegal parameters
+WITHDRAWAL ANumber:119 ID:19 BrNumber:14
+Illegal parameters
+BALANCES ID:19 ANumber:119
+Illegal parameters
+TRANSFER IDF:8 ANumberF:108 IDT:17 ANumberT:117
+Illegal parameters
+BALANCES ID:16 ANumber:116
+Illegal parameters
+TRANSFER IDF:14 ANumberF:114 IDT:13 ANumberT:113
+Not applicable
+BALANCES ID:6 ANumber:106
+Current Balance: -53.90
+ TID | Source | Amount    | Commission | Balance     |
+ 0   | DEBIT  | 364.00    | 10.30      | -374.30     |
+ 31  | DEBIT  | 596.00    | 10.30      | -980.60     |
+ 57  | CREDIT | 862.00    |            | -118.60     |
+ 68  | DEBIT  | 581.00    | 10.30      | -709.90     |
+ 74  | CREDIT | 656.00    |            | -53.90      |
+ASSOCIATES 9
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+WITHDRAWAL ANumber:104 ID:4 BrNumber:14
+Not applicable
+WITHDRAWAL ANumber:109 ID:9 BrNumber:14
+WID:52 Amount:455.00 Commission:3.80 Balance:182.60
+ASSOCIATES 14
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+BALANCES ID:9 ANumber:109
+Current Balance: 182.60
+ TID | Source | Amount    | Commission | Balance     |
+ 7   | CREDIT | 441.00    |            | 441.00      |
+ 6   | DEBIT  | 599.00    | 3.80       | -161.80     |
+ 14  | CREDIT | 228.00    |            | 66.20       |
+ 13  | DEBIT  | 232.00    | 3.80       | -169.60     |
+ 40  | CREDIT | 1527.00   |            | 1357.40     |
+ 45  | DEBIT  | 1124.00   | 10.30      | 223.10      |
+ 48  | CREDIT | 156.00    |            | 379.10      |
+ 49  | DEBIT  | 1352.00   | 10.30      | -983.20     |
+ 52  | CREDIT | 566.00    |            | -417.20     |
+ 36  | DEBIT  | 218.00    | 3.80       | -639.00     |
+ 53  | CREDIT | 1807.00   |            | 1168.00     |
+ 60  | CREDIT | 1841.00   |            | 3009.00     |
+ 62  | DEBIT  | 1339.00   | 10.30      | 1659.70     |
+ 64  | CREDIT | 874.00    |            | 2533.70     |
+ 76  | DEBIT  | 1882.00   | 10.30      | 641.40      |
+ 52  | DEBIT  | 455.00    | 3.80       | 182.60      |
+TRANSFER IDF:5 ANumberF:105 IDT:11 ANumberT:111
+Not applicable
+BALANCES ID:18 ANumber:118
+Illegal parameters
+BALANCES ID:17 ANumber:117
+Illegal parameters
+WITHDRAWAL ANumber:112 ID:12 BrNumber:12
+WID:53 Amount:369.00 Commission:3.80 Balance:-269.70
+TRANSFER IDF:14 ANumberF:114 IDT:5 ANumberT:105
+TID:85 Amount:46.00 Commission:10.30 BalanceT:-305.60 BalanceF:-741.40
+BALANCES ID:10 ANumber:110
+Current Balance: -637.50
+ TID | Source | Amount    | Commission | Balance     |
+ 6   | CREDIT | 339.00    |            | 339.00      |
+ 11  | DEBIT  | 509.00    | 10.30      | -180.30     |
+ 12  | DEBIT  | 768.00    | 3.80       | -952.10     |
+ 32  | DEBIT  | 29.00     | 10.30      | -991.40     |
+ 43  | CREDIT | 949.00    |            | -42.40      |
+ 55  | CREDIT | 1460.00   |            | 1417.60     |
+ 60  | DEBIT  | 1841.00   | 10.30      | -433.70     |
+ 43  | DEBIT  | 200.00    | 3.80       | -637.50     |
+WITHDRAWAL ANumber:101 ID:1 BrNumber:11
+WID:54 Amount:452.00 Commission:3.80 Balance:3289.30
+ASSOCIATES 12
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+TRANSFER IDF:3 ANumberF:103 IDT:18 ANumberT:118
+Illegal parameters
+BALANCES ID:15 ANumber:115
+Current Balance: -483.40
+ TID | Source | Amount    | Commission | Balance     |
+ 8   | DEBIT  | 709.00    | 3.80       | -712.80     |
+ 13  | DEBIT  | 102.00    | 10.30      | -825.10     |
+ 32  | CREDIT | 29.00     |            | -796.10     |
+ 35  | CREDIT | 179.00    |            | -617.10     |
+ 50  | CREDIT | 519.00    |            | -98.10      |
+ 56  | CREDIT | 614.00    |            | 515.90      |
+ 61  | CREDIT | 155.00    |            | 670.90      |
+ 77  | DEBIT  | 1144.00   | 10.30      | -483.40     |
+TRANSFER IDF:6 ANumberF:106 IDT:11 ANumberT:111
+Illegal parameters
+TRANSFER IDF:19 ANumberF:119 IDT:17 ANumberT:117
+Illegal parameters
+BALANCES ID:1 ANumber:101
+Current Balance: 3289.30
+ TID | Source | Amount    | Commission | Balance     |
+ 1   | DEBIT  | 366.00    | 3.80       | -369.80     |
+ 51  | CREDIT | 939.00    |            | 569.20      |
+ 33  | DEBIT  | 1086.00   | 3.80       | -520.60     |
+ 61  | DEBIT  | 155.00    | 10.30      | -685.90     |
+ 62  | CREDIT | 1339.00   |            | 653.10      |
+ 72  | CREDIT | 1210.00   |            | 1863.10     |
+ 76  | CREDIT | 1882.00   |            | 3745.10     |
+ 54  | DEBIT  | 452.00    | 3.80       | 3289.30     |
+TRANSFER IDF:6 ANumberF:106 IDT:16 ANumberT:116
+Illegal parameters
+TRANSFER IDF:11 ANumberF:111 IDT:20 ANumberT:120
+Illegal parameters
+TRANSFER IDF:15 ANumberF:115 IDT:17 ANumberT:117
+Illegal parameters

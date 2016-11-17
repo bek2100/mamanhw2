@@ -1,0 +1,78 @@
+#!/usr/bin/python
+
+from functools import reduce
+import random
+import re
+
+class MyClass:
+    def __init__(self):
+        print ("this is my class")
+class Point:
+    def __init__(self, x=0 , y=0 ):
+        self.x = x
+        self.y = y
+        
+    def show(self):
+        print ("my location is: %d,%d" % (self.x, self.y))
+
+def TorF( val ):
+    if val:
+        return 1
+    return -1
+
+def pow( x, y ):
+    if y == 0:
+        return 1
+    return x*pow(x, y-1)
+
+def sums( nums ):
+    return reduce(lambda x, y: x+y, nums)
+
+def perfect(n):
+    if n == reduce(lambda x, y:x+y, filter(lambda x: n%x ==0, range(1,n))):
+        return True
+    return False
+
+def rrr( n ):
+    r = random.randrange(1000)
+    if n > r:
+        return r
+    return 0
+
+def lnn (l, n):
+    return random.sample(l,n)
+def spnsum(a):
+    lst = a.split('.')
+    return int(lst[0]) + int(lst[1])
+
+if __name__ == "__main__":
+    print("hello world!")
+    print (TorF( True ))
+    print (TorF( False ))
+    print (pow ( 2, 3))
+    a,b = 5,6
+    print (a,b)
+    (a,b) = (b,a)
+    print (a, b)
+    list1 = []
+    list1.insert( 1, a)
+    list1.insert( 2, b)
+    print (list1)
+    list1.reverse()
+    print (list1)
+    r= range (2,24)
+    print (list(r))
+    num_list = list(range(1,11))
+    print (num_list[3:11:2])
+    print (sums( num_list))
+    fo = open("Myfile.txt", "w+")
+    fo.write("I know how to write.")
+    print (perfect(6))
+    print (perfect(7))
+    c = MyClass()
+    p = Point()
+    p.show()
+    print (rrr(500))
+    print (rrr(900))
+    print (list(lnn(num_list, 2)))
+    print (spnsum("327.-437"))

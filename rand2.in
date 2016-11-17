@@ -1,0 +1,500 @@
+transfer 367 15 115 15 115
+transfer 1624 19 119 17 117
+transfer 364 6 106 11 111
+transfer 727 2 102 13 113
+transfer 1842 8 108 4 104
+transfer 504 3 103 16 116
+transfer 282 2 102 18 118
+balances 16 116
+transfer 1626 12 112 10 110
+balances 13 113
+withdrawal 435 10 20 120
+transfer 603 12 112 14 114
+transfer 1573 5 105 6 106
+transfer 153 9 109 16 116
+transfer 562 18 118 15 115
+transfer 623 2 102 11 111
+withdrawal -65 12 17 117
+transfer 1742 9 109 15 115
+transfer 842 5 105 13 113
+transfer 1705 11 111 20 120
+balances 11 111
+withdrawal 293 12 2 102
+money_laundering
+transfer 523 5 105 19 119
+withdrawal 366 11 1 101
+withdrawal 708 12 12 112
+transfer 339 7 107 10 110
+transfer 1438 19 119 1 101
+transfer 441 14 114 9 109
+transfer 1558 5 105 15 115
+withdrawal 73 12 7 107
+transfer 921 6 106 10 110
+withdrawal 1229 11 11 111
+balances 14 114
+transfer 412 7 107 17 117
+withdrawal 1255 12 17 117
+withdrawal 474 11 16 116
+transfer -48 11 111 1 101
+transfer 1624 7 107 17 117
+transfer 91 8 108 5 105
+withdrawal 653 13 8 108
+transfer 845 10 110 19 119
+withdrawal 488 12 2 102
+transfer 846 7 107 17 117
+transfer 1068 1 101 12 112
+withdrawal 810 11 16 116
+transfer 1524 18 118 6 106
+transfer 1495 2 102 4 104
+transfer 191 17 117 11 111
+balances 17 117
+withdrawal 599 14 9 109
+withdrawal 681 10 5 105
+balances 14 114
+transfer 318 19 119 19 119
+transfer 27 8 108 16 116
+transfer 548 4 104 11 111
+withdrawal 517 11 11 111
+withdrawal 709 10 15 115
+transfer 835 12 112 12 112
+transfer 419 17 117 15 115
+withdrawal 408 10 5 105
+transfer 509 10 110 12 112
+transfer 385 14 114 17 117
+balances 8 108
+transfer 1403 9 109 9 109
+transfer 518 1 101 17 117
+money_laundering
+transfer 1489 19 119 8 108
+withdrawal 1022 13 13 113
+associates 13
+transfer 79 11 111 8 108
+withdrawal 215 12 12 112
+associates 17
+transfer 102 15 115 7 107
+transfer 228 7 107 9 109
+associates 16
+balances 10 110
+transfer 1744 17 117 18 118
+transfer 222 12 112 13 113
+transfer 1457 17 117 9 109
+associates 16
+transfer 500 11 111 14 114
+withdrawal 1088 12 2 102
+transfer 1689 16 116 19 119
+transfer 485 3 103 8 108
+associates 7
+transfer 1657 13 113 5 105
+transfer 54 2 102 11 111
+withdrawal 768 10 10 110
+transfer 1325 16 116 10 110
+transfer 1341 13 113 18 118
+transfer 1618 14 114 13 113
+transfer 179 17 117 4 104
+balances 10 110
+transfer 1766 10 110 3 103
+money_laundering
+transfer 316 7 107 12 112
+transfer 182 16 116 10 110
+transfer 1601 17 117 8 108
+associates 4
+transfer 255 6 106 19 119
+withdrawal 232 14 9 109
+money_laundering
+transfer 1656 2 102 20 120
+money_laundering
+balances 2 102
+associates 17
+transfer 1029 2 102 17 117
+transfer 1073 7 107 11 111
+transfer 192 20 120 13 113
+balances 15 115
+transfer 645 10 110 16 116
+transfer 374 3 103 11 111
+balances 8 108
+withdrawal 1291 14 19 119
+withdrawal 877 11 6 106
+transfer 1214 5 105 19 119
+balances 13 113
+transfer 1733 11 111 18 118
+money_laundering
+withdrawal 1173 13 18 118
+withdrawal 1068 14 4 104
+associates 6
+transfer 380 14 114 1 101
+withdrawal 427 10 20 120
+balances 4 104
+transfer 923 13 113 14 114
+balances 4 104
+transfer 1405 14 114 19 119
+transfer 392 3 103 5 105
+associates 5
+money_laundering
+transfer 260 14 114 8 108
+withdrawal 135 11 11 111
+balances 12 112
+transfer 796 8 108 13 113
+money_laundering
+transfer 1594 16 116 20 120
+transfer 25 17 117 11 111
+withdrawal 771 13 3 103
+transfer 578 14 114 5 105
+transfer 918 5 105 4 104
+transfer 700 8 108 8 108
+transfer 910 18 118 8 108
+balances 17 117
+balances 4 104
+transfer 1064 10 110 12 112
+transfer 1465 8 108 5 105
+balances 6 106
+transfer 1529 9 109 12 112
+withdrawal 1362 13 3 103
+transfer 496 18 118 19 119
+transfer 425 5 105 5 105
+transfer 16 11 111 17 117
+transfer 671 12 112 19 119
+withdrawal 1190 11 1 101
+balances 9 109
+withdrawal 1251 11 1 101
+transfer 1729 1 101 14 114
+transfer 1478 6 106 13 113
+balances 1 101
+transfer 339 4 104 4 104
+withdrawal 377 10 5 105
+withdrawal 1287 14 14 114
+withdrawal 860 11 11 111
+balances 14 114
+balances 6 106
+associates 12
+transfer 735 17 117 9 109
+money_laundering
+balances 6 106
+withdrawal 26 12 17 117
+transfer 426 18 118 15 115
+withdrawal 761 10 10 110
+transfer 922 18 118 10 110
+transfer 596 6 106 7 107
+transfer 29 10 110 15 115
+transfer 832 17 117 12 112
+transfer 862 5 105 19 119
+transfer 872 18 118 7 107
+transfer 863 8 108 11 111
+withdrawal 967 11 16 116
+transfer 575 19 119 2 102
+associates 15
+transfer 641 16 116 15 115
+transfer 1121 11 111 17 117
+transfer 1105 4 104 14 114
+transfer 179 2 102 15 115
+transfer 1537 15 115 11 111
+transfer 76 6 106 8 108
+transfer 1781 1 101 14 114
+transfer 1755 16 116 18 118
+transfer 1511 18 118 2 102
+transfer 1652 4 104 20 120
+balances 1 101
+withdrawal 472 11 16 116
+balances 11 111
+transfer 832 13 113 8 108
+transfer 1731 1 101 9 109
+transfer 990 18 118 7 107
+transfer 1045 14 114 8 108
+transfer 640 5 105 3 103
+transfer 659 13 113 18 118
+transfer 81 4 104 13 113
+balances 9 109
+transfer 1897 10 110 6 106
+transfer 1527 8 108 9 109
+withdrawal 713 11 1 101
+balances 2 102
+balances 16 116
+transfer 113 13 113 17 117
+transfer 1292 20 120 10 110
+withdrawal 984 13 8 108
+withdrawal 398 12 7 107
+balances 8 108
+transfer 504 4 104 5 105
+withdrawal 763 12 7 107
+withdrawal 389 12 12 112
+associates 5
+transfer 1519 14 114 5 105
+transfer 1718 13 113 3 103
+withdrawal -61 11 16 116
+withdrawal -2 13 3 103
+transfer 1484 9 109 20 120
+withdrawal 475 14 14 114
+money_laundering
+transfer 1446 19 119 8 108
+transfer 419 6 106 15 115
+transfer 765 1 101 6 106
+withdrawal 770 14 19 119
+withdrawal 32 14 4 104
+withdrawal 987 13 13 113
+balances 4 104
+transfer 1003 4 104 11 111
+transfer 869 16 116 1 101
+withdrawal 1247 14 4 104
+transfer 843 18 118 7 107
+transfer 949 2 102 10 110
+associates 9
+transfer 1121 19 119 13 113
+transfer 46 11 111 20 120
+associates 11
+transfer 648 8 108 4 104
+balances 16 116
+transfer 1085 19 119 12 112
+transfer 1124 9 109 12 112
+transfer 157 7 107 11 111
+transfer 1218 7 107 18 118
+withdrawal 901 11 16 116
+transfer 1396 5 105 20 120
+transfer 1242 16 116 9 109
+associates 17
+transfer 972 7 107 13 113
+balances 10 110
+withdrawal 1026 11 6 106
+transfer 1275 14 114 19 119
+transfer 636 2 102 16 116
+transfer 156 13 113 9 109
+associates 3
+withdrawal 1031 11 16 116
+balances 2 102
+balances 12 112
+associates 7
+transfer 1550 3 103 17 117
+associates 14
+transfer 1352 9 109 11 111
+transfer 1354 4 104 18 118
+transfer 156 9 109 13 113
+withdrawal 9 14 14 114
+withdrawal -20 11 1 101
+withdrawal -50 14 19 119
+withdrawal 164 12 2 102
+transfer 1576 4 104 13 113
+transfer 1461 10 110 18 118
+balances 14 114
+balances 1 101
+withdrawal 731 14 4 104
+withdrawal 659 14 19 119
+transfer 519 12 112 15 115
+transfer 1681 5 105 17 117
+transfer 1213 19 119 8 108
+transfer 1838 18 118 8 108
+transfer 134 9 109 10 110
+transfer 393 16 116 5 105
+transfer 769 19 119 19 119
+withdrawal 17 10 5 105
+withdrawal 215 11 16 116
+transfer 939 13 113 1 101
+transfer 1854 6 106 16 116
+transfer 674 1 101 16 116
+withdrawal 15 12 2 102
+withdrawal 298 11 11 111
+transfer 688 18 118 10 110
+transfer 589 14 114 2 102
+transfer 1690 4 104 7 107
+withdrawal 678 10 5 105
+withdrawal 285 12 12 112
+balances 12 112
+balances 8 108
+transfer 195 9 109 14 114
+balances 10 110
+withdrawal 209 14 19 119
+transfer 586 1 101 17 117
+money_laundering
+transfer 1428 20 120 4 104
+withdrawal 1226 11 6 106
+balances 17 117
+transfer 566 8 108 9 109
+withdrawal 1086 11 1 101
+withdrawal 1121 13 3 103
+transfer 1209 16 116 18 118
+withdrawal 1341 10 5 105
+transfer 1662 4 104 15 115
+withdrawal 218 14 9 109
+transfer 1807 8 108 9 109
+transfer 1036 11 111 5 105
+transfer -16 17 117 7 107
+transfer 1896 13 113 7 107
+transfer 608 9 109 20 120
+transfer 1031 15 115 14 114
+withdrawal 1104 13 3 103
+money_laundering
+withdrawal 1379 10 10 110
+associates 4
+withdrawal 1059 12 7 107
+money_laundering
+transfer 1096 3 103 16 116
+withdrawal 1046 13 3 103
+associates 18
+withdrawal 858 13 8 108
+withdrawal 998 13 8 108
+balances 13 113
+transfer 1178 20 120 12 112
+transfer 1782 1 101 16 116
+balances 3 103
+transfer 236 18 118 16 116
+money_laundering
+withdrawal 1216 12 12 112
+balances 10 110
+transfer 558 10 110 10 110
+transfer 1460 8 108 10 110
+withdrawal 692 11 16 116
+withdrawal 1298 10 15 115
+transfer 614 7 107 15 115
+balances 19 119
+transfer 975 16 116 17 117
+withdrawal 928 11 16 116
+transfer 470 6 106 10 110
+transfer 862 2 102 6 106
+money_laundering
+balances 11 111
+transfer 250 14 114 19 119
+transfer 1637 17 117 14 114
+balances 14 114
+transfer 614 5 105 16 116
+transfer 1035 6 106 3 103
+transfer 237 4 104 8 108
+balances 9 109
+transfer 1181 6 106 18 118
+balances 13 113
+associates 17
+transfer 296 13 113 2 102
+associates 15
+balances 4 104
+transfer 1841 10 110 9 109
+withdrawal -15 11 6 106
+withdrawal 15 11 11 111
+transfer 964 7 107 20 120
+withdrawal 200 10 10 110
+transfer 1473 10 110 11 111
+transfer 1868 19 119 10 110
+withdrawal -90 12 7 107
+balances 15 115
+balances 11 111
+withdrawal 1291 13 3 103
+transfer 1664 15 115 19 119
+transfer 155 1 101 15 115
+balances 2 102
+withdrawal 477 13 8 108
+transfer 1505 16 116 10 110
+withdrawal 654 14 4 104
+balances 13 113
+transfer 1339 9 109 1 101
+withdrawal 308 13 8 108
+balances 9 109
+transfer 1659 15 115 19 119
+associates 20
+transfer 1845 7 107 13 113
+money_laundering
+transfer 1592 8 108 20 120
+transfer 874 8 108 9 109
+transfer 122 12 112 8 108
+balances 9 109
+transfer 1882 19 119 15 115
+balances 12 112
+balances 17 117
+transfer 825 5 105 11 111
+withdrawal 1043 10 10 110
+transfer 1577 9 109 17 117
+associates 17
+transfer 728 8 108 14 114
+transfer 597 13 113 16 116
+balances 9 109
+transfer 1408 6 106 4 104
+associates 4
+withdrawal 1250 12 2 102
+balances 12 112
+money_laundering
+money_laundering
+associates 15
+transfer 581 6 106 13 113
+withdrawal 534 14 14 114
+transfer 872 11 111 12 112
+associates 18
+balances 11 111
+transfer 264 2 102 12 112
+transfer 137 4 104 3 103
+money_laundering
+balances 8 108
+transfer 1210 3 103 1 101
+transfer 1387 11 111 19 119
+transfer 158 14 114 14 114
+transfer 1186 3 103 13 113
+transfer 1028 15 115 16 116
+withdrawal 1267 14 4 104
+transfer 838 2 102 19 119
+money_laundering
+transfer 498 19 119 20 120
+transfer 656 8 108 6 106
+transfer 1335 6 106 1 101
+associates 7
+transfer 260 11 111 19 119
+balances 13 113
+transfer 1740 7 107 2 102
+withdrawal 1237 10 20 120
+transfer 1882 9 109 1 101
+transfer 1144 15 115 3 103
+transfer 1547 13 113 8 108
+withdrawal 397 10 5 105
+transfer 1549 16 116 17 117
+transfer 0 13 113 1 101
+balances 12 112
+withdrawal 1291 14 14 114
+transfer 1754 11 111 8 108
+transfer 1680 19 119 10 110
+transfer 1240 8 108 7 107
+withdrawal 938 14 4 104
+transfer 93 13 113 4 104
+transfer 1734 1 101 18 118
+associates 10
+transfer 705 12 112 4 104
+withdrawal 478 10 10 110
+transfer 871 18 118 11 111
+associates 1
+transfer 1726 17 117 7 107
+transfer 1478 20 120 18 118
+associates 20
+transfer 824 13 113 13 113
+withdrawal 1108 13 8 108
+withdrawal 270 14 4 104
+transfer 96 15 115 17 117
+withdrawal 161 10 20 120
+transfer 790 4 104 7 107
+balances 13 113
+transfer 641 15 115 8 108
+withdrawal 360 12 17 117
+balances 5 105
+transfer 36 1 101 19 119
+transfer 287 5 105 5 105
+balances 7 107
+transfer 141 3 103 12 112
+balances 19 119
+transfer 1521 16 116 12 112
+withdrawal 1078 14 19 119
+balances 19 119
+transfer 650 8 108 17 117
+balances 16 116
+transfer 576 14 114 13 113
+balances 6 106
+associates 9
+withdrawal 1329 14 4 104
+withdrawal 455 14 9 109
+associates 14
+balances 9 109
+transfer 886 5 105 11 111
+balances 18 118
+balances 17 117
+withdrawal 369 12 12 112
+transfer 46 14 114 5 105
+balances 10 110
+withdrawal 452 11 1 101
+associates 12
+transfer 1126 3 103 18 118
+balances 15 115
+transfer -3 6 106 11 111
+transfer 1161 19 119 17 117
+balances 1 101
+transfer 1847 6 106 16 116
+transfer 1389 11 111 20 120
+transfer 1765 15 115 17 117
